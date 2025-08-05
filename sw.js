@@ -1,5 +1,5 @@
 // Service Worker for Quiz Master PWA
-const CACHE_NAME = 'quiz-master-v1';
+const CACHE_NAME = 'quiz-master-v2-simplified';
 const OFFLINE_URL = 'offline.html';
 
 // Files to cache for offline functionality
@@ -11,8 +11,9 @@ const urlsToCache = [
   './js/quiz.js',
   './js/storage.js',
   './manifest.json',
-  './icons/icon-192x192.png',
-  './icons/icon-512x512.png'
+  './icon/icon-72x72.png',
+  './icon/icon-192x192.svg',
+  './icon/icon-512x512.svg'
 ];
 
 // Install event - cache resources
@@ -106,8 +107,8 @@ self.addEventListener('push', (event) => {
     const data = event.data.json();
     const options = {
       body: data.body,
-      icon: './icons/icon-192x192.png',
-      badge: './icons/icon-72x72.png',
+      icon: './icon/icon-192x192.svg',
+      badge: './icon/icon-72x72.png',
       vibrate: [200, 100, 200],
       data: data.data || {},
       actions: data.actions || []
