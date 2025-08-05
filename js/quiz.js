@@ -365,21 +365,17 @@ class QuizManager {
         this.isQuizActive = false;
         window.storageManager.clearCurrentQuiz();
         
-        // Switch to home screen
-        if (window.appManager) {
-            window.appManager.showScreen('homeScreen');
-        }
+        // Return to start state
+        this.hideQuizInterface();
     }
 
     // Show quiz interface
     showQuizInterface() {
         const quizContainer = document.getElementById('quizContainer');
-        const quizStatus = document.getElementById('quizStatus');
         const startSection = document.getElementById('startSection');
         const resultsContainer = document.getElementById('resultsContainer');
 
         if (quizContainer) quizContainer.classList.remove('hidden');
-        if (quizStatus) quizStatus.classList.remove('hidden');
         if (startSection) startSection.classList.add('hidden');
         if (resultsContainer) resultsContainer.classList.add('hidden');
     }
@@ -387,23 +383,19 @@ class QuizManager {
     // Show results interface
     showResultsInterface() {
         const quizContainer = document.getElementById('quizContainer');
-        const quizStatus = document.getElementById('quizStatus');
         const resultsContainer = document.getElementById('resultsContainer');
 
         if (quizContainer) quizContainer.classList.add('hidden');
-        if (quizStatus) quizStatus.classList.add('hidden');
         if (resultsContainer) resultsContainer.classList.remove('hidden');
     }
 
     // Hide quiz interface (return to start)
     hideQuizInterface() {
         const quizContainer = document.getElementById('quizContainer');
-        const quizStatus = document.getElementById('quizStatus');
         const startSection = document.getElementById('startSection');
         const resultsContainer = document.getElementById('resultsContainer');
 
         if (quizContainer) quizContainer.classList.add('hidden');
-        if (quizStatus) quizStatus.classList.add('hidden');
         if (startSection) startSection.classList.remove('hidden');
         if (resultsContainer) resultsContainer.classList.add('hidden');
     }

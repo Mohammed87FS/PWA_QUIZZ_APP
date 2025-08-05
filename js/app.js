@@ -1,13 +1,9 @@
-// Main Application Logic for Quiz Master PWA
-// Handles UI interactions, navigation, file uploads, and app coordination
+// Simplified App Manager for Quiz Master PWA
 
 class AppManager {
     constructor() {
-        this.currentScreen = 'homeScreen';
-        this.isMenuOpen = false;
-        this.installPrompt = null;
-        this.isOnline = navigator.onLine;
         this.currentFiles = [];
+        this.settingsOpen = false;
     }
 
     // Initialize the application
@@ -15,32 +11,15 @@ class AppManager {
         try {
             console.log('Initializing Quiz Master PWA...');
             
-            // Initialize storage
             await window.storageManager.init();
-            
-            // Initialize quiz manager
             window.quizManager.init();
             
-            // Setup event listeners
             this.setupEventListeners();
-            
-            // Setup PWA features
-            this.setupPWA();
-            
-            // Load settings and apply theme
-            this.loadAndApplySettings();
-            
-            // Load stored files
+            this.loadSettings();
             await this.loadStoredFiles();
-            
-            // Check for resumed quiz
             this.checkResumeQuiz();
             
-            // Show online/offline status
-            this.updateOnlineStatus();
-            
             console.log('Quiz Master PWA initialized successfully');
-            
         } catch (error) {
             console.error('Error initializing app:', error);
         }
@@ -48,192 +27,78 @@ class AppManager {
 
     // Setup all event listeners
     setupEventListeners() {
-        // Navigation
-        this.setupNavigation();
-        
+        // Settings button
+        const settingsBtn = document.getElementById('settingsBtn');
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', () => this.toggleSettings());
+        }
+
+        // Close settings
+        const closeSettings = document.getElementById('closeSettings');
+        if (closeSettings) {
+            closeSettings.addEventListener('click', () => this.closeSettings());
+        }
+
         // File upload
-        this.setupFileUpload();
-        
-        // Quiz controls
-        this.setupQuizControls();
-        
-        // Settings
-        this.setupSettings();
-        
-        // Keyboard shortcuts
-        this.setupKeyboardShortcuts();
-        
-        // Online/offline events
-        window.addEventListener('online', () => this.updateOnlineStatus());
-        window.addEventListener('offline', () => this.updateOnlineStatus());
-    }
-
-    // Setup navigation event listeners
-    setupNavigation() {
-        // Menu toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const navMenu = document.getElementById('navMenu');
-        const overlay = document.getElementById('overlay');
-
-        if (menuBtn) {
-            menuBtn.addEventListener('click', () => this.toggleMenu());
-        }
-
-        if (overlay) {
-            overlay.addEventListener('click', () => this.closeMenu());
-        }
-
-        // Navigation links
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetScreen = this.getScreenFromNavId(link.id);
-                if (targetScreen) {
-                    this.showScreen(targetScreen);
-                    this.setActiveNavLink(link.id);
-                    this.closeMenu();
-                }
-            });
-        });
-    }
-
-    // Setup file upload functionality
-    setupFileUpload() {
         const fileInput = document.getElementById('fileInput');
-        const fileUploadLabel = document.querySelector('.file-upload-label');
-        
         if (fileInput) {
             fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         }
-        
-        // Drag and drop
-        if (fileUploadLabel) {
-            fileUploadLabel.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                fileUploadLabel.classList.add('drag-over');
-            });
-            
-            fileUploadLabel.addEventListener('dragleave', () => {
-                fileUploadLabel.classList.remove('drag-over');
-            });
-            
-            fileUploadLabel.addEventListener('drop', (e) => {
-                e.preventDefault();
-                fileUploadLabel.classList.remove('drag-over');
-                
-                const files = e.dataTransfer.files;
-                if (files.length > 0) {
-                    this.processFile(files[0]);
-                }
-            });
+
+        // Load sample quiz
+        const loadSample = document.getElementById('loadSample');
+        if (loadSample) {
+            loadSample.addEventListener('click', () => this.loadSampleQuiz());
         }
 
-        // JSON preview buttons
-        const saveBtn = document.getElementById('saveJson');
-        const discardBtn = document.getElementById('discardJson');
-        
-        if (saveBtn) {
-            saveBtn.addEventListener('click', () => this.saveCurrentJson());
+        // Start quiz
+        const startQuiz = document.getElementById('startQuiz');
+        if (startQuiz) {
+            startQuiz.addEventListener('click', () => this.startQuiz());
         }
-        
-        if (discardBtn) {
-            discardBtn.addEventListener('click', () => this.discardCurrentJson());
-        }
-    }
 
-    // Setup quiz control event listeners
-    setupQuizControls() {
-        const startQuizBtn = document.getElementById('startQuiz');
-        const loadSampleBtn = document.getElementById('loadSample');
+        // JSON preview actions
+        const saveJson = document.getElementById('saveJson');
+        const discardJson = document.getElementById('discardJson');
         
-        if (startQuizBtn) {
-            startQuizBtn.addEventListener('click', () => this.startQuiz());
+        if (saveJson) {
+            saveJson.addEventListener('click', () => this.saveCurrentJson());
         }
         
-        if (loadSampleBtn) {
-            loadSampleBtn.addEventListener('click', () => this.loadSampleQuiz());
+        if (discardJson) {
+            discardJson.addEventListener('click', () => this.discardCurrentJson());
         }
-    }
 
-    // Setup settings event listeners
-    setupSettings() {
-        const settingsInputs = document.querySelectorAll('#settingsScreen input[type="checkbox"]');
+        // Settings checkboxes
+        const settingsInputs = document.querySelectorAll('#settingsModal input[type="checkbox"]');
         settingsInputs.forEach(input => {
             input.addEventListener('change', () => this.saveSettings());
         });
 
-        const clearDataBtn = document.getElementById('clearData');
-        const exportDataBtn = document.getElementById('exportData');
-        
-        if (clearDataBtn) {
-            clearDataBtn.addEventListener('click', () => this.clearAllData());
+        // Clear data
+        const clearData = document.getElementById('clearData');
+        if (clearData) {
+            clearData.addEventListener('click', () => this.clearAllData());
         }
-        
-        if (exportDataBtn) {
-            exportDataBtn.addEventListener('click', () => this.exportData());
-        }
-    }
 
-    // Setup keyboard shortcuts
-    setupKeyboardShortcuts() {
-        document.addEventListener('keydown', (e) => {
-            // Escape key to close menu
-            if (e.key === 'Escape') {
-                this.closeMenu();
-            }
-            
-            // Number keys for quiz answers (1-4)
-            if (window.quizManager.isQuizActive && !window.quizManager.hasAnswered) {
-                const num = parseInt(e.key);
-                if (num >= 1 && num <= 4) {
-                    const option = document.querySelector(`.option[data-index="${num - 1}"]`);
-                    if (option) {
-                        window.quizManager.selectAnswer(option);
-                    }
+        // Click outside modal to close
+        const modal = document.getElementById('settingsModal');
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    this.closeSettings();
                 }
-                
-                // Enter to submit answer
-                if (e.key === 'Enter' && window.quizManager.selectedAnswer !== null) {
-                    window.quizManager.submitAnswer();
-                }
-            }
-        });
-    }
-
-    // Setup PWA features
-    setupPWA() {
-        // Install prompt
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            this.installPrompt = e;
-            this.showInstallButton();
-        });
-
-        // App installed
-        window.addEventListener('appinstalled', () => {
-            console.log('PWA installed successfully');
-            this.hideInstallButton();
-        });
-
-        // iOS install detection
-        if (this.isIOS() && !this.isInStandaloneMode()) {
-            this.showIOSInstallInstructions();
+            });
         }
     }
 
     // Handle file selection
-    handleFileSelect(event) {
+    async handleFileSelect(event) {
         const file = event.target.files[0];
-        if (file) {
-            this.processFile(file);
-        }
-    }
+        if (!file) return;
 
-    // Process uploaded file
-    async processFile(file) {
         if (!file.type === 'application/json' && !file.name.endsWith('.json')) {
-            console.error('Invalid file type: Please select a JSON file');
+            alert('Bitte wähle eine JSON-Datei aus.');
             return;
         }
 
@@ -241,19 +106,17 @@ class AppManager {
             const text = await this.readFileAsText(file);
             const data = JSON.parse(text);
             
-            // Validate the JSON structure
             const validation = window.storageManager.validateQuizData(data);
             
             if (!validation.valid) {
-                console.error(`JSON validation error: ${validation.errors[0]}`);
+                alert(`JSON-Validierungsfehler: ${validation.errors[0]}`);
                 return;
             }
 
-            // Show preview
             this.showJsonPreview(file.name, data, validation);
-            
         } catch (error) {
             console.error('Error processing file:', error);
+            alert('Fehler beim Verarbeiten der Datei. Überprüfe das JSON-Format.');
         }
     }
 
@@ -269,58 +132,51 @@ class AppManager {
 
     // Show JSON preview
     showJsonPreview(fileName, data, validation) {
-        const previewSection = document.getElementById('jsonPreview');
-        const questionCountSpan = document.getElementById('previewQuestionCount');
-        const categoriesSpan = document.getElementById('previewCategories');
-        const jsonTextarea = document.getElementById('jsonContent');
+        const preview = document.getElementById('jsonPreview');
+        const questionCount = document.getElementById('previewQuestionCount');
+        const categories = document.getElementById('previewCategories');
 
-        if (previewSection) {
-            previewSection.classList.remove('hidden');
-            previewSection.dataset.fileName = fileName;
-            previewSection.dataset.jsonData = JSON.stringify(data);
+        if (preview) {
+            preview.classList.remove('hidden');
+            preview.dataset.fileName = fileName;
+            preview.dataset.jsonData = JSON.stringify(data);
         }
 
-        if (questionCountSpan) {
-            questionCountSpan.textContent = `${validation.questionCount} Fragen`;
+        if (questionCount) {
+            questionCount.textContent = `${validation.questionCount} Fragen`;
         }
 
-        if (categoriesSpan) {
-            categoriesSpan.textContent = `${validation.categories} Kategorien`;
+        if (categories) {
+            categories.textContent = `${validation.categories} Kategorien`;
         }
-
-        if (jsonTextarea) {
-            jsonTextarea.value = JSON.stringify(data, null, 2);
-        }
-
-        console.log(`JSON file loaded: ${validation.questionCount} questions`);
     }
 
-    // Save current JSON to storage
+    // Save current JSON
     async saveCurrentJson() {
-        const previewSection = document.getElementById('jsonPreview');
-        if (!previewSection) return;
+        const preview = document.getElementById('jsonPreview');
+        if (!preview) return;
 
-        const fileName = previewSection.dataset.fileName;
-        const jsonData = JSON.parse(previewSection.dataset.jsonData);
+        const fileName = preview.dataset.fileName;
+        const jsonData = JSON.parse(preview.dataset.jsonData);
 
         try {
             await window.storageManager.saveQuizData(fileName, jsonData);
             console.log('Quiz data saved successfully');
             this.discardCurrentJson();
             await this.loadStoredFiles();
-            
         } catch (error) {
             console.error('Error saving quiz data:', error);
+            alert('Fehler beim Speichern der Daten.');
         }
     }
 
     // Discard current JSON preview
     discardCurrentJson() {
-        const previewSection = document.getElementById('jsonPreview');
+        const preview = document.getElementById('jsonPreview');
         const fileInput = document.getElementById('fileInput');
         
-        if (previewSection) {
-            previewSection.classList.add('hidden');
+        if (preview) {
+            preview.classList.add('hidden');
         }
         
         if (fileInput) {
@@ -328,74 +184,32 @@ class AppManager {
         }
     }
 
-    // Load and display stored files
+    // Load stored files
     async loadStoredFiles() {
         try {
             this.currentFiles = await window.storageManager.getStoredQuizFiles();
-            this.updateFilesDisplay();
             this.updateQuizInfo();
+            this.updateFilesDisplay();
         } catch (error) {
             console.error('Error loading stored files:', error);
         }
     }
 
-    // Update files display
-    updateFilesDisplay() {
-        const currentFilesSection = document.getElementById('currentFiles');
-        const filesList = document.getElementById('filesList');
-
-        if (!filesList) return;
-
-        if (this.currentFiles.length === 0) {
-            if (currentFilesSection) {
-                currentFilesSection.classList.add('hidden');
-            }
-            return;
-        }
-
-        if (currentFilesSection) {
-            currentFilesSection.classList.remove('hidden');
-        }
-
-        filesList.innerHTML = '';
-
-        this.currentFiles.forEach((file, index) => {
-            const fileItem = document.createElement('div');
-            fileItem.className = 'file-item';
-            fileItem.innerHTML = `
-                <div class="file-info">
-                    <h4>${file.name}</h4>
-                    <p>${file.questionCount} Fragen, ${file.categories.length} Kategorien</p>
-                    <small>Hochgeladen: ${new Date(file.uploadDate).toLocaleDateString('de-DE')}</small>
-                </div>
-                <div class="file-actions">
-                    <button class="btn btn-outline btn-sm" onclick="appManager.useQuizFile(${file.id || index})">
-                        Verwenden
-                    </button>
-                    <button class="btn btn-danger btn-sm" onclick="appManager.deleteQuizFile(${file.id || index})">
-                        Löschen
-                    </button>
-                </div>
-            `;
-            filesList.appendChild(fileItem);
-        });
-    }
-
-    // Update quiz info on home screen
+    // Update quiz info
     updateQuizInfo() {
-        const startQuizBtn = document.getElementById('startQuiz');
-        const quizStats = document.getElementById('quizStats');
+        const startBtn = document.getElementById('startQuiz');
+        const stats = document.getElementById('quizStats');
         const questionCount = document.getElementById('questionCount');
         const categoryCount = document.getElementById('categoryCount');
 
         const hasFiles = this.currentFiles.length > 0;
         
-        if (startQuizBtn) {
-            startQuizBtn.disabled = !hasFiles;
+        if (startBtn) {
+            startBtn.disabled = !hasFiles;
         }
 
-        if (quizStats) {
-            quizStats.classList.toggle('hidden', !hasFiles);
+        if (stats) {
+            stats.classList.toggle('hidden', !hasFiles);
         }
 
         if (hasFiles) {
@@ -410,52 +224,100 @@ class AppManager {
         }
     }
 
+    // Update files display
+    updateFilesDisplay() {
+        const filesSection = document.getElementById('currentFiles');
+        const filesList = document.getElementById('filesList');
+
+        if (!filesList) return;
+
+        if (this.currentFiles.length === 0) {
+            if (filesSection) {
+                filesSection.classList.add('hidden');
+            }
+            return;
+        }
+
+        if (filesSection) {
+            filesSection.classList.remove('hidden');
+        }
+
+        filesList.innerHTML = '';
+
+        this.currentFiles.forEach((file, index) => {
+            const fileItem = document.createElement('div');
+            fileItem.style.cssText = `
+                background: var(--gray-100);
+                padding: 1rem;
+                border-radius: var(--radius);
+                margin-bottom: 0.5rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            `;
+            
+            fileItem.innerHTML = `
+                <div>
+                    <strong>${file.name}</strong><br>
+                    <small>${file.questionCount} Fragen, ${file.categories.length} Kategorien</small>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button onclick="appManager.useQuizFile(${file.id || index})" 
+                            style="background: var(--primary); color: white; border: none; padding: 0.25rem 0.5rem; border-radius: var(--radius); cursor: pointer;">
+                        Verwenden
+                    </button>
+                    <button onclick="appManager.deleteQuizFile(${file.id || index})" 
+                            style="background: var(--danger); color: white; border: none; padding: 0.25rem 0.5rem; border-radius: var(--radius); cursor: pointer;">
+                        Löschen
+                    </button>
+                </div>
+            `;
+            filesList.appendChild(fileItem);
+        });
+    }
+
+    // Start quiz
+    startQuiz() {
+        if (this.currentFiles.length === 0) {
+            alert('Keine Quiz-Daten verfügbar. Bitte lade zuerst eine JSON-Datei hoch.');
+            return;
+        }
+
+        this.useQuizFile(this.currentFiles[0].id || 0);
+    }
+
     // Use a specific quiz file
     async useQuizFile(fileId) {
         try {
             const quizData = await window.storageManager.getQuizData(fileId);
             if (quizData) {
                 window.quizManager.startQuiz(quizData, quizData.name);
-                this.showScreen('homeScreen');
-                this.setActiveNavLink('homeTab');
             }
         } catch (error) {
             console.error('Error loading quiz file:', error);
+            alert('Fehler beim Laden der Quiz-Datei.');
         }
     }
 
     // Delete a quiz file
     async deleteQuizFile(fileId) {
-        if (!confirm('Möchten Sie diese Quiz-Datei wirklich löschen?')) {
+        if (!confirm('Möchtest du diese Quiz-Datei wirklich löschen?')) {
             return;
         }
 
         try {
             await window.storageManager.deleteQuizData(fileId);
-            console.log('Quiz file deleted');
             await this.loadStoredFiles();
         } catch (error) {
             console.error('Error deleting quiz file:', error);
+            alert('Fehler beim Löschen der Datei.');
         }
-    }
-
-    // Start quiz with available data
-    startQuiz() {
-        if (this.currentFiles.length === 0) {
-            console.warn('No quiz data available. Please upload a JSON file first.');
-            return;
-        }
-
-        // Use the first available file for now
-        // Could be extended to let user choose
-        this.useQuizFile(this.currentFiles[0].id || 0);
     }
 
     // Load sample quiz
     loadSampleQuiz() {
         const sampleData = window.quizManager.getSampleQuizData();
         window.quizManager.startQuiz(sampleData, 'Beispiel-Quiz');
-        console.log('Sample quiz started');
     }
 
     // Check if there's a quiz to resume
@@ -465,105 +327,40 @@ class AppManager {
         }
     }
 
-    // Navigation methods
-    showScreen(screenId) {
-        // Hide all screens
-        document.querySelectorAll('.screen').forEach(screen => {
-            screen.classList.remove('active');
-        });
-
-        // Show target screen
-        const targetScreen = document.getElementById(screenId);
-        if (targetScreen) {
-            targetScreen.classList.add('active');
-            this.currentScreen = screenId;
-        }
-
-        // Update page title
-        this.updatePageTitle(screenId);
-    }
-
-    getScreenFromNavId(navId) {
-        const mapping = {
-            'homeTab': 'homeScreen',
-            'uploadTab': 'uploadScreen',
-            'settingsTab': 'settingsScreen',
-            'aboutTab': 'aboutScreen'
-        };
-        return mapping[navId];
-    }
-
-    setActiveNavLink(navId) {
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-        });
-        
-        const activeLink = document.getElementById(navId);
-        if (activeLink) {
-            activeLink.classList.add('active');
-        }
-    }
-
-    updatePageTitle(screenId) {
-        const titles = {
-            'homeScreen': 'Quiz Master',
-            'uploadScreen': 'JSON verwalten',
-            'settingsScreen': 'Einstellungen',
-            'aboutScreen': 'Über die App'
-        };
-        
-        document.title = titles[screenId] || 'Quiz Master PWA';
-    }
-
-    // Menu methods
-    toggleMenu() {
-        this.isMenuOpen = !this.isMenuOpen;
-        const navMenu = document.getElementById('navMenu');
-        const overlay = document.getElementById('overlay');
-        
-        if (navMenu) {
-            navMenu.classList.toggle('hidden', !this.isMenuOpen);
-        }
-        
-        if (overlay) {
-            overlay.classList.toggle('hidden', !this.isMenuOpen);
-        }
-    }
-
-    closeMenu() {
-        this.isMenuOpen = false;
-        const navMenu = document.getElementById('navMenu');
-        const overlay = document.getElementById('overlay');
-        
-        if (navMenu) {
-            navMenu.classList.add('hidden');
-        }
-        
-        if (overlay) {
-            overlay.classList.add('hidden');
-        }
-    }
-
     // Settings methods
-    loadAndApplySettings() {
+    toggleSettings() {
+        const modal = document.getElementById('settingsModal');
+        if (modal) {
+            modal.classList.toggle('hidden');
+            this.settingsOpen = !modal.classList.contains('hidden');
+        }
+    }
+
+    closeSettings() {
+        const modal = document.getElementById('settingsModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            this.settingsOpen = false;
+        }
+    }
+
+    loadSettings() {
         const settings = window.storageManager.loadSettings();
         
-        // Apply settings to UI
-        const settingsInputs = {
+        const inputs = {
             'showExplanations': settings.showExplanations,
             'randomizeQuestions': settings.randomizeQuestions,
             'randomizeOptions': settings.randomizeOptions,
             'darkMode': settings.darkMode
         };
 
-        Object.entries(settingsInputs).forEach(([id, value]) => {
+        Object.entries(inputs).forEach(([id, value]) => {
             const input = document.getElementById(id);
             if (input) {
                 input.checked = value;
             }
         });
 
-        // Apply dark mode
         if (settings.darkMode) {
             document.documentElement.setAttribute('data-theme', 'dark');
         }
@@ -580,19 +377,16 @@ class AppManager {
         window.storageManager.saveSettings(settings);
         window.quizManager.loadSettings();
 
-        // Apply dark mode immediately
         if (settings.darkMode) {
             document.documentElement.setAttribute('data-theme', 'dark');
         } else {
             document.documentElement.removeAttribute('data-theme');
         }
-
-        console.log('Settings saved');
     }
 
-    // Data management
+    // Clear all data
     async clearAllData() {
-        if (!confirm('Möchten Sie wirklich alle Daten löschen? Diese Aktion kann nicht rückgängig gemacht werden.')) {
+        if (!confirm('Möchtest du wirklich alle Daten löschen? Diese Aktion kann nicht rückgängig gemacht werden.')) {
             return;
         }
 
@@ -605,78 +399,8 @@ class AppManager {
             console.log('All data cleared');
         } catch (error) {
             console.error('Error clearing data:', error);
+            alert('Fehler beim Löschen der Daten.');
         }
-    }
-
-    async exportData() {
-        try {
-            const exportData = await window.storageManager.exportAllData();
-            this.downloadFile(exportData, 'quiz-master-backup.json', 'application/json');
-            console.log('Data exported successfully');
-        } catch (error) {
-            console.error('Error exporting data:', error);
-        }
-    }
-
-    // Utility methods
-    downloadFile(content, fileName, contentType) {
-        const blob = new Blob([content], { type: contentType });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-    }
-
-    updateOnlineStatus() {
-        this.isOnline = navigator.onLine;
-        const statusText = this.isOnline ? 'Online' : 'Offline';
-        console.log('Network status:', statusText);
-        
-        if (!this.isOnline) {
-            console.log('Offline mode active');
-        }
-    }
-
-    // PWA installation
-    showInstallButton() {
-        // Could add an install button to the UI
-        console.log('PWA install prompt available');
-    }
-
-    hideInstallButton() {
-        // Hide install button after installation
-        console.log('PWA install button hidden');
-    }
-
-    async installPWA() {
-        if (this.installPrompt) {
-            const result = await this.installPrompt.prompt();
-            console.log('Install prompt result:', result);
-            this.installPrompt = null;
-        }
-    }
-
-    isIOS() {
-        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    }
-
-    isInStandaloneMode() {
-        return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-    }
-
-    showIOSInstallInstructions() {
-        // Could show iOS-specific installation instructions
-        console.log('iOS device detected - install instructions available');
-    }
-
-    // Toast notifications - DISABLED
-    showToast(message, type = 'info', duration = 4000) {
-        // Notifications disabled - method does nothing
-        return;
     }
 }
 
@@ -685,6 +409,3 @@ document.addEventListener('DOMContentLoaded', () => {
     window.appManager = new AppManager();
     window.appManager.init();
 });
-
-// Make appManager globally available
-window.appManager = window.appManager || new AppManager();
