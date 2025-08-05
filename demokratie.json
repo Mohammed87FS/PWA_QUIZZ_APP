@@ -1,0 +1,394 @@
+{
+    "questions": [
+      {
+        "id": 1,
+        "category": "Menschenwürde",
+        "question": "Was kennzeichnet die Menschenwürde grundlegend?",
+        "options": [
+          "Der Wert aller Menschen ist gleich und alle haben unveräußerliche Rechte",
+          "Sie ist abhängig von Staatsbürgerschaft und sozialer Stellung",
+          "Sie gilt nur für Erwachsene über 18 Jahren",
+          "Sie muss durch besondere Leistungen erworben werden"
+        ],
+        "correct_answer": 0,
+        "explanation": "Menschenwürde bedeutet, dass der Wert aller Menschen gleich ist und alle Menschen bestimmte Rechte haben, die ihnen niemand wegnehmen kann - unabhängig von Herkunft, Geschlecht, Alter, Religion oder anderen Merkmalen."
+      },
+      {
+        "id": 2,
+        "category": "Menschenwürde",
+        "question": "Wann entstand die Idee der Menschenwürde und wie entwickelte sie sich?",
+        "options": [
+          "Erst im 20. Jahrhundert durch die UN",
+          "In der Antike, später weiterentwickelt im Humanismus und der Renaissance (15.-16. Jahrhundert)",
+          "Ausschließlich im christlichen Mittelalter",
+          "Nur in der Aufklärung des 18. Jahrhunderts"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die Idee der Menschenwürde entstand bereits in der Antike, wurde im Zeitalter des Humanismus und der Renaissance (15.-16. Jahrhundert) wieder aufgegriffen und neuzeitlich weiterentwickelt."
+      },
+      {
+        "id": 3,
+        "category": "Menschenwürde",
+        "question": "Wie ist die Achtung der Menschenwürde in Österreich rechtlich verankert?",
+        "options": [
+          "Nur durch internationale Abkommen",
+          "Seit 1811 im ABGB, internationale Abkommen und Bundesverfassung",
+          "Ausschließlich durch EU-Recht",
+          "Nur durch Gerichtsentscheidungen"
+        ],
+        "correct_answer": 1,
+        "explanation": "Bereits seit 1811 steht im Allgemeinen Bürgerlichen Gesetzbuch, dass jeder Mensch angeborene Rechte hat. Zusätzlich hat Österreich internationale Abkommen unterzeichnet und die Bundesverfassung schützt Grundrechte."
+      },
+      {
+        "id": 4,
+        "category": "Grundrechte",
+        "question": "Welche Grundrechte gelten für alle Menschen in Österreich?",
+        "options": [
+          "Nur das Recht auf Leben",
+          "Recht auf Leben, Verbot der Folter, Verbot von Sklaverei und Zwangsarbeit, Diskriminierungsverbot",
+          "Nur politische Rechte wie das Wahlrecht",
+          "Ausschließlich wirtschaftliche Rechte"
+        ],
+        "correct_answer": 1,
+        "explanation": "Grundrechte wie das Recht auf Leben, Verbot der Folter, Verbot von Sklaverei und Zwangsarbeit sowie das Diskriminierungsverbot gelten für alle Menschen in Österreich, unabhängig von der Staatsbürgerschaft."
+      },
+      {
+        "id": 5,
+        "category": "Liberaler Staat",
+        "question": "Was kennzeichnet einen liberalen Staat?",
+        "options": [
+          "Unbegrenzte staatliche Macht",
+          "Leben in größtmöglicher Freiheit mit Grenzen für den Staat und Verantwortung für die Bürger",
+          "Keine Gesetze und völlige Anarchie",
+          "Kontrolle aller Lebensbereiche durch den Staat"
+        ],
+        "correct_answer": 1,
+        "explanation": "Ein liberaler Staat ermöglicht seinen Bürgern ein Leben in größtmöglicher Freiheit, indem dem Staat Grenzen gesetzt werden. Die Freiheit muss aber verantwortungsvoll genutzt und die Freiheit anderer respektiert werden."
+      },
+      {
+        "id": 6,
+        "category": "Freiheitsrechte",
+        "question": "Ab welchem Alter können Kinder in Österreich selbst über ihre Religion entscheiden?",
+        "options": [
+          "Ab 12 Jahren",
+          "Ab 14 Jahren",
+          "Ab 16 Jahren",
+          "Ab 18 Jahren"
+        ],
+        "correct_answer": 1,
+        "explanation": "Ab dem Alter von 14 Jahren können Kinder selbst entscheiden, welche Religion sie ausüben wollen. Bis dahin haben die Eltern das Erziehungsrecht und dürfen über die Religion der Kinder bestimmen."
+      },
+      {
+        "id": 7,
+        "category": "Soziale Marktwirtschaft",
+        "question": "Was bedeutet 'Soziale Marktwirtschaft' in Österreich?",
+        "options": [
+          "Völlig freie Marktwirtschaft ohne Beschränkungen",
+          "Wirtschaftliche Freiheit mit Grenzen zum Schutz von Arbeitnehmern und sozialer Verantwortung",
+          "Staatliche Planwirtschaft",
+          "Nur für Unternehmer geltende Freiheiten"
+        ],
+        "correct_answer": 1,
+        "explanation": "Soziale Marktwirtschaft bedeutet, dass der wirtschaftlichen Freiheit Grenzen gesetzt sind - zum Schutz von Arbeitern und Angestellten, durch Sozialversicherung und mit sozialer und ökologischer Verantwortung."
+      },
+      {
+        "id": 8,
+        "category": "Rechtsstaat",
+        "question": "Was sind die drei Merkmale eines Rechtsstaates?",
+        "options": [
+          "Nur Gesetze für die Bevölkerung",
+          "Rechtsordnung gilt für alle, Gesetze dürfen Grundrechte nicht verletzen, Kontrolle der Einhaltung möglich",
+          "Ausschließlich Kontrolle durch Gerichte",
+          "Nur internationale Gesetze gelten"
+        ],
+        "correct_answer": 1,
+        "explanation": "Ein Rechtsstaat zeichnet sich durch drei Merkmale aus: Die Rechtsordnung gilt für alle (auch den Staat), Gesetze dürfen Grundrechte nicht verletzen, und die Einhaltung kann kontrolliert werden."
+      },
+      {
+        "id": 9,
+        "category": "Rechtsstaat",
+        "question": "Welche sind die wichtigsten Grundlagen der Rechtsordnung in Österreich?",
+        "options": [
+          "Nur die österreichische Bundesverfassung",
+          "Die österreichische Bundesverfassung und das Recht der Europäischen Union",
+          "Ausschließlich internationale Verträge",
+          "Nur Entscheidungen des Verfassungsgerichtshofs"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die wichtigsten Grundlagen der österreichischen Rechtsordnung sind die österreichische Bundesverfassung und das Recht der Europäischen Union."
+      },
+      {
+        "id": 10,
+        "category": "Gerichtsbarkeit",
+        "question": "Was bedeutet es, dass Richter 'unabsetzbar' und 'unversetzbar' sind?",
+        "options": [
+          "Sie können beliebig versetzt werden",
+          "Sie können niemals wegen einer Entscheidung entlassen und nicht gegen ihren Willen versetzt werden",
+          "Sie müssen alle Entscheidungen mit der Regierung abstimmen",
+          "Sie dürfen nur ein Jahr lang arbeiten"
+        ],
+        "correct_answer": 1,
+        "explanation": "'Unabsetzbar' bedeutet, sie können niemals wegen einer getroffenen Entscheidung entlassen werden. 'Unversetzbar' bedeutet, sie können nicht gegen ihren Willen an ein anderes Gericht versetzt werden."
+      },
+      {
+        "id": 11,
+        "category": "Demokratie",
+        "question": "Was bedeutet der Begriff 'Demokratie'?",
+        "options": [
+          "Herrschaft der Reichen",
+          "Volksherrschaft",
+          "Militärherrschaft",
+          "Herrschaft der Gebildeten"
+        ],
+        "correct_answer": 1,
+        "explanation": "Der Begriff 'Demokratie' bedeutet 'Volksherrschaft' und ist das Gegenteil einer Diktatur, bei der ein Alleinherrscher oder eine einzige Partei alles bestimmt."
+      },
+      {
+        "id": 12,
+        "category": "Wahlrecht",
+        "question": "Ab welchem Alter dürfen österreichische Staatsbürger wählen?",
+        "options": [
+          "Ab 16 Jahren",
+          "Ab 18 Jahren",
+          "Ab 21 Jahren",
+          "Ab 14 Jahren"
+        ],
+        "correct_answer": 0,
+        "explanation": "Alle österreichischen Staatsbürger haben ab dem 16. Geburtstag das Recht, ihre politischen Vertreter zu wählen."
+      },
+      {
+        "id": 13,
+        "category": "Wahlrecht",
+        "question": "Welche Grundsätze gelten für das Wahlrecht in Österreich?",
+        "options": [
+          "Nur allgemein und gleich",
+          "Allgemein, gleich, unmittelbar, persönlich, geheim und frei",
+          "Nur geheim und frei",
+          "Abhängig vom Einkommen"
+        ],
+        "correct_answer": 1,
+        "explanation": "Das Wahlrecht in Österreich ist allgemein, gleich, unmittelbar, persönlich, geheim und frei - diese sechs Grundsätze garantieren faire und demokratische Wahlen."
+      },
+      {
+        "id": 14,
+        "category": "Parlament",
+        "question": "Aus wie vielen Abgeordneten besteht der österreichische Nationalrat?",
+        "options": [
+          "150 Abgeordneten",
+          "183 Abgeordneten",
+          "200 Abgeordneten",
+          "100 Abgeordneten"
+        ],
+        "correct_answer": 1,
+        "explanation": "Der österreichische Nationalrat besteht aus 183 Abgeordneten, die von den österreichischen Staatsbürgern gewählt werden."
+      },
+      {
+        "id": 15,
+        "category": "Direkte Demokratie",
+        "question": "Was ist der Unterschied zwischen Volksabstimmung, Volksbefragung und Volksbegehren?",
+        "options": [
+          "Alle sind völlig gleich",
+          "Volksabstimmung ist bindend über Gesetze, Volksbefragung ist unverbindlich, Volksbegehren ist Bürgerinitiative",
+          "Nur Volksabstimmungen sind erlaubt",
+          "Alle erfordern die gleiche Anzahl von Unterschriften"
+        ],
+        "correct_answer": 1,
+        "explanation": "Volksabstimmung: bindende Entscheidung über Gesetze. Volksbefragung: unverbindliche Bürgermeinung. Volksbegehren: Initiative vom Volk, ab 100.000 Unterschriften muss sich der Nationalrat damit beschäftigen."
+      },
+      {
+        "id": 16,
+        "category": "Republik",
+        "question": "Wann wurde die Republik Österreich erstmals ausgerufen?",
+        "options": [
+          "12. November 1918",
+          "1. November 1918",
+          "15. Mai 1945",
+          "26. Oktober 1955"
+        ],
+        "correct_answer": 0,
+        "explanation": "Die Republik Österreich wurde am 12. November 1918 von der Provisorischen Nationalversammlung ausgerufen, einen Tag nachdem Kaiser Karl zurückgetreten war."
+      },
+      {
+        "id": 17,
+        "category": "Bundespräsident",
+        "question": "Welche wichtigen Aufgaben hat der Bundespräsident?",
+        "options": [
+          "Nur repräsentative Aufgaben",
+          "Ernennung der Bundesregierung, Unterzeichnung von Gesetzen, Staatsverträge, Oberbefehl über das Bundesheer",
+          "Ausschließlich militärische Aufgaben",
+          "Nur Kontrolle der Regierung"
+        ],
+        "correct_answer": 1,
+        "explanation": "Der Bundespräsident ernennt und entlässt die Bundesregierung, unterschreibt Bundesgesetze, schließt Staatsverträge ab und ist Oberbefehlshaber des Bundesheeres."
+      },
+      {
+        "id": 18,
+        "category": "Sozialstaat",
+        "question": "Wie wird das öffentliche Bildungssystem in Österreich finanziert?",
+        "options": [
+          "Durch Vereinsbeiträge",
+          "Durch Steuern aller Steuerzahler nach dem Solidaritätsprinzip",
+          "Nur durch Schulgebühren",
+          "Ausschließlich durch Spenden"
+        ],
+        "correct_answer": 1,
+        "explanation": "Das öffentliche Bildungssystem wird durch Steuern aller Steuerzahler finanziert. Diesem System liegt der Gedanke der Solidarität zugrunde: Alle zahlen mit, damit alle Kinder eine gute Ausbildung bekommen."
+      },
+      {
+        "id": 19,
+        "category": "Bundesstaat",
+        "question": "Aus wie vielen Bundesländern besteht Österreich?",
+        "options": [
+          "8 Bundesländern",
+          "9 Bundesländern",
+          "10 Bundesländern",
+          "7 Bundesländern"
+        ],
+        "correct_answer": 1,
+        "explanation": "Österreich besteht aus 9 Bundesländern: Burgenland, Kärnten, Steiermark, Niederösterreich, Oberösterreich, Salzburg, Tirol, Vorarlberg und Wien."
+      },
+      {
+        "id": 20,
+        "category": "Bundesstaat",
+        "question": "Wo ist geregelt, welche Aufgaben der Bund und die Bundesländer haben?",
+        "options": [
+          "In der österreichischen Bundesverfassung",
+          "In EU-Beschlüssen",
+          "In internationalen Verträgen",
+          "In Parteistatuten"
+        ],
+        "correct_answer": 0,
+        "explanation": "Die österreichische Bundesverfassung legt die Aufgaben des Bundes und der Bundesländer fest und regelt die Aufteilung zwischen Gesetzgebung und Verwaltung."
+      },
+      {
+        "id": 21,
+        "category": "Gewaltenteilung",
+        "question": "Was sind die drei großen Staatsaufgaben in Österreich?",
+        "options": [
+          "Regierung, Opposition und Medien",
+          "Gesetzgebung, Verwaltung und Gerichtsbarkeit",
+          "Bund, Länder und Gemeinden",
+          "Parlament, Regierung und Bundespräsident"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die drei großen Staatsaufgaben sind: Gesetzgebung (Parlament), Verwaltung (Regierung und Behörden) und Gerichtsbarkeit (unabhängige Gerichte)."
+      },
+      {
+        "id": 22,
+        "category": "Kontrollinstitutionen",
+        "question": "Welche wichtigen Kontrollinstitutionen gibt es in Österreich?",
+        "options": [
+          "Nur die Medien",
+          "Volksanwaltschaft, Rechnungshof, Verfassungsgerichtshof, Verwaltungsgerichtshof",
+          "Ausschließlich politische Parteien",
+          "Nur internationale Organisationen"
+        ],
+        "correct_answer": 1,
+        "explanation": "Wichtige Kontrollinstitutionen sind: Volksanwaltschaft (kontrolliert Verwaltung), Rechnungshof (prüft öffentliche Gelder), Verfassungs- und Verwaltungsgerichtshof (kontrollieren Gesetze und Verwaltung)."
+      },
+      {
+        "id": 23,
+        "category": "NGOs",
+        "question": "Was sind Beispiele für wichtige nichtstaatliche Organisationen (NGOs) in Österreich?",
+        "options": [
+          "Wirtschaftskammer und Arbeiterkammer",
+          "Österreichisches Rotes Kreuz, Caritas, Amnesty International, WWF",
+          "Nur politische Parteien",
+          "Ausschließlich Regierungsbehörden"
+        ],
+        "correct_answer": 1,
+        "explanation": "NGOs wie das Österreichische Rote Kreuz, Caritas, Amnesty International oder WWF leisten wichtige gesellschaftliche Arbeit in sozialen, menschenrechtlichen und umweltpolitischen Bereichen."
+      },
+      {
+        "id": 24,
+        "category": "Europäische Union",
+        "question": "Seit wann ist Österreich Mitglied der Europäischen Union?",
+        "options": [
+          "Seit 1995",
+          "Seit 1990",
+          "Seit 2000",
+          "Seit 1993"
+        ],
+        "correct_answer": 0,
+        "explanation": "Österreich ist seit 1995 Mitglied der Europäischen Union. 1994 fand dazu eine Volksabstimmung statt, bei der die Mehrheit mit 'Ja' stimmte."
+      },
+      {
+        "id": 25,
+        "category": "EU-Institutionen",
+        "question": "Welche sind wichtige Institutionen der Europäischen Union?",
+        "options": [
+          "Nur das Europäische Parlament",
+          "Europäische Kommission, Europäischer Rat, Rat der EU, Europäisches Parlament",
+          "Ausschließlich nationale Regierungen",
+          "Nur der Verfassungsgerichtshof"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die wichtigsten EU-Institutionen sind: Europäische Kommission (Verwaltung), Europäischer Rat (Staatschefs), Rat der EU (Fachminister) und Europäisches Parlament (direkt gewählt)."
+      },
+      {
+        "id": 26,
+        "category": "EU-Grundfreiheiten",
+        "question": "Was sind die vier Grundfreiheiten des europäischen Binnenmarktes?",
+        "options": [
+          "Nur freier Personenverkehr",
+          "Freier Waren-, Personen-, Dienstleistungs- und Kapitalverkehr",
+          "Ausschließlich wirtschaftliche Freiheiten",
+          "Nur politische Rechte"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die vier Grundfreiheiten sind: freier Warenverkehr, freier Personenverkehr, freier Dienstleistungsverkehr und freier Kapital- und Zahlungsverkehr."
+      },
+      {
+        "id": 27,
+        "category": "Unionsbürgerschaft",
+        "question": "Welche Rechte haben österreichische Staatsbürger als EU-Bürger?",
+        "options": [
+          "Keine besonderen Rechte",
+          "Freie Bewegung und Aufenthalt in EU-Staaten, Teilnahme an Europawahlen, Beruf in allen EU-Ländern",
+          "Nur touristische Reisen",
+          "Ausschließlich wirtschaftliche Rechte"
+        ],
+        "correct_answer": 1,
+        "explanation": "EU-Bürger dürfen sich in EU-Staaten frei bewegen und aufhalten, an Europawahlen teilnehmen und grundsätzlich in allen EU-Ländern einen Wohnsitz nehmen und einen Beruf ausüben."
+      },
+      {
+        "id": 28,
+        "category": "Menschenrechtsschutz",
+        "question": "Welche internationalen Abkommen schützen Menschenrechte, die Österreich unterzeichnet hat?",
+        "options": [
+          "Nur nationale Gesetze",
+          "Europäische Menschenrechtskonvention, EU-Grundrechtecharta, UN-Kinderrechtskonvention, Genfer Flüchtlingskonvention",
+          "Ausschließlich Handelsabkommen",
+          "Nur bilaterale Verträge"
+        ],
+        "correct_answer": 1,
+        "explanation": "Österreich hat internationale Abkommen wie die Europäische Menschenrechtskonvention, EU-Grundrechtecharta, UN-Kinderrechtskonvention und Genfer Flüchtlingskonvention unterzeichnet."
+      },
+      {
+        "id": 29,
+        "category": "Gleichbehandlung",
+        "question": "An wen kann ich mich wenden, wenn ich am Arbeitsplatz diskriminiert werde?",
+        "options": [
+          "Nur an die Polizei",
+          "An die Gleichbehandlungsanwaltschaft, Arbeiterkammer oder Gewerkschaft",
+          "Ausschließlich an die Regierung",
+          "Nur an internationale Organisationen"
+        ],
+        "correct_answer": 1,
+        "explanation": "Bei Diskriminierung am Arbeitsplatz kann man sich an die Gleichbehandlungsanwaltschaft, Arbeiterkammer oder Gewerkschaft wenden, um Beratung und Unterstützung zu erhalten."
+      },
+      {
+        "id": 30,
+        "category": "Demokratische Teilhabe",
+        "question": "Warum ist die Teilnahme an Wahlen in einer Demokratie wichtig?",
+        "options": [
+          "Es ist gesetzlich vorgeschrieben",
+          "Demokratie lebt von Bürgerbeteiligung und Wahlen sind Rückmeldung an Politiker über Zufriedenheit mit der Politik",
+          "Nur für politische Karrieren wichtig",
+          "Hat keine besondere Bedeutung"
+        ],
+        "correct_answer": 1,
+        "explanation": "Demokratie lebt davon, dass Bürger sich für das politische Geschehen interessieren und teilnehmen. Wahlen sind eine wichtige Rückmeldung an die Politiker über die Zufriedenheit mit der Politik."
+      }
+    ]
+  }

@@ -1,0 +1,394 @@
+{
+    "questions": [
+      {
+        "id": 1,
+        "category": "Frühe Siedler",
+        "question": "Welche Völker lebten bereits vor der Römerzeit auf dem Gebiet des heutigen Österreich?",
+        "options": [
+          "Germanen und Slawen",
+          "Kelten und Römer",
+          "Kelten in keltischen Königreichen",
+          "Bajuwaren und Alemannen"
+        ],
+        "correct_answer": 2,
+        "explanation": "Vor der Römerzeit gab es bereits keltische Königreiche auf dem Gebiet des heutigen Österreich. Die Römer kamen erst um Christi Geburt, andere Völker wie Slawen, Bajuwaren und Alemannen kamen nach dem Ende der Römerzeit."
+      },
+      {
+        "id": 2,
+        "category": "Römerzeit",
+        "question": "Wie lange dauerte die Römerzeit in Österreich und was beendete sie?",
+        "options": [
+          "300 Jahre, beendet durch slawische Einwanderung",
+          "Fast 500 Jahre, beendet durch die Völkerwanderung germanischer Völker",
+          "600 Jahre, beendet durch ungarische Eroberungen",
+          "200 Jahre, beendet durch alemannische Eroberungen"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die Römerzeit dauerte fast 500 Jahre (um Christi Geburt bis etwa 500 n. Chr.) und endete mit der großen Völkerwanderung germanischer Völker, die das Römische Reich eroberten."
+      },
+      {
+        "id": 3,
+        "category": "Frühe Siedler",
+        "question": "Warum wird Österreich heute hauptsächlich deutschsprachig?",
+        "options": [
+          "Durch die römische Kolonisation",
+          "Durch die Zuwanderung von Alemannen und Bajuwaren",
+          "Durch die slawische Besiedlung",
+          "Durch die Habsburg-Herrschaft"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die Zuwanderung der Alemannen und Bajuwaren ist der wichtigste Grund, warum in Österreich heute vorwiegend Deutsch gesprochen wird. Diese germanischen Völker brachten ihre Sprache mit."
+      },
+      {
+        "id": 4,
+        "category": "Spuren der Vergangenheit",
+        "question": "Welche heutigen österreichischen Minderheiten sind direkte Nachfahren der frühmittelalterlichen Siedler?",
+        "options": [
+          "Deutsche in Tirol und Vorarlberg",
+          "Slowenen in Kärnten und Kroaten im Burgenland",
+          "Ungarn in Wien und Niederösterreich",
+          "Italiener in Südtirol"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die Slowenen in Kärnten sind Nachfahren der slawischen Siedler, die Kroaten im Burgenland kamen im 16. Jahrhundert als Nachfahren der frühen südslawischen Siedlungen hinzu."
+      },
+      {
+        "id": 5,
+        "category": "Habsburger-Herrschaft",
+        "question": "Wie lange regierten die Habsburger in Österreich?",
+        "options": [
+          "500 Jahre (1273-1773)",
+          "Fast 650 Jahre (1273-1918)",
+          "400 Jahre (1400-1800)",
+          "750 Jahre (1200-1950)"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die Habsburger regierten von 1273 bis 1918, also fast 650 Jahre lang. Sie begannen als Herrscher einzelner österreichischer Länder und endeten als Kaiser von Österreich-Ungarn."
+      },
+      {
+        "id": 6,
+        "category": "Habsburger-Herrschaft",
+        "question": "Was bedeutete der Spruch 'Kriege mögen andere führen, Du – glückliches Österreich – heirate!'?",
+        "options": [
+          "Österreich war friedlicher als andere Länder",
+          "Die Habsburger erweiterten ihr Reich hauptsächlich durch geschickte Heiratspolitik",
+          "Österreichische Hochzeiten waren besonders prunkvoll",
+          "Die Habsburger vermieden alle militärischen Konflikte"
+        ],
+        "correct_answer": 1,
+        "explanation": "Dieser Spruch beschreibt die erfolgreiche Heiratspolitik der Habsburger. Länder wie die Niederlande, Belgien, Spanien, Böhmen und Ungarn wurden durch Hochzeiten für das Haus Habsburg gewonnen."
+      },
+      {
+        "id": 7,
+        "category": "Maria Theresia",
+        "question": "Welche langfristig bedeutende Reform führte Maria Theresia ein, die bis heute gilt?",
+        "options": [
+          "Die Abschaffung der Monarchie",
+          "Die allgemeine Schulpflicht",
+          "Das Frauenwahlrecht",
+          "Die Religionsfreiheit"
+        ],
+        "correct_answer": 1,
+        "explanation": "Maria Theresia führte zum ersten Mal die Schulpflicht ein - Kinder mussten in die Schule gehen. Diese Schulpflicht gilt bis heute und war eine revolutionäre Reform für die damalige Zeit."
+      },
+      {
+        "id": 8,
+        "category": "Maria Theresia",
+        "question": "Was zeigt, dass das Bild Maria Theresias als 'liebevolle Landesmutter' kritisch zu betrachten ist?",
+        "options": [
+          "Sie führte viele Kriege",
+          "Sie schaffte die Schulpflicht wieder ab",
+          "Sie vertrieb evangelische Christen wegen ihres Glaubens aus Österreich",
+          "Sie erhöhte die Steuern drastisch"
+        ],
+        "correct_answer": 2,
+        "explanation": "Während ihrer Regierungszeit wurden evangelische Christen (Protestanten) wegen ihres Glaubens aus Österreich vertrieben. Viele mussten fliehen oder in entfernte Gebiete der Monarchie übersiedeln."
+      },
+      {
+        "id": 9,
+        "category": "19. Jahrhundert",
+        "question": "Was kennzeichnete die 'industrielle Revolution' in Österreich im 19. Jahrhundert?",
+        "options": [
+          "Nur politische Veränderungen ohne wirtschaftliche Auswirkungen",
+          "Entstehung moderner Industriebetriebe, Verkehrsnetze und Verstädterung",
+          "Rückkehr zur Landwirtschaft als Haupterwerbszweig",
+          "Abschaffung aller neuen Technologien"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die industrielle Revolution brachte moderne Industriebetriebe (Eisen-, Stahl- und Textilindustrie), Eisenbahnen, Dampfschiffe und führte zur Verstädterung. Wien wuchs auf 2 Millionen Einwohner an."
+      },
+      {
+        "id": 10,
+        "category": "Revolution 1848",
+        "question": "Was waren die Hauptforderungen der Revolution von 1848 in Österreich?",
+        "options": [
+          "Rückkehr zur absoluten Monarchie",
+          "Freiheit, Bürgerrechte, Verfassung und ein gewähltes Parlament",
+          "Abschaffung aller Schulen und Universitäten",
+          "Verbot von Zeitungen und freier Meinungsäußerung"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die Revolutionäre von 1848 forderten Freiheit und Bürgerrechte, eine Verfassung und Wahlen zu einem Parlament. Gesetze sollten nicht mehr allein vom Kaiser, sondern vom Parlament beschlossen werden."
+      },
+      {
+        "id": 11,
+        "category": "Revolution 1848",
+        "question": "Welche wichtige Reform blieb trotz der Unterdrückung der Revolution 1848 bestehen?",
+        "options": [
+          "Die Einführung der Republik",
+          "Die Befreiung der Bauern von ihren Grundbesitzern",
+          "Die Abschaffung der Monarchie",
+          "Die Unabhängigkeit Ungarns"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die Bauernbefreiung blieb bestehen: Bauern mussten nicht mehr ohne Bezahlung für Grundherren arbeiten und durften ihre Ernte behalten oder verkaufen, ohne einen Teil abgeben zu müssen."
+      },
+      {
+        "id": 12,
+        "category": "Österreich-Ungarn",
+        "question": "Was charakterisierte Österreich-Ungarn als 'Vielvölkerstaat'?",
+        "options": [
+          "Nur Deutsche und Ungarn lebten dort",
+          "Elf Sprachen waren offiziell anerkannt und verschiedene Religionen koexistierten",
+          "Alle Bewohner sprachen dieselbe Sprache",
+          "Es gab nur eine einheitliche Religion"
+        ],
+        "correct_answer": 1,
+        "explanation": "In Österreich-Ungarn waren elf Sprachen offiziell anerkannt. Es gab katholische, evangelische und orthodoxe Christen, sowie anerkannte jüdische und islamische Gemeinden."
+      },
+      {
+        "id": 13,
+        "category": "Nationalstaaten",
+        "question": "Was verstand man im 19. Jahrhundert unter einem 'Volk' im Sinne des Nationalstaatsgedankens?",
+        "options": [
+          "Alle Menschen eines bestimmten Gebietes unabhängig von Sprache und Kultur",
+          "Menschen mit gemeinsamer Sprache und gemeinsamer Kultur",
+          "Nur adelige Familien",
+          "Ausschließlich Bauern und Handwerker"
+        ],
+        "correct_answer": 1,
+        "explanation": "Im 19. Jahrhundert bezeichnete man als 'Volk' alle Menschen, die eine gemeinsame Sprache sprechen und eine gemeinsame Kultur haben. Daraus entstanden neue nationale Identitäten wie 'Tschechen', 'Slowenen' etc."
+      },
+      {
+        "id": 14,
+        "category": "Ende der Monarchie",
+        "question": "Welche Staaten entstanden 1918 auf dem Gebiet der ehemaligen Monarchie Österreich-Ungarn?",
+        "options": [
+          "Nur Österreich und Ungarn",
+          "Tschechoslowakei, Polen, Jugoslawien sowie verkleinerte Versionen von Ungarn und Österreich",
+          "Deutschland und Russland teilten sich das Gebiet",
+          "Das Gebiet wurde vollständig an Italien abgetreten"
+        ],
+        "correct_answer": 1,
+        "explanation": "1918 entstanden die Tschechoslowakei, Polen, Jugoslawien sowie ein verkleinertes Ungarn und Österreich. Teile gingen auch an Italien und Rumänien."
+      },
+      {
+        "id": 15,
+        "category": "Erste Republik",
+        "question": "Warum sollte Österreich ursprünglich 'Republik Deutsch-Österreich' heißen?",
+        "options": [
+          "Weil es Teil Deutschlands werden sollte",
+          "Weil zur Republik die Gebiete gehörten, in denen die meisten Einwohner Deutsch sprachen",
+          "Weil der Kaiser das so bestimmt hatte",
+          "Weil es von Deutschland erobert worden war"
+        ],
+        "correct_answer": 1,
+        "explanation": "Zur Republik Österreich gehörten jene Gebiete des Alpen- und Donauraums, in denen die meisten Einwohner Deutsch sprachen. Der Friedensvertrag von Saint Germain verbot aber die Vereinigung mit Deutschland und legte den Namen 'Republik Österreich' fest."
+      },
+      {
+        "id": 16,
+        "category": "Erste Republik",
+        "question": "Was führte zum Scheitern der Ersten Republik?",
+        "options": [
+          "Nur wirtschaftliche Probleme",
+          "Politische Radikalisierung, bewaffnete Milizen der Parteien und gegenseitige Feindschaft statt demokratischer Konkurrenz",
+          "Ausschließlich ausländische Einmischung",
+          "Nur die Weltwirtschaftskrise"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die Parteien sahen sich als Feinde, nicht als Konkurrenten. Jede große Partei hatte bewaffnete Milizen. Dazu kamen wirtschaftliche Krisen, Antisemitismus und politische Radikalisierung."
+      },
+      {
+        "id": 17,
+        "category": "Ständestaat",
+        "question": "Was kennzeichnete den 'christlich-deutschen Ständestaat' unter Dollfuß?",
+        "options": [
+          "Mehr Demokratie und Parlament",
+          "Autoritäre Regierung ohne demokratische Kontrolle und ohne gewähltes Parlament",
+          "Vollständige Religionsfreiheit",
+          "Beitritt zur Europäischen Union"
+        ],
+        "correct_answer": 1,
+        "explanation": "1933 schaltete Dollfuß das Parlament aus und gründete einen autoritären Staat ohne demokratisch gewählte Institutionen, gestützt auf die katholische Kirche."
+      },
+      {
+        "id": 18,
+        "category": "Nationalsozialismus",
+        "question": "Warum war die Volksabstimmung über den 'Anschluss' 1938 nicht frei und fair?",
+        "options": [
+          "Es durften nur Männer abstimmen",
+          "Wer gegen den Anschluss war, musste mit Verfolgung durch die Nationalsozialisten rechnen",
+          "Die Abstimmung fand zu früh statt",
+          "Es gab keine Wahlurnen"
+        ],
+        "correct_answer": 1,
+        "explanation": "Obwohl eine große Mehrheit für den Anschluss stimmte, war die Abstimmung nicht frei, da Gegner des Anschlusses mit Verfolgung durch die Nationalsozialisten rechnen mussten."
+      },
+      {
+        "id": 19,
+        "category": "Nationalsozialismus",
+        "question": "Welche Bevölkerungsgruppen wurden während des Nationalsozialismus systematisch verfolgt und ermordet?",
+        "options": [
+          "Nur politische Gegner",
+          "Juden, Roma und Sinti, slowenische und tschechische Minderheiten, Homosexuelle, Menschen mit Behinderung",
+          "Ausschließlich ausländische Staatsangehörige",
+          "Nur Kommunisten"
+        ],
+        "correct_answer": 1,
+        "explanation": "Systematisch verfolgt wurden Juden, Roma und Sinti, Angehörige von Minderheiten, Homosexuelle, Menschen mit Behinderung, Kirchenvertreter und politische Gegner des Nationalsozialismus."
+      },
+      {
+        "id": 20,
+        "category": "Zweiter Weltkrieg",
+        "question": "Wie viele Menschen wurden im Konzentrationslager Mauthausen ermordet?",
+        "options": [
+          "Etwa 10.000 Menschen",
+          "Etwa 50.000 Menschen",
+          "Etwa 100.000 Menschen",
+          "Etwa 200.000 Menschen"
+        ],
+        "correct_answer": 2,
+        "explanation": "In Mauthausen, dem größten Konzentrationslager in Österreich, wurden von 1938 bis 1945 insgesamt etwa 100.000 Menschen ermordet."
+      },
+      {
+        "id": 21,
+        "category": "Nachkriegszeit",
+        "question": "Wie war Österreich zwischen 1945 und 1955 organisiert?",
+        "options": [
+          "Als unabhängiger Staat ohne Einschränkungen",
+          "In vier Besatzungszonen geteilt, verwaltet von USA, Großbritannien, Frankreich und Sowjetunion",
+          "Als Teil Deutschlands",
+          "Als Teil der Tschechoslowakei"
+        ],
+        "correct_answer": 1,
+        "explanation": "Österreich war von 1945 bis 1955 in vier Besatzungszonen geteilt. Jeder Sieger des Zweiten Weltkriegs verwaltete eine Zone und behielt die letzte Entscheidungsgewalt."
+      },
+      {
+        "id": 22,
+        "category": "Staatsvertrag 1955",
+        "question": "Welche Verpflichtungen ergaben sich für Österreich aus dem Staatsvertrag von 1955?",
+        "options": [
+          "Beitritt zur NATO und Anschluss an Deutschland",
+          "Kein Anschluss an Deutschland, immerwährende Neutralität, eigene Armee, Minderheitenschutz",
+          "Auflösung des österreichischen Staates",
+          "Beitritt zum Warschauer Pakt"
+        ],
+        "correct_answer": 1,
+        "explanation": "Der Staatsvertrag verpflichtete Österreich zu: kein Anschluss an Deutschland, kein Beitritt zu Militärbündnissen (Neutralität), eigene Armee zur Neutralitätsverteidigung und Schutz der Minderheiten."
+      },
+      {
+        "id": 23,
+        "category": "Zweite Republik",
+        "question": "Was unterschied die Zweite Republik grundlegend von der Ersten Republik?",
+        "options": [
+          "Dieselben Probleme wie in der Ersten Republik",
+          "Zusammenarbeit statt Konfrontation, große Koalition zwischen ÖVP und SPÖ, Sozialpartnerschaft",
+          "Rückkehr zur Monarchie",
+          "Ausschließlich autoritäre Regierung"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die Zweite Republik war geprägt von Zusammenarbeit: ÖVP und SPÖ regierten gemeinsam, es entstand die Sozialpartnerschaft, und die Parteien sahen sich als Konkurrenten, nicht als Feinde."
+      },
+      {
+        "id": 24,
+        "category": "Sozialpartnerschaft",
+        "question": "Welche Organisationen bilden die österreichische Sozialpartnerschaft?",
+        "options": [
+          "Nur Regierung und Opposition",
+          "Bundesarbeitskammer, Landwirtschaftskammer, Gewerkschaftsbund und Wirtschaftskammer",
+          "Ausschließlich politische Parteien",
+          "Nur kirchliche Organisationen"
+        ],
+        "correct_answer": 1,
+        "explanation": "Die Sozialpartnerschaft besteht aus den beruflichen Interessenvertretungen: Bundesarbeitskammer (AK), Landwirtschaftskammer (LK), Österreichischer Gewerkschaftsbund (ÖGB) und Wirtschaftskammer Österreich (WKÖ)."
+      },
+      {
+        "id": 25,
+        "category": "Moderne Reformen",
+        "question": "Welche bedeutenden gesellschaftlichen Reformen fanden in den 1970er Jahren statt?",
+        "options": [
+          "Einführung der Monarchie",
+          "Familienrechtsreform mit Gleichberechtigung, Bildungsexpansion, Legalisierung der Homosexualität",
+          "Abschaffung der Schulpflicht",
+          "Verbot von Universitäten"
+        ],
+        "correct_answer": 1,
+        "explanation": "In den 1970ern wurden Männer und Frauen gleichberechtigt, die Bildung ausgebaut (Schülerfreifahrt, kostenlose Schulbücher), und Homosexualität legalisiert."
+      },
+      {
+        "id": 26,
+        "category": "Aufarbeitung NS-Zeit",
+        "question": "Wie wurde nach 2000 die NS-Vergangenheit Österreichs aufgearbeitet?",
+        "options": [
+          "Gar nicht, das Thema wurde ignoriert",
+          "Rückgabe geraubter Kunstwerke, Entschädigung für Zwangsarbeiter und beraubte Familien",
+          "Nur durch Gedenktafeln",
+          "Ausschließlich durch Museen"
+        ],
+        "correct_answer": 1,
+        "explanation": "Nach 2000 wurden geraubte Kunstwerke zurückgegeben, Familien für geraubte Häuser entschädigt und ehemalige Zwangsarbeiter erhielten Entschädigungszahlungen."
+      },
+      {
+        "id": 27,
+        "category": "EU-Beitritt",
+        "question": "Wie veränderte der Fall des 'Eisernen Vorhangs' Österreichs Position in Europa?",
+        "options": [
+          "Österreich wurde isoliert",
+          "Österreich war nicht mehr an der Ost-West-Grenze, sondern wieder in der 'Mitte' Europas",
+          "Österreich verlor alle Nachbarländer",
+          "Österreich wurde wirtschaftlich unbedeutend"
+        ],
+        "correct_answer": 1,
+        "explanation": "Nach 1989 war Österreich nicht mehr Grenzland zwischen Ost und West, sondern lag wieder in der Mitte Europas. Dies führte zu neuen wirtschaftlichen Möglichkeiten und verstärkten Beziehungen zu Mittel- und Osteuropa."
+      },
+      {
+        "id": 28,
+        "category": "EU-Mitgliedschaft",
+        "question": "Welche konkreten Auswirkungen hat die EU-Mitgliedschaft auf den österreichischen Alltag?",
+        "options": [
+          "Keine spürbaren Veränderungen",
+          "Euro als Währung, günstigeres Telefonieren, Studium in der ganzen EU, Gleichbehandlung von EU-Bürgern",
+          "Verbot von Reisen ins Ausland",
+          "Abschaffung der deutschen Sprache"
+        ],
+        "correct_answer": 1,
+        "explanation": "Konkrete EU-Auswirkungen: Euro seit 2002, einheitliche Handytarife seit 2011, europaweites Studium und Gleichbehandlung von EU-Bürgern in Österreich."
+      },
+      {
+        "id": 29,
+        "category": "Modernes Österreich",
+        "question": "Wie hat sich die Bevölkerungsstruktur Österreichs durch die EU-Mitgliedschaft und Globalisierung verändert?",
+        "options": [
+          "Die Bevölkerung ist geschrumpft",
+          "Jeder fünfte Einwohner ist Zuwanderer - von 8,9 Millionen sind 1,7 Millionen im Ausland geboren",
+          "Alle Ausländer wurden ausgewiesen",
+          "Die Bevölkerung ist völlig homogen geworden"
+        ],
+        "correct_answer": 1,
+        "explanation": "Von 8,9 Millionen Einwohnern sind 1,7 Millionen im Ausland geboren. Das bedeutet: Jeder fünfte Einwohner Österreichs ist ein Zuwanderer, was Österreichs internationale Ausrichtung zeigt."
+      },
+      {
+        "id": 30,
+        "category": "Österreichische Identität",
+        "question": "Wie entwickelte sich das österreichische Nationalbewusstsein von der Ersten zur Zweiten Republik?",
+        "options": [
+          "Es blieb völlig unverändert",
+          "Von anfänglicher Ablehnung eines kleinen Staates hin zu Stolz auf die österreichische Identität durch Wohlstand und Erfolg",
+          "Österreicher wollten immer unabhängig sein",
+          "Das Nationalbewusstsein verschwand völlig"
+        ],
+        "correct_answer": 1,
+        "explanation": "1918 wollten viele den Anschluss an Deutschland. Durch den wirtschaftlichen Erfolg der Zweiten Republik entstand jedoch eine selbstverständliche österreichische Identität, auf die die Menschen stolz sind."
+      }
+    ]
+  }

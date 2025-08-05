@@ -1,0 +1,786 @@
+{
+  "quiz_title": "Elektronik & Digitaltechnik - Bauelemente",
+  "description": "Umfassendes Quiz zu passiven und aktiven Bauelementen",
+  "questions": [
+    {
+      "id": 1,
+      "category": "Passive Bauelemente - Grundlagen",
+      "question": "Was ist die fundamentale Eigenschaft passiver Bauelemente?",
+      "options": [
+        "Sie können Signale verstärken und haben Steuerfunktionen",
+        "Sie besitzen keine Steuerfunktion und können Signale nur dämpfen, niemals verstärken",
+        "Sie können bei Resonanz unbegrenzt Energie erzeugen",
+        "Sie wandeln elektrische Energie in andere Energieformen um"
+      ],
+      "correct_answer": 1,
+      "explanation": "Passive Bauelemente besitzen keinerlei Steuerfunktion und keine Verstärkerwirkungen. Eine Schaltung aus nur passiven Bauelementen kann ein Eingangssignal nur dämpfen, niemals verstärken."
+    },
+    {
+      "id": 2,
+      "category": "Widerstände - Kennlinien",
+      "question": "Bei nichtlinearen Widerständen wird zur Berechnung im Arbeitsbereich welche Methode verwendet?",
+      "options": [
+        "Das einfache Ohmsche Gesetz R = U/I",
+        "Der differentielle Widerstand durch Linearisierung",
+        "Die Kirchhoffschen Gesetze",
+        "Die Spannungsteilerregel"
+      ],
+      "correct_answer": 1,
+      "explanation": "Bei nichtlinearen Widerständen (wie NTC, PTC) wird ein differentieller Widerstand herangezogen, die Berechnung erfolgt nur im betrachteten Arbeitsbereich durch Linearisierung."
+    },
+    {
+      "id": 3,
+      "category": "Widerstände - Widerstandsreihen",
+      "question": "In der E6-Reihe gibt es folgende Widerstandswerte. Welcher Wert gehört NICHT zur E6-Grundreihe?",
+      "options": [
+        "1,0 Ω",
+        "2,2 Ω",
+        "3,3 Ω",
+        "4,7 Ω"
+      ],
+      "correct_answer": 2,
+      "explanation": "Die E6-Reihe enthält 6 Grundwerte pro Dekade. Nach der gegebenen E3-Reihe (1,0; 2,2; 4,7) erweitert sich E6, aber 3,3 ist nicht in der korrekten Position für E6."
+    },
+    {
+      "id": 4,
+      "category": "Widerstände - Temperaturverhalten",
+      "question": "Wie verhalten sich Metallschichtwiderstände bei Temperaturerhöhung?",
+      "options": [
+        "Der Widerstandswert wird kleiner",
+        "Der Widerstandswert bleibt konstant",
+        "Der Widerstandswert wird größer",
+        "Das Verhalten ist materialunabhängig"
+      ],
+      "correct_answer": 2,
+      "explanation": "Metallschichtwiderstände haben bei Temperaturerhöhung einen größeren Widerstandswert, während bei Kohleschichtwiderständen der Wert kleiner wird."
+    },
+    {
+      "id": 5,
+      "category": "Widerstände - Leistungsberechnung",
+      "question": "Gegeben: LED-Vorwiderstand mit 15mA und 200Ω. Welche Leistung wird im Widerstand umgesetzt?",
+      "options": [
+        "45 mW",
+        "50 mW",
+        "75 mW",
+        "100 mW"
+      ],
+      "correct_answer": 0,
+      "explanation": "P = I²R = (0,015A)² × 200Ω = 0,000225 × 200 = 0,045W = 45mW"
+    },
+    {
+      "id": 6,
+      "category": "Kondensatoren - Grundlagen",
+      "question": "Was passiert bei einem Spannungssprung an einem idealen Kondensator?",
+      "options": [
+        "Der Strom bleibt konstant",
+        "Es fließt theoretisch ein unendlich hoher Strom",
+        "Die Spannung am Kondensator ändert sich nicht",
+        "Der Kondensator wirkt wie ein offener Schalter"
+      ],
+      "correct_answer": 1,
+      "explanation": "Bei einem idealen Kondensator ohne Innenwiderstand würde bei einem Spannungssprung theoretisch ein unendlicher Strom fließen, da I = C × dU/dt."
+    },
+    {
+      "id": 7,
+      "category": "Kondensatoren - ESR",
+      "question": "Warum ist der ESR (Equivalent Series Resistance) bei hohen Taktfrequenzen kritisch?",
+      "options": [
+        "Er verringert die Kapazität des Kondensators",
+        "Er führt bei großen Strömen (I=C×dU/dt) zu starker Erwärmung (P=I²R)",
+        "Er macht den Kondensator induktiv",
+        "Er erhöht die Durchbruchspannung"
+      ],
+      "correct_answer": 1,
+      "explanation": "Bei hohen Taktfrequenzen und steilen Spannungsrampen entstehen durch I=C×dU/dt große Ströme, die aufgrund P=I²×R zu starker Erwärmung führen."
+    },
+    {
+      "id": 8,
+      "category": "Kondensatoren - Kennzeichnung",
+      "question": "Ein Kondensator ist mit '473' gekennzeichnet. Welche Kapazität hat er?",
+      "options": [
+        "473 pF",
+        "4,73 nF",
+        "47 nF",
+        "473 µF"
+      ],
+      "correct_answer": 2,
+      "explanation": "473 bedeutet 47 × 10³ pF = 47.000 pF = 47 nF. Die letzten beiden Ziffern geben den Multiplikator (10³) an."
+    },
+    {
+      "id": 9,
+      "category": "Kondensatoren - Frequenzverhalten",
+      "question": "Bei welcher Frequenz zeigt ein realer Kondensator den niedrigsten Scheinwiderstand?",
+      "options": [
+        "Bei sehr niedrigen Frequenzen",
+        "Bei der Resonanzfrequenz f₀ = 1/(2π√LC)",
+        "Bei sehr hohen Frequenzen",
+        "Der Scheinwiderstand ist frequenzunabhängig"
+      ],
+      "correct_answer": 1,
+      "explanation": "Der Scheinwiderstand sinkt zunächst mit steigender Frequenz ab bis zum Wendepunkt bei der Resonanzfrequenz, danach steigt er wieder an aufgrund der parasitären Induktivität (ESL)."
+    },
+    {
+      "id": 10,
+      "category": "Kondensatoren - Pufferkondensator",
+      "question": "Für eine digitale Eisenbahn mit LOW-Phase von 116µs, I=10mA konstant und max. 5% Spannungseinbruch wird welche Kapazität benötigt?",
+      "options": [
+        "32 µF",
+        "46 µF",
+        "64 µF",
+        "100 µF"
+      ],
+      "correct_answer": 2,
+      "explanation": "C = (I × t) / ΔU = (10mA × 116µs) / (5V × 0,05) = 1,16µC / 0,25V = 4,64µF ≈ 64µF (aus E-Reihe gewählt)"
+    },
+    {
+      "id": 11,
+      "category": "Spulen - Grundlagen",
+      "question": "Was würde bei einer sprungartigen Stromänderung an einer idealen Spule auftreten?",
+      "options": [
+        "Ein konstanter Strom würde fließen",
+        "Eine unendlich hohe Spannung würde entstehen",
+        "Die Induktivität würde sich ändern",
+        "Nichts würde passieren"
+      ],
+      "correct_answer": 1,
+      "explanation": "Bei einer idealen Spule ohne Widerstand würde eine sprunghafte Stromänderung (dI/dt → ∞) zu einer unendlich hohen Spannung führen (U = L × dI/dt)."
+    },
+    {
+      "id": 12,
+      "category": "Spulen - Ersatzschaltbild",
+      "question": "Was passiert bei einer realen Spule oberhalb der Self Resonance Frequency (SRF)?",
+      "options": [
+        "Der Scheinwiderstand steigt linear weiter an",
+        "Die Spule zeigt kapazitives Verhalten und der Scheinwiderstand sinkt",
+        "Die Induktivität wird null",
+        "Die Spule wird zum Kurzschluss"
+      ],
+      "correct_answer": 1,
+      "explanation": "Oberhalb der SRF dominieren die Parasitärkapazitäten, der Scheinwiderstand sinkt und die Spule zeigt kapazitives Verhalten."
+    },
+    {
+      "id": 13,
+      "category": "Halbleiter - Dotierung",
+      "question": "Was geschieht beim n-Dotieren eines Silizium-Halbleiters?",
+      "options": [
+        "Dreiwertige Atome werden eingebaut, es entstehen Löcher",
+        "Fünfwertige Atome werden eingebaut, es entstehen zusätzliche Elektronen",
+        "Die Leitfähigkeit nimmt ab",
+        "Es entstehen nur positive Ladungsträger"
+      ],
+      "correct_answer": 1,
+      "explanation": "Beim n-Dotieren werden fünfwertige Atome (Donatoren wie Arsen oder Phosphor) eingebaut, die ein überschüssiges Elektron liefern."
+    },
+    {
+      "id": 14,
+      "category": "Dioden - PN-Übergang",
+      "question": "Wie groß ist die Diffusionsspannung Ud einer Silizium-Diode bei 20°C?",
+      "options": [
+        "0,3 V",
+        "0,6-0,7 V",
+        "1,2 V",
+        "2,0 V"
+      ],
+      "correct_answer": 1,
+      "explanation": "Die Diffusionsspannung einer Silizium-Diode beträgt bei 20°C etwa 0,6-0,7V, während Germanium etwa 0,3V hat."
+    },
+    {
+      "id": 15,
+      "category": "Dioden - Kennlinie",
+      "question": "Nach welcher Formel wird der Diodenstrom in Durchlassrichtung beschrieben?",
+      "options": [
+        "ID = IS × (UD/UT)",
+        "ID = IS × (e^(UD/(n×UT)) - 1)",
+        "ID = UD/R",
+        "ID = IS + UD/R"
+      ],
+      "correct_answer": 1,
+      "explanation": "Die Shockley-Gleichung: ID = IS × (e^(UD/(n×UT)) - 1), wobei IS der Sättigungssperrstrom, UT die Temperaturspannung (26mV bei Raumtemperatur) und n der Emissionskoeffizient ist."
+    },
+    {
+      "id": 16,
+      "category": "Spezialdioden - Zenerdiode",
+      "question": "Wofür werden Zenerdioden hauptsächlich eingesetzt?",
+      "options": [
+        "Als Gleichrichter in Netzteilen",
+        "Zur Spannungsstabilisierung im Sperrbereich",
+        "Als Schalter in der Digitaltechnik",
+        "Zur Frequenzerzeugung"
+      ],
+      "correct_answer": 1,
+      "explanation": "Zenerdioden sind für den Dauerbetrieb im Durchbruchbereich ausgelegt und werden zur Spannungsstabilisierung bzw. Spannungsbegrenzung eingesetzt."
+    },
+    {
+      "id": 17,
+      "category": "Spezialdioden - Schottkydiode",
+      "question": "Welcher Vorteil und welcher Nachteil charakterisieren Schottkydioden?",
+      "options": [
+        "Hohe Durchbruchspannung, aber langsame Schaltzeiten",
+        "Extrem schnelle Schaltzeiten, aber niedrige Durchbruchspannung (5-20V)",
+        "Hohe Sperrspannung, aber hohe Durchlassspannung",
+        "Niedrige Durchlassspannung, aber hoher Sperrstrom"
+      ],
+      "correct_answer": 1,
+      "explanation": "Schottkydioden haben extrem schnelle Schaltzeiten (typ. 50-100ps) und sind für hohe Frequenzen geeignet, haben aber meist niedrige Durchbruchspannungen (5-20V)."
+    },
+    {
+      "id": 18,
+      "category": "Spezialdioden - Kapazitätsdiode",
+      "question": "Wie ändert sich die Sperrschichtkapazität einer Kapazitätsdiode bei steigender Sperrspannung?",
+      "options": [
+        "Sie wird größer",
+        "Sie bleibt konstant",
+        "Sie wird kleiner",
+        "Sie oszilliert"
+      ],
+      "correct_answer": 2,
+      "explanation": "Bei steigender Sperrspannung wird die Sperrschicht breiter, wodurch die Kapazität kleiner wird. Dieser Effekt wird zur Frequenzabstimmung genutzt."
+    },
+    {
+      "id": 19,
+      "category": "Bipolartransistor - Funktionsprinzip",
+      "question": "Welcher Anteil der Elektronen erreicht bei einem typischen NPN-Transistor den Kollektor?",
+      "options": [
+        "Etwa 50%",
+        "Etwa 75%",
+        "Etwa 99%",
+        "Etwa 100%"
+      ],
+      "correct_answer": 2,
+      "explanation": "Bei üblichen Bipolartransistoren erreichen etwa 99% der Elektronen vom Emitter den Kollektor, nur etwa 1% bleibt in der dünnen Basisschicht hängen."
+    },
+    {
+      "id": 20,
+      "category": "Bipolartransistor - Schaltverhalten",
+      "question": "Wann ist ein NPN-Transistor als Schalter leitend?",
+      "options": [
+        "Wenn UBE < 0,6V",
+        "Wenn IB > 0 und UBE > 0,6V",
+        "Wenn UCE > 5V",
+        "Wenn nur UCE angelegt wird"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ein NPN-Transistor ist leitend, wenn ein Strom in die Basis fließt (IB > 0) und UBE > 0,6V beträgt, dann kann ein Kollektorstrom IC fließen."
+    },
+    {
+      "id": 21,
+      "category": "Bipolartransistor - Kenngrößen",
+      "question": "Die Stromverstärkung β eines Transistors ist definiert als:",
+      "options": [
+        "β = IE/IB",
+        "β = IC/IB",
+        "β = UCE/UBE",
+        "β = IC/IE"
+      ],
+      "correct_answer": 1,
+      "explanation": "Die Kleinsignalstromverstärkung β (oder hFE) ist definiert als β = IC/IB, das Verhältnis von Kollektorstrom zu Basisstrom."
+    },
+    {
+      "id": 22,
+      "category": "Darlington-Transistor",
+      "question": "Welche Eigenschaft charakterisiert eine Darlington-Schaltung?",
+      "options": [
+        "Niedrigere Stromverstärkung als Einzeltransistoren",
+        "Gesamtverstärkung βges ≈ β1 × β2",
+        "Schnellere Schaltzeiten",
+        "Niedrigere Basis-Emitter-Spannung"
+      ],
+      "correct_answer": 1,
+      "explanation": "Bei Darlington-Transistoren multiplizieren sich die Verstärkungsfaktoren: βges ≈ β1 × β2, wodurch sehr hohe Stromverstärkungen erreicht werden."
+    },
+    {
+      "id": 23,
+      "category": "Darlington-Transistor - Eigenschaften",
+      "question": "Welcher Nachteil ist typisch für Darlington-Transistoren?",
+      "options": [
+        "Niedrigere Stromverstärkung",
+        "Basis-Emitter-Spannung verdoppelt sich auf ca. 1,4V",
+        "Zu schnelle Schaltzeiten",
+        "Niedrigere Verlustleistung"
+      ],
+      "correct_answer": 1,
+      "explanation": "Die Basis-Emitter-Spannung verdoppelt sich bei Darlington-Transistoren auf etwa 1,4V (2 × 0,7V) und die Durchlassspannung UCE beträgt ca. 0,9V statt 0,2V."
+    },
+    {
+      "id": 24,
+      "category": "MOSFET - Funktionsprinzip",
+      "question": "Warum fließt bei einem MOSFET kein Gatestrom IG?",
+      "options": [
+        "Das Gate ist kurzgeschlossen",
+        "Die Siliziumdioxid-Schicht wirkt isolierend zwischen Gate und Substrat",
+        "Der Innenwiderstand ist zu hoch",
+        "Es wird keine Spannung angelegt"
+      ],
+      "correct_answer": 1,
+      "explanation": "Die Siliziumdioxid-Schicht wirkt isolierend zwischen Aluminium-Gate und Substrat, daher fließt kein Gatestrom und die Steuerung erfolgt nahezu leistungslos."
+    },
+    {
+      "id": 25,
+      "category": "MOSFET - Schaltverhalten",
+      "question": "Ein n-Kanal MOSFET (selbstsperrend) wird leitend, wenn:",
+      "options": [
+        "UGS = 0V",
+        "UGS < 0V",
+        "UGS > Uth (z.B. 2V)",
+        "UDS > 5V"
+      ],
+      "correct_answer": 2,
+      "explanation": "Ein n-Kanal MOSFET (selbstsperrend) wird leitend, wenn UGS größer als die Threshold-Spannung Uth ist (typisch 2-4V)."
+    },
+    {
+      "id": 26,
+      "category": "MOSFET - Parasitäre Diode",
+      "question": "Warum ist bei High-Side-Schaltungen mit n-Kanal MOSFETs eine Charge-Pump nötig?",
+      "options": [
+        "Um den Drain-Strom zu begrenzen",
+        "Weil UGS negativ wird, wenn der Source auf Drain-Potential angehoben wird",
+        "Um die parasitäre Diode zu aktivieren",
+        "Um Schwingungen zu unterdrücken"
+      ],
+      "correct_answer": 1,
+      "explanation": "Bei High-Side-Schaltungen wird durch das Einschalten des MOSFETs das Source-Potential angehoben, wodurch UGS negativ wird und der FET wieder sperrt. Eine Charge-Pump erzeugt eine höhere Gate-Spannung."
+    },
+    {
+      "id": 27,
+      "category": "Thyristor - Funktionsprinzip",
+      "question": "Wie kann ein einmal gezündeter Thyristor wieder abgeschaltet werden?",
+      "options": [
+        "Durch Anlegen einer negativen Gate-Spannung",
+        "Durch Unterschreiten des Haltestroms",
+        "Durch Erhöhen der Anodenspannung",
+        "Automatisch nach einer bestimmten Zeit"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ein Thyristor kann nur abgeschaltet werden, wenn der Strom unter den Haltestrom fällt. Bei Wechselspannung geschieht dies automatisch beim Nulldurchgang."
+    },
+    {
+      "id": 28,
+      "category": "Triac",
+      "question": "Welchen Vorteil bietet ein Triac gegenüber einem Thyristor?",
+      "options": [
+        "Höhere Schaltgeschwindigkeit",
+        "Nutzung beider Halbwellen bei Wechselspannung",
+        "Niedrigere Verluste",
+        "Bessere Linearität"
+      ],
+      "correct_answer": 1,
+      "explanation": "Triacs können beide Halbwellen einer Wechselspannung nutzen, während Thyristoren nur eine Halbwelle nutzen und einen Gleichrichteffekt haben."
+    },
+    {
+      "id": 29,
+      "category": "IGBT - Eigenschaften",
+      "question": "Welche Eigenschaft kombiniert der IGBT von welchen Transistortypen?",
+      "options": [
+        "Schnelle Schaltzeiten des Bipolartransistors mit der Stromtragfähigkeit des MOSFETs",
+        "Hohe Stromtragfähigkeit des Bipolartransistors mit der leistungslosen Ansteuerung des MOSFETs",
+        "Niedrige Kosten des Bipolartransistors mit der Einfachheit des MOSFETs",
+        "Linearität des Bipolartransistors mit der Robustheit des MOSFETs"
+      ],
+      "correct_answer": 1,
+      "explanation": "Der IGBT vereint die hohe Stromtragfähigkeit und hohe Sperrspannung von Bipolartransistoren mit der kapazitiven, nahezu leistungslosen Ansteuerbarkeit des MOSFETs."
+    },
+    {
+      "id": 30,
+      "category": "IGBT - Anwendung",
+      "question": "Bis zu welchen Spannungs- und Stromwerten sind moderne IGBTs verfügbar?",
+      "options": [
+        "650V und 50A",
+        "1200V und 100A",
+        "6500V und 3600A",
+        "10kV und 5000A"
+      ],
+      "correct_answer": 2,
+      "explanation": "Moderne IGBT-Module erreichen heute Spannungen bis 6500V und Ströme bis 3600A, mit Parallelschaltung in Hochleistungsmodulen."
+    },
+    {
+      "id": 31,
+      "category": "Leistungsberechnung - Praktisch",
+      "question": "Ein Widerstand der E24-Reihe soll als LED-Vorwiderstand dienen (5V, LED: 2V/15mA). Welchen Wert und welche Mindestleistung wählen Sie?",
+      "options": [
+        "180Ω, 63mW",
+        "200Ω, 45mW",
+        "220Ω, 50mW",
+        "150Ω, 68mW"
+      ],
+      "correct_answer": 1,
+      "explanation": "R = (5V-2V)/15mA = 200Ω; P = I²R = (0,015)² × 200 = 45mW. Man wählt 200Ω aus E24 und mindestens 100mW Belastbarkeit (Faktor 2 Sicherheit)."
+    },
+    {
+      "id": 32,
+      "category": "Frequenzverhalten - Resonanz",
+      "question": "Bei einem LC-Schwingkreis mit L=10µH und C=100pF liegt die Resonanzfrequenz bei:",
+      "options": [
+        "1,59 MHz",
+        "5,03 MHz",
+        "15,9 MHz",
+        "50,3 MHz"
+      ],
+      "correct_answer": 1,
+      "explanation": "f₀ = 1/(2π√LC) = 1/(2π√(10×10⁻⁶ × 100×10⁻¹²)) = 1/(2π × 10⁻⁹) ≈ 5,03 MHz"
+    },
+    {
+      "id": 33,
+      "category": "Transistor-Arbeitspunkt",
+      "question": "Bei der Arbeitspunkteinstellung mit Basisspannungsteiler wird der Querstrom IR2 typischerweise gewählt als:",
+      "options": [
+        "IR2 = IB",
+        "IR2 = IC/10",
+        "IR2 = 10 × IB",
+        "IR2 = IC"
+      ],
+      "correct_answer": 2,
+      "explanation": "Der Querstrom IR2 wird typisch etwa 10-mal größer als der Basisstrom IB gewählt, um eine stabile Arbeitspunkteinstellung zu gewährleisten."
+    },
+    {
+      "id": 34,
+      "category": "Elektrolytkondensatoren",
+      "question": "Warum dürfen Elektrolytkondensatoren nicht mit falscher Polarität betrieben werden?",
+      "options": [
+        "Die Kapazität würde sich verringern",
+        "Es besteht Explosionsgefahr",
+        "Sie würden als Induktivität wirken",
+        "Der ESR würde zu hoch werden"
+      ],
+      "correct_answer": 1,
+      "explanation": "Elektrolytkondensatoren sind gepolte Bauelemente und dürfen nicht mit falscher Polarität betrieben werden, da Explosionsgefahr besteht."
+    },
+    {
+      "id": 35,
+      "category": "SMD-Bauformen",
+      "question": "Welche typische maximale Leistung hat ein SMD-Widerstand der Bauform 0603?",
+      "options": [
+        "50mW",
+        "100mW",
+        "250mW",
+        "500mW"
+      ],
+      "correct_answer": 1,
+      "explanation": "SMD-Widerstände der Bauform 0603 (1,6mm × 0,8mm) haben typischerweise eine maximale Leistung von 100mW."
+    },
+    {
+      "id": 36,
+      "category": "Spezielle Widerstände - PTC",
+      "question": "Was charakterisiert einen PTC-Widerstand (Kaltleiter)?",
+      "options": [
+        "Der Widerstandswert sinkt mit steigender Temperatur",
+        "Der Widerstandswert steigt mit steigender Temperatur",
+        "Der Widerstandswert ist temperaturunabhängig",
+        "Er funktioniert nur bei negativen Temperaturen"
+      ],
+      "correct_answer": 1,
+      "explanation": "PTC-Widerstände (Positive Temperature Coefficient) haben einen positiven Temperaturkoeffizienten - der Widerstandswert steigt mit steigender Temperatur. Sie werden als Temperatursensoren verwendet."
+    },
+    {
+      "id": 37,
+      "category": "Spezielle Widerstände - NTC",
+      "question": "Welche Eigenschaft hat ein NTC-Widerstand (Heißleiter)?",
+      "options": [
+        "Er leitet nur bei hohen Temperaturen",
+        "Der Widerstandswert sinkt mit steigender Temperatur",
+        "Er kann nur Wechselstrom leiten",
+        "Er hat einen konstanten Temperaturkoeffizienten"
+      ],
+      "correct_answer": 1,
+      "explanation": "NTC-Widerstände (Negative Temperature Coefficient) haben einen negativen Temperaturkoeffizienten - der Widerstandswert sinkt mit steigender Temperatur."
+    },
+    {
+      "id": 38,
+      "category": "Spezielle Widerstände - Fotowiderstand",
+      "question": "Wie verhält sich ein Fotowiderstand bei Lichteinfall?",
+      "options": [
+        "Der Widerstandswert steigt",
+        "Der Widerstandswert verringert sich",
+        "Er wird zum Kurzschluss",
+        "Die Polarität kehrt sich um"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ein Fotowiderstand verringert seinen Widerstandswert bei Lichteinfluss. Je mehr Licht einfällt, desto geringer wird der Widerstand."
+    },
+    {
+      "id": 39,
+      "category": "Spezielle Widerstände - Varistor",
+      "question": "Wofür werden Varistoren hauptsächlich eingesetzt?",
+      "options": [
+        "Zur Spannungsstabilisierung",
+        "Als Temperatursensoren",
+        "Zur Begrenzung von Überspannungsimpulsen",
+        "Als lineare Widerstände"
+      ],
+      "correct_answer": 2,
+      "explanation": "Varistoren sind spannungsabhängige Widerstände, die ihren Widerstand drastisch ab einer Schwellspannung verringern. Sie werden zur Begrenzung von Überspannungsimpulsen eingesetzt, NICHT zur Spannungsstabilisierung."
+    },
+    {
+      "id": 40,
+      "category": "Spezielle Widerstände - Dehnmessstreifen",
+      "question": "Wie funktionieren Dehnmessstreifen?",
+      "options": [
+        "Sie messen die Temperatur von Bauteilen",
+        "Sie ändern ihren Widerstandswert in Abhängigkeit ihrer Dehnung/Zugspannung",
+        "Sie messen elektrische Spannung",
+        "Sie funktionieren nur bei Druckbelastung"
+      ],
+      "correct_answer": 1,
+      "explanation": "Dehnmessstreifen sind Folienwiderstände, die aufgeklebt werden und ihren Widerstandswert in Abhängigkeit ihrer Dehnung bzw. Zugspannung ändern."
+    },
+    {
+      "id": 41,
+      "category": "Einstellbare Widerstände - Potentiometer",
+      "question": "Wie viele Anschlüsse hat ein Potentiometer und welche Funktion haben sie?",
+      "options": [
+        "2 Anschlüsse: Eingang und Ausgang",
+        "3 Anschlüsse: zwei an den Enden der Widerstandsstrecke, einer am Schleifer",
+        "4 Anschlüsse: je zwei für Eingang und Ausgang",
+        "5 Anschlüsse: für verschiedene Widerstandswerte"
+      ],
+      "correct_answer": 1,
+      "explanation": "Potentiometer haben drei Anschlüsse: Zwei sind an den Enden der Widerstandsstrecke und ein Anschluss ist der Kontakt zum Schleifer, der auf den Widerstandskörper drückt."
+    },
+    {
+      "id": 42,
+      "category": "Kondensatoren - Bipolare Elektrolytkondensatoren",
+      "question": "Wie werden bipolare Elektrolytkondensatoren für Wechselspannungsbetrieb hergestellt?",
+      "options": [
+        "Durch spezielle Beschichtung der Elektroden",
+        "Durch gegenpolige Serienschaltung zweier Anodenfolien in einem Gehäuse",
+        "Durch Verwendung eines anderen Dielektrikums",
+        "Durch höhere Betriebsspannung"
+      ],
+      "correct_answer": 1,
+      "explanation": "Bipolare Elektrolytkondensatoren für Wechselspannungsbetrieb werden durch gegenpolige Serienschaltung zweier Anodenfolien in einem Kondensatorgehäuse hergestellt."
+    },
+    {
+      "id": 43,
+      "category": "Kondensatoren - Drehkondensatoren",
+      "question": "Wie erfolgt die Kapazitätsänderung bei Drehkondensatoren?",
+      "options": [
+        "Durch Änderung des Abstands der Platten",
+        "Durch Änderung der kapazitiv wirksamen Fläche",
+        "Durch Änderung des Dielektrikums",
+        "Durch Änderung der Spannung"
+      ],
+      "correct_answer": 1,
+      "explanation": "Die Kapazitätsänderung bei Drehkondensatoren erfolgt durch Änderung der kapazitiv wirksamen Fläche durch Drehen der beweglichen Platten."
+    },
+    {
+      "id": 44,
+      "category": "Kondensatoren - Trimmer",
+      "question": "Wofür werden Kondensator-Trimmer verwendet?",
+      "options": [
+        "Für häufige manuelle Regelung durch den Benutzer",
+        "Nur zur Erstinbetriebnahme und nach Reparaturen für Kapazitätsabgleich",
+        "Als Ersatz für Drehkondensatoren",
+        "Zur automatischen Frequenzregelung"
+      ],
+      "correct_answer": 1,
+      "explanation": "Trimmer sind nicht für häufige Betätigung ausgelegt und werden nur zur Erstinbetriebnahme und ggf. nach Reparaturen betätigt, um einen Kapazitätsausgleich zu bewirken (Abgleich)."
+    },
+    {
+      "id": 45,
+      "category": "JFET - Sperrschicht-FET",
+      "question": "Wie funktioniert ein JFET (Junction-FET, Sperrschicht-FET)?",
+      "options": [
+        "Durch Isolation des Gates mit Siliziumdioxid",
+        "Die Steuerspannung beeinflusst die Sperrschichtweite eines in Sperrrichtung betriebenen pn-Übergangs",
+        "Durch Änderung der Dotierung",
+        "Durch mechanische Verstellung"
+      ],
+      "correct_answer": 1,
+      "explanation": "Beim JFET beeinflusst die Steuerspannung die Sperrschichtweite eines in Sperrrichtung betriebenen pn-Übergangs, wodurch der Kanal gesteuert wird."
+    },
+    {
+      "id": 46,
+      "category": "Schaltregler - Step-Up-Wandler",
+      "question": "Nach welcher Formel berechnet sich die Ausgangsspannung eines Step-Up-Wandlers (Boost)?",
+      "options": [
+        "Uout = Uin × Ton/Toff",
+        "Uout = Uin × (Ton + Toff)/Toff",
+        "Uout = Uin × Toff/Ton",
+        "Uout = Uin × Ton × Toff"
+      ],
+      "correct_answer": 1,
+      "explanation": "Bei einem Step-Up-Wandler gilt: Uout = Uin × (Ton + Toff)/Toff, wobei Ton die Einschaltzeit und Toff die Ausschaltzeit des Schalters ist."
+    },
+    {
+      "id": 47,
+      "category": "Schaltregler - Betriebsfrequenz",
+      "question": "In welchem Frequenzbereich arbeiten typische Schaltregler?",
+      "options": [
+        "1-10 kHz",
+        "50-300 kHz",
+        "1-10 MHz",
+        "50-100 MHz"
+      ],
+      "correct_answer": 1,
+      "explanation": "Typische Schaltregler arbeiten mit Schaltfrequenzen von 50-300 kHz, um einen Kompromiss zwischen Bauteilgröße und Schaltverlusten zu erreichen."
+    },
+    {
+      "id": 48,
+      "category": "Halbleiter - Materialunterschiede",
+      "question": "Welche Diffusionsspannung haben Germanium-Dioden bei 20°C?",
+      "options": [
+        "0,3 V",
+        "0,7 V",
+        "1,2 V",
+        "2,0 V"
+      ],
+      "correct_answer": 0,
+      "explanation": "Germanium-Dioden haben bei 20°C eine Diffusionsspannung von etwa 0,3V, während Silizium-Dioden etwa 0,6-0,7V haben."
+    },
+    {
+      "id": 49,
+      "category": "SMD-Kennzeichnung",
+      "question": "Was bedeutet die SMD-Kennzeichnung '4k7' auf einem Widerstand?",
+      "options": [
+        "4,7 Ω",
+        "47 Ω",
+        "4,7 kΩ",
+        "47 kΩ"
+      ],
+      "correct_answer": 2,
+      "explanation": "Die Schreibweise '4k7' bedeutet 4,7 kΩ. Der Buchstabe 'k' ersetzt das Komma und zeigt gleichzeitig die Größenordnung (Kilo) an."
+    },
+    {
+      "id": 50,
+      "category": "SMD-Bauformen - Detailwissen",
+      "question": "Welche SMD-Baugröße hat die Abmessung 2,0mm × 1,2mm?",
+      "options": [
+        "0603",
+        "0805",
+        "1210",
+        "1812"
+      ],
+      "correct_answer": 1,
+      "explanation": "Die SMD-Baugröße 0805 hat die Abmessungen 2,0mm × 1,2mm und eine typische maximale Leistung von 125-250mW."
+    },
+    {
+      "id": 51,
+      "category": "Widerstandsreihen - Berechnung",
+      "question": "Wie berechnet sich der nächste Wert in einer E-Reihe?",
+      "options": [
+        "Multiplikation mit 2",
+        "Multiplikation mit 10^(1/n), wobei n die Reihennummer ist",
+        "Addition einer Konstante",
+        "Logarithmische Progression"
+      ],
+      "correct_answer": 1,
+      "explanation": "In E-Reihen wird der nächste Wert durch Multiplikation mit 10^(1/n) berechnet, wobei n die Reihennummer ist (E6: 10^(1/6) ≈ 1,47)."
+    },
+    {
+      "id": 52,
+      "category": "Thyristor - Zündung",
+      "question": "Was passiert beim 'Zünden' eines Thyristors?",
+      "options": [
+        "Er wird automatisch nach kurzer Zeit wieder ausgeschaltet",
+        "Er wird durch einen kleinen Stromimpuls am Gate in den leitenden Zustand versetzt",
+        "Er explodiert kontrolliert",
+        "Die Polarität kehrt sich um"
+      ],
+      "correct_answer": 1,
+      "explanation": "Beim 'Zünden' wird der Thyristor durch einen kleinen Stromimpuls über das Gate in den leitenden Zustand versetzt und bleibt leitend, auch wenn der Gate-Impuls wieder verschwindet."
+    },
+    {
+      "id": 53,
+      "category": "IGBT - Schaltfrequenz",
+      "question": "Bis zu welcher Schaltfrequenz sind IGBTs typischerweise geeignet?",
+      "options": [
+        "1 kHz",
+        "30 kHz",
+        "1 MHz",
+        "100 MHz"
+      ],
+      "correct_answer": 1,
+      "explanation": "IGBTs eignen sich für den Schaltbetrieb mit Schaltfrequenzen bis zu etwa 30 kHz. Oberhalb dieser Frequenz werden meist MOSFETs bevorzugt."
+    },
+    {
+      "id": 54,
+      "category": "Leistungshalbleiter - Wirkungsgrad",
+      "question": "Welchen Wirkungsgrad erreichen moderne IGBTs als einzelnes Bauteil?",
+      "options": [
+        "Etwa 85%",
+        "Etwa 95%",
+        "Nahe 99%",
+        "Über 99,5%"
+      ],
+      "correct_answer": 2,
+      "explanation": "Moderne IGBTs erreichen als einzelnes Bauteil Wirkungsgrade nahe 99%, aber aufgrund der hohen Ströme und Spannungen ist auch 1% Verlustleistung erheblich und erfordert Kühlung."
+    },
+    {
+      "id": 55,
+      "category": "Kondensatoren - Temperaturkoeffizient",
+      "question": "Was gibt es bei Keramikkondensatoren bezüglich des Temperaturkoeffizienten?",
+      "options": [
+        "Alle haben denselben negativen Temperaturkoeffizienten",
+        "Alle haben denselben positiven Temperaturkoeffizienten",
+        "Es gibt paraelektrische Dielektrika mit positivem, negativem und nahe null betragendem Temperaturkoeffizienten",
+        "Der Temperaturkoeffizient ist immer null"
+      ],
+      "correct_answer": 2,
+      "explanation": "Für Keramikkondensatoren gibt es paraelektrische Dielektrika mit positivem, negativem und nahe null betragendem Temperaturkoeffizienten, je nach gewünschter Anwendung."
+    },
+    {
+      "id": 56,
+      "category": "Spulen - Eisenkern",
+      "question": "Welchen Hauptvorteil bringt ein Eisenkern in einer Spule?",
+      "options": [
+        "Niedrigere Kosten",
+        "Höhere mechanische Stabilität",
+        "Wesentlich weniger Windungen für benötigte Induktivität durch erhöhte Permeabilität",
+        "Bessere Hochfrequenzeigenschaften"
+      ],
+      "correct_answer": 2,
+      "explanation": "Ein Eisenkern erhöht durch seine ferromagnetischen Eigenschaften die Permeabilität und damit die magnetische Flussdichte, wodurch man mit wesentlich weniger Windungen die benötigte Induktivität erreicht."
+    },
+    {
+      "id": 57,
+      "category": "Praktische Berechnung - Transistor",
+      "question": "Gegeben: Transistor mit β=150, IC=50mA. Wie groß ist der erforderliche Basisstrom IB?",
+      "options": [
+        "333 µA",
+        "300 µA",
+        "7,5 mA",
+        "750 µA"
+      ],
+      "correct_answer": 0,
+      "explanation": "IB = IC/β = 50mA/150 = 0,333mA = 333µA. Der Basisstrom ist um den Faktor β kleiner als der Kollektorstrom."
+    },
+    {
+      "id": 58,
+      "category": "LED - Materialabhängigkeit",
+      "question": "Was bestimmt hauptsächlich die Farbe einer LED?",
+      "options": [
+        "Die angelegte Spannung",
+        "Der Strom durch die LED",
+        "Das verwendete Halbleitermaterial und die Bandlücke",
+        "Die Temperatur der LED"
+      ],
+      "correct_answer": 2,
+      "explanation": "Die Farbe einer LED wird hauptsächlich durch das verwendete Halbleitermaterial und dessen Bandlücke bestimmt, da beim Übergang von Elektronen Licht mit spezifischer Energie/Wellenlänge ausgesendet wird."
+    },
+    {
+      "id": 59,
+      "category": "Resonanz - Praktisch",
+      "question": "Was passiert bei Resonanzerscheinungen in LC-Schaltungen?",
+      "options": [
+        "Die Schaltung wird zerstört",
+        "Es kommt zu Spannungsüberhöhung, aber dies stellt keine verwertbare Verstärkung dar",
+        "Unbegrenzte Energieverstärkung",
+        "Die Frequenz ändert sich automatisch"
+      ],
+      "correct_answer": 1,
+      "explanation": "Bei Resonanz in LC-Schaltungen kann es zu Spannungsüberhöhung kommen, dies stellt aber keine verwertbare Verstärkung dar, da der Energieinhalt nicht vergrößert wird."
+    },
+    {
+      "id": 60,
+      "category": "Praxis - Sicherheitsfaktor",
+      "question": "Welcher Sicherheitsfaktor wird typischerweise bei der Widerstandsbelastung gewählt?",
+      "options": [
+        "Faktor 1,2",
+        "Faktor 2",
+        "Faktor 5",
+        "Faktor 10"
+      ],
+      "correct_answer": 1,
+      "explanation": "Meist wird mindestens ein Faktor 2 zwischen der tatsächlichen Leistung und der maximalen gewählt, um thermische Belastung und Widerstandsänderungen zu vermeiden."
+    }
+  ]
+}
