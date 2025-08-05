@@ -11,15 +11,34 @@ class AppManager {
         try {
             console.log('Initializing Quiz Master PWA...');
             
+            // Check if storage manager exists
+            if (!window.storageManager) {
+                console.error('StorageManager not found!');
+                return;
+            }
+            
             // Initialize storage manager first
             await window.storageManager.init();
+            console.log('Storage manager initialized');
+            
+            // Check if quiz manager exists
+            if (!window.quizManager) {
+                console.error('QuizManager not found!');
+                return;
+            }
             
             window.quizManager.init();
+            console.log('Quiz manager initialized');
+            
             this.setupEventListeners();
+            console.log('Event listeners set up');
+            
             this.loadSettings();
+            console.log('Settings loaded');
             
             // Load saved quiz data
             await this.loadSavedQuizzes();
+            console.log('Saved quizzes loaded');
             
             this.updateQuizInfo();
             
@@ -49,13 +68,37 @@ class AppManager {
             fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         }
 
-        // Quiz cards (built-in quizzes)
-        const quizCards = document.querySelectorAll('.quiz-card[data-quiz]');
-        quizCards.forEach(card => {
-            card.addEventListener('click', () => this.loadQuickQuiz(card.dataset.quiz));
+        // Quiz cards (built-in quizzes) - use event delegation
+        document.addEventListener('click', (e) => {
+            console.log('Document click detected:', e.target);
+            
+            // Handle quiz card clicks
+            const quizCard = e.target.closest('.quiz-card[data-quiz]');
+            if (quizCard) {
+                const quizName = quizCard.dataset.quiz;
+                if (quizName) {
+                    console.log('Quiz card clicked:', quizName);
+                    e.preventDefault();
+                    this.loadQuickQuiz(quizName);
+                }
+            }
+            
+            // Handle saved quiz selection
+            if (e.target.classList.contains('quiz-select-btn')) {
+                const quizId = parseInt(e.target.dataset.quizId);
+                if (quizId) {
+                    this.selectQuiz(quizId);
+                }
+            }
+            
+            // Handle saved quiz deletion
+            if (e.target.classList.contains('quiz-delete-btn')) {
+                const quizId = parseInt(e.target.dataset.quizId);
+                if (quizId) {
+                    this.deleteQuiz(quizId);
+                }
+            }
         });
-
-        // Note: Start quiz button removed - quizzes now auto-start
 
         // Settings checkboxes (only essential ones remain)
         const showExplanations = document.getElementById('showExplanations');
@@ -137,10 +180,11 @@ class AppManager {
 
     // Load a quick quiz from json_dbs directory
     async loadQuickQuiz(quizName) {
+        console.log('loadQuickQuiz called with:', quizName);
         if (!quizName) return;
         
         // If currently in a quiz, ask for confirmation to switch
-        if (window.quizManager.isQuizActive) {
+        if (window.quizManager && window.quizManager.isQuizActive) {
             const confirmSwitch = confirm('Möchtest du das aktuelle Quiz beenden und ein neues starten?');
             if (!confirmSwitch) {
                 return;
@@ -300,14 +344,7 @@ class AppManager {
             quizList.appendChild(quizItem);
         });
         
-        // Add event listeners for quiz selection and deletion
-        quizList.addEventListener('click', (e) => {
-            if (e.target.classList.contains('quiz-select-btn')) {
-                this.selectQuiz(parseInt(e.target.dataset.quizId));
-            } else if (e.target.classList.contains('quiz-delete-btn')) {
-                this.deleteQuiz(parseInt(e.target.dataset.quizId));
-            }
-        });
+        // Event listeners are now handled globally in setupEventListeners
         
         console.log('Quiz list updated:', quizzes.length, 'quizzes');
     }

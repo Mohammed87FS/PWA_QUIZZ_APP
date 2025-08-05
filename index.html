@@ -42,21 +42,21 @@
                 <div class="quiz-section">
                     <h3>Verfügbare Quizzes</h3>
                     <div class="quiz-grid">
-                        <button class="quiz-card" data-quiz="demokratie">
-                            <div class="quiz-icon">🏛️</div>
-                            <div class="quiz-title">Demokratie</div>
+                        <button class="quiz-card" data-quiz="demokratie" onclick="console.log('Demokratie clicked')">
+                            <span class="quiz-icon">🏛️</span>
+                            <span class="quiz-title">Demokratie</span>
                         </button>
-                        <button class="quiz-card" data-quiz="geschichte">
-                            <div class="quiz-icon">📜</div>
-                            <div class="quiz-title">Geschichte</div>
+                        <button class="quiz-card" data-quiz="geschichte" onclick="console.log('Geschichte clicked')">
+                            <span class="quiz-icon">📜</span>
+                            <span class="quiz-title">Geschichte</span>
                         </button>
-                        <button class="quiz-card" data-quiz="elektronik_quiz">
-                            <div class="quiz-icon">⚡</div>
-                            <div class="quiz-title">Elektronik</div>
+                        <button class="quiz-card" data-quiz="elektronik_quiz" onclick="console.log('Elektronik clicked')">
+                            <span class="quiz-icon">⚡</span>
+                            <span class="quiz-title">Elektronik</span>
                         </button>
                         <label for="fileInput" class="quiz-card upload-card">
-                            <div class="quiz-icon">📁</div>
-                            <div class="quiz-title">Eigene Datei</div>
+                            <span class="quiz-icon">📁</span>
+                            <span class="quiz-title">Eigene Datei</span>
                             <input type="file" id="fileInput" accept=".json" hidden>
                         </label>
                     </div>
