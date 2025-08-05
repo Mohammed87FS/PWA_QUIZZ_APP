@@ -1,5 +1,5 @@
 // Service Worker for Quiz Master PWA
-const CACHE_NAME = 'quiz-master-v2-simplified';
+const CACHE_NAME = 'quiz-master-v3-no-sample';
 const OFFLINE_URL = 'offline.html';
 
 // Files to cache for offline functionality
