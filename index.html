@@ -34,37 +34,41 @@
         </header>
 
         <main class="main">
-            <!-- Simplified Quiz Selection -->
+            <!-- Clean Quiz Selection -->
             <div class="quiz-selection">
-                <h2>Quiz auswählen</h2>
+                <h2>Wähle ein Quiz</h2>
                 
-                <!-- Quick Quiz Selection -->
-                <div class="quick-quiz-buttons">
-                    <button class="quick-quiz-btn" data-quiz="demokratie">🏛️ Demokratie</button>
-                    <button class="quick-quiz-btn" data-quiz="geschichte">📜 Geschichte</button>
-                    <button class="quick-quiz-btn" data-quiz="elektronik_quiz">⚡ Elektronik</button>
-                </div>
-                
-                <div class="divider">oder</div>
-                
-                <!-- File Upload -->
-                <div class="upload-section">
-                    <input type="file" id="fileInput" accept=".json" hidden>
-                    <label for="fileInput" class="upload-btn">📁 Eigene JSON-Datei hochladen</label>
+                <!-- Built-in Quizzes -->
+                <div class="quiz-section">
+                    <h3>Verfügbare Quizzes</h3>
+                    <div class="quiz-grid">
+                        <button class="quiz-card" data-quiz="demokratie">
+                            <div class="quiz-icon">🏛️</div>
+                            <div class="quiz-title">Demokratie</div>
+                        </button>
+                        <button class="quiz-card" data-quiz="geschichte">
+                            <div class="quiz-icon">📜</div>
+                            <div class="quiz-title">Geschichte</div>
+                        </button>
+                        <button class="quiz-card" data-quiz="elektronik_quiz">
+                            <div class="quiz-icon">⚡</div>
+                            <div class="quiz-title">Elektronik</div>
+                        </button>
+                        <label for="fileInput" class="quiz-card upload-card">
+                            <div class="quiz-icon">📁</div>
+                            <div class="quiz-title">Eigene Datei</div>
+                            <input type="file" id="fileInput" accept=".json" hidden>
+                        </label>
+                    </div>
                 </div>
 
-                <!-- Saved Quizzes (Auto-shown when available) -->
-                <div id="savedQuizzesSection" class="saved-quizzes hidden">
+                <!-- Saved Quizzes (shown when available) -->
+                <div id="savedQuizzesSection" class="quiz-section hidden">
                     <h3>Gespeicherte Quizzes</h3>
-                    <div id="quizList" class="quiz-list">
+                    <div id="quizList" class="saved-quiz-grid">
                         <!-- Quiz items will be added dynamically -->
                     </div>
                 </div>
-                
-                <div id="quizStats" class="stats hidden">
-                    <span id="questionCount">0</span> Fragen
-                </div>
-                <button id="startQuiz" class="start-btn" disabled>Quiz starten</button>
             </div>
 
             <!-- Quiz Interface -->

@@ -49,17 +49,13 @@ class AppManager {
             fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         }
 
-        // Quick quiz buttons
-        const quickQuizButtons = document.querySelectorAll('.quick-quiz-btn');
-        quickQuizButtons.forEach(button => {
-            button.addEventListener('click', () => this.loadQuickQuiz(button.dataset.quiz));
+        // Quiz cards (built-in quizzes)
+        const quizCards = document.querySelectorAll('.quiz-card[data-quiz]');
+        quizCards.forEach(card => {
+            card.addEventListener('click', () => this.loadQuickQuiz(card.dataset.quiz));
         });
 
-        // Start quiz
-        const startQuiz = document.getElementById('startQuiz');
-        if (startQuiz) {
-            startQuiz.addEventListener('click', () => this.startQuiz());
-        }
+        // Note: Start quiz button removed - quizzes now auto-start
 
         // Settings checkboxes (only essential ones remain)
         const showExplanations = document.getElementById('showExplanations');
@@ -286,18 +282,18 @@ class AppManager {
         // Clear existing list
         quizList.innerHTML = '';
         
-        // Add each quiz to the list
+        // Add each quiz as a card
         quizzes.forEach(quiz => {
             const quizItem = document.createElement('div');
             quizItem.className = 'quiz-item';
             quizItem.innerHTML = `
                 <div class="quiz-info">
                     <div class="quiz-name">${quiz.name}</div>
-                    <div class="quiz-details">${quiz.questionCount} Fragen • ${quiz.categories.length} Kategorien</div>
-                    <div class="quiz-date">Hochgeladen: ${new Date(quiz.uploadDate).toLocaleDateString('de-DE')}</div>
+                    <div class="quiz-details">${quiz.questionCount} Fragen</div>
+                    <div class="quiz-date">${new Date(quiz.uploadDate).toLocaleDateString('de-DE')}</div>
                 </div>
                 <div class="quiz-actions">
-                    <button class="quiz-select-btn" data-quiz-id="${quiz.id}">Auswählen</button>
+                    <button class="quiz-select-btn" data-quiz-id="${quiz.id}">Starten</button>
                     <button class="quiz-delete-btn" data-quiz-id="${quiz.id}">🗑️</button>
                 </div>
             `;
@@ -316,33 +312,10 @@ class AppManager {
         console.log('Quiz list updated:', quizzes.length, 'quizzes');
     }
 
-    // Update quiz info
+    // Update quiz info (simplified - no longer needed with auto-start)
     updateQuizInfo() {
-        const startBtn = document.getElementById('startQuiz');
-        const stats = document.getElementById('quizStats');
-        const questionCount = document.getElementById('questionCount');
-        const categoryCount = document.getElementById('categoryCount');
-
-        const hasData = !!this.currentQuizData;
-        
-        if (startBtn) {
-            startBtn.disabled = !hasData;
-        }
-
-        if (stats) {
-            stats.classList.toggle('hidden', !hasData);
-        }
-
-        if (hasData && this.currentQuizData.questions) {
-            const totalQuestions = this.currentQuizData.questions.length;
-            const allCategories = new Set();
-            this.currentQuizData.questions.forEach(q => {
-                if (q.category) allCategories.add(q.category);
-            });
-
-            if (questionCount) questionCount.textContent = totalQuestions;
-            if (categoryCount) categoryCount.textContent = allCategories.size;
-        }
+        // Quiz info is now displayed inline with each quiz option
+        // No central quiz info display needed
     }
 
     // Select a quiz from the saved list
@@ -403,14 +376,9 @@ class AppManager {
         }
     }
 
-    // Start quiz
+    // Start quiz (now handled automatically when quiz is selected)
     startQuiz() {
-        if (!this.currentQuizData) {
-            alert('Keine Quiz-Daten verfügbar. Bitte lade zuerst eine JSON-Datei hoch.');
-            return;
-        }
-
-        window.quizManager.startQuiz(this.currentQuizData, this.currentQuizData.name || 'Quiz');
+        // This method is no longer used - quizzes auto-start on selection
     }
 
     // Check if there's a quiz to resume
