@@ -1,0 +1,120 @@
+// Service Worker for Quiz Master PWA
+const CACHE_NAME = 'quiz-master-v1';
+const OFFLINE_URL = 'offline.html';
+
+// Files to cache for offline functionality
+const urlsToCache = [
+  './',
+  './index.html',
+  './css/styles.css',
+  './js/app.js',
+  './js/quiz.js',
+  './js/storage.js',
+  './manifest.json',
+  './icons/icon-192x192.png',
+  './icons/icon-512x512.png'
+];
+
+// Install event - cache resources
+self.addEventListener('install', (event) => {
+  console.log('Service Worker: Installing...');
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        console.log('Service Worker: Caching files');
+        return cache.addAll(urlsToCache);
+      })
+      .catch((error) => {
+        console.error('Service Worker: Error caching files:', error);
+      })
+  );
+  // Force the service worker to activate immediately
+  self.skipWaiting();
+});
+
+// Activate event - cleanup old caches
+self.addEventListener('activate', (event) => {
+  console.log('Service Worker: Activating...');
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            console.log('Service Worker: Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+  // Take control of all clients immediately
+  return self.clients.claim();
+});
+
+// Fetch event - serve cached content when offline
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request)
+      .then((response) => {
+        // Return cached version or fetch from network
+        if (response) {
+          return response;
+        }
+        
+        // Clone the request because it's a stream
+        const fetchRequest = event.request.clone();
+        
+        return fetch(fetchRequest).then((response) => {
+          // Check if valid response
+          if (!response || response.status !== 200 || response.type !== 'basic') {
+            return response;
+          }
+          
+          // Clone the response because it's a stream
+          const responseToCache = response.clone();
+          
+          caches.open(CACHE_NAME)
+            .then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+            
+          return response;
+        }).catch(() => {
+          // If both cache and network fail, show offline page for navigation requests
+          if (event.request.destination === 'document') {
+            return caches.match(OFFLINE_URL);
+          }
+        });
+      })
+  );
+});
+
+// Handle background sync for when connection is restored
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'background-sync') {
+    console.log('Service Worker: Background sync triggered');
+    event.waitUntil(
+      // Add any background sync logic here
+      Promise.resolve()
+    );
+  }
+});
+
+// Handle push notifications (optional for future features)
+self.addEventListener('push', (event) => {
+  if (event.data) {
+    const data = event.data.json();
+    const options = {
+      body: data.body,
+      icon: './icons/icon-192x192.png',
+      badge: './icons/icon-72x72.png',
+      vibrate: [200, 100, 200],
+      data: data.data || {},
+      actions: data.actions || []
+    };
+    
+    event.waitUntil(
+      self.registration.showNotification(data.title, options)
+    );
+  }
+});

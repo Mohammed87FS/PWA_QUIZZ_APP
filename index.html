@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quiz Master PWA - Offline Multiple-Choice Quiz App">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="QuizMaster">
+    
+    <title>Quiz Master PWA</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-72x72.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="js/app.js" as="script">
+    <link rel="preload" href="js/quiz.js" as="script">
+</head>
+<body>
+    <!-- App Container -->
+    <div id="app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <span class="quiz-icon">🧠</span>
+                    Quiz Master
+                </h1>
+                <div class="header-actions">
+                    <button id="menuBtn" class="menu-btn" aria-label="Menü öffnen">
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Menu -->
+        <nav id="navMenu" class="nav-menu hidden">
+            <ul class="nav-list">
+                <li><a href="#" id="homeTab" class="nav-link active">Quiz starten</a></li>
+                <li><a href="#" id="uploadTab" class="nav-link">JSON verwalten</a></li>
+                <li><a href="#" id="settingsTab" class="nav-link">Einstellungen</a></li>
+                <li><a href="#" id="aboutTab" class="nav-link">Über die App</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home/Quiz Screen -->
+            <section id="homeScreen" class="screen active">
+                <div class="welcome-section">
+                    <h2>Willkommen bei Quiz Master!</h2>
+                    <p>Teste dein Wissen mit interaktiven Multiple-Choice-Fragen.</p>
+                </div>
+
+                <!-- Quiz Status -->
+                <div id="quizStatus" class="quiz-status hidden">
+                    <div class="status-info">
+                        <span id="currentQuestion">1</span> von <span id="totalQuestions">10</span>
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="score-info">
+                        Punkte: <span id="currentScore">0</span>
+                    </div>
+                </div>
+
+                <!-- Quiz Container -->
+                <div id="quizContainer" class="quiz-container hidden">
+                    <div class="question-card">
+                        <div class="question-meta">
+                            <span id="questionCategory" class="question-category">Kategorie</span>
+                        </div>
+                        <h3 id="questionText" class="question-text">Frage wird geladen...</h3>
+                        <div id="optionsContainer" class="options-container">
+                            <!-- Options will be generated dynamically -->
+                        </div>
+                        <div class="question-actions">
+                            <button id="submitAnswer" class="btn btn-primary" disabled>Antwort bestätigen</button>
+                        </div>
+                    </div>
+
+                    <!-- Answer Explanation -->
+                    <div id="explanationCard" class="explanation-card hidden">
+                        <div class="explanation-header">
+                            <span id="answerResult" class="answer-result">Richtig!</span>
+                        </div>
+                        <p id="explanationText" class="explanation-text">Erklärung...</p>
+                        <button id="nextQuestion" class="btn btn-secondary">Nächste Frage</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div id="resultsContainer" class="results-container hidden">
+                    <div class="results-card">
+                        <h3>Quiz beendet! 🎉</h3>
+                        <div class="final-score">
+                            <span id="finalScore">0</span> von <span id="finalTotal">10</span> Punkten
+                        </div>
+                        <div class="score-percentage">
+                            <span id="scorePercentage">0%</span>
+                        </div>
+                        <div class="results-actions">
+                            <button id="restartQuiz" class="btn btn-primary">Quiz wiederholen</button>
+                            <button id="newQuiz" class="btn btn-secondary">Neues Quiz</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Start Quiz Section -->
+                <div id="startSection" class="start-section">
+                    <div class="quiz-info">
+                        <p id="quizDescription">Lade eine JSON-Datei mit Fragen hoch oder verwende die Beispielfragen.</p>
+                        <div class="quiz-stats hidden" id="quizStats">
+                            <div class="stat">
+                                <span class="stat-number" id="questionCount">0</span>
+                                <span class="stat-label">Fragen</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="categoryCount">0</span>
+                                <span class="stat-label">Kategorien</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="start-actions">
+                        <button id="startQuiz" class="btn btn-primary btn-large" disabled>Quiz starten</button>
+                        <button id="loadSample" class="btn btn-outline">Beispielfragen laden</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload/Manage JSON Screen -->
+            <section id="uploadScreen" class="screen">
+                <div class="upload-section">
+                    <h2>JSON-Dateien verwalten</h2>
+                    <p>Lade deine eigenen Quizfragen als JSON-Datei hoch.</p>
+
+                    <!-- File Upload -->
+                    <div class="file-upload-area">
+                        <input type="file" id="fileInput" accept=".json" class="file-input">
+                        <label for="fileInput" class="file-upload-label">
+                            <span class="upload-icon">📁</span>
+                            <span class="upload-text">JSON-Datei auswählen</span>
+                            <span class="upload-info">oder hierher ziehen</span>
+                        </label>
+                    </div>
+
+                    <!-- Current Files -->
+                    <div id="currentFiles" class="current-files hidden">
+                        <h3>Geladene Dateien</h3>
+                        <div id="filesList" class="files-list">
+                            <!-- Files will be listed here -->
+                        </div>
+                    </div>
+
+                    <!-- JSON Preview -->
+                    <div id="jsonPreview" class="json-preview hidden">
+                        <h3>Vorschau</h3>
+                        <div class="preview-stats">
+                            <span id="previewQuestionCount">0 Fragen</span>
+                            <span id="previewCategories">0 Kategorien</span>
+                        </div>
+                        <textarea id="jsonContent" class="json-textarea" readonly></textarea>
+                        <div class="preview-actions">
+                            <button id="saveJson" class="btn btn-primary">Fragen speichern</button>
+                            <button id="discardJson" class="btn btn-outline">Verwerfen</button>
+                        </div>
+                    </div>
+
+                    <!-- JSON Format Help -->
+                    <div class="format-help">
+                        <details>
+                            <summary>JSON-Format Hilfe</summary>
+                            <div class="help-content">
+                                <p>Das JSON-Format sollte folgendermaßen strukturiert sein:</p>
+                                <pre><code>{
+  "questions": [
+    {
+      "id": 1,
+      "category": "Kategorie Name",
+      "question": "Deine Frage hier?",
+      "options": [
+        "Antwort A",
+        "Antwort B", 
+        "Antwort C",
+        "Antwort D"
+      ],
+      "correct_answer": 0,
+      "explanation": "Erklärung der richtigen Antwort."
+    }
+  ]
+}</code></pre>
+                                <ul>
+                                    <li><strong>correct_answer:</strong> Index der richtigen Antwort (0-3)</li>
+                                    <li><strong>options:</strong> Genau 4 Antwortmöglichkeiten</li>
+                                    <li><strong>explanation:</strong> Optional, aber empfohlen</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Screen -->
+            <section id="settingsScreen" class="screen">
+                <div class="settings-section">
+                    <h2>Einstellungen</h2>
+                    
+                    <div class="settings-group">
+                        <h3>Quiz-Einstellungen</h3>
+                        <div class="setting-item">
+                            <label for="showExplanations">Erklärungen anzeigen</label>
+                            <input type="checkbox" id="showExplanations" checked>
+                        </div>
+                        <div class="setting-item">
+                            <label for="randomizeQuestions">Fragen mischen</label>
+                            <input type="checkbox" id="randomizeQuestions">
+                        </div>
+                        <div class="setting-item">
+                            <label for="randomizeOptions">Antworten mischen</label>
+                            <input type="checkbox" id="randomizeOptions">
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>App-Einstellungen</h3>
+                        <div class="setting-item">
+                            <label for="darkMode">Dunkles Design</label>
+                            <input type="checkbox" id="darkMode">
+                        </div>
+
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>Daten verwalten</h3>
+                        <button id="clearData" class="btn btn-danger">Alle Daten löschen</button>
+                        <button id="exportData" class="btn btn-outline">Daten exportieren</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Screen -->
+            <section id="aboutScreen" class="screen">
+                <div class="about-section">
+                    <h2>Über Quiz Master</h2>
+                    <div class="app-info">
+                        <div class="app-logo">🧠</div>
+                        <h3>Quiz Master PWA</h3>
+                        <p class="version">Version 1.0.0</p>
+                        <p class="description">
+                            Eine Progressive Web App für offline Multiple-Choice-Quiz mit 
+                            benutzerdefinierten JSON-Dateien. Perfekt für Lernen unterwegs!
+                        </p>
+                    </div>
+
+                    <div class="features-list">
+                        <h3>Features</h3>
+                        <ul>
+                            <li>✅ Vollständig offline funktionsfähig</li>
+                            <li>✅ Als App installierbar</li>
+                            <li>✅ Eigene JSON-Dateien hochladen</li>
+                            <li>✅ Responsive Design für alle Geräte</li>
+                            <li>✅ Lokale Datenspeicherung</li>
+                            <li>✅ Antwort-Erklärungen</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-info">
+                        <h3>Technologie</h3>
+                        <p>Entwickelt mit Vanilla JavaScript, CSS3 und HTML5. 
+                        Nutzt Service Workers für Offline-Funktionalität und 
+                        IndexedDB für lokale Datenspeicherung.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+
+
+        <!-- Overlay -->
+        <div id="overlay" class="overlay hidden"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- PWA Installation -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

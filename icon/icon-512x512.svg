@@ -1,0 +1,46 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366F1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="512" height="512" rx="96" fill="url(#bgGradient)"/>
+  
+  <!-- Brain Icon - Centered and larger -->
+  <g transform="translate(128, 128)">
+    <!-- Left hemisphere -->
+    <path d="M64 224C16 224 16 160 48 128C16 96 48 32 96 32C144 32 144 64 128 96C144 128 128 160 128 192C128 208 96 224 64 224Z" fill="white" fill-opacity="0.95"/>
+    
+    <!-- Right hemisphere -->
+    <path d="M192 224C240 224 240 160 208 128C240 96 208 32 160 32C112 32 112 64 128 96C112 128 128 160 128 192C128 208 160 224 192 224Z" fill="white" fill-opacity="0.95"/>
+    
+    <!-- Brain connection -->
+    <ellipse cx="128" cy="128" rx="8" ry="32" fill="white" fill-opacity="0.7"/>
+    
+    <!-- Brain details and folds -->
+    <path d="M80 64C80 80 96 80 96 96" stroke="#4F46E5" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M176 64C176 80 160 80 160 96" stroke="#4F46E5" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M80 128C96 128 96 144 112 144" stroke="#4F46E5" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M176 128C160 128 160 144 144 144" stroke="#4F46E5" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M96 176C112 176 112 192 128 192" stroke="#4F46E5" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M160 176C144 176 144 192 128 192" stroke="#4F46E5" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Question marks around -->
+  <g fill="white" fill-opacity="0.6" font-family="sans-serif" font-weight="bold">
+    <circle cx="384" cy="384" r="32" fill="white" fill-opacity="0.2"/>
+    <text x="384" y="396" text-anchor="middle" fill="white" font-size="36">?</text>
+    
+    <circle cx="128" cy="384" r="24" fill="white" fill-opacity="0.15"/>
+    <text x="128" y="392" text-anchor="middle" fill="white" font-size="28">?</text>
+    
+    <circle cx="384" cy="128" r="24" fill="white" fill-opacity="0.15"/>
+    <text x="384" y="136" text-anchor="middle" fill="white" font-size="28">?</text>
+  </g>
+  
+  <!-- App name -->
+  <text x="256" y="460" text-anchor="middle" fill="white" font-family="sans-serif" font-size="32" font-weight="300" opacity="0.8">QUIZ MASTER</text>
+</svg>

@@ -1,0 +1,542 @@
+// Quiz Logic for Quiz Master PWA
+// Handles quiz flow, questions, scoring and game mechanics
+
+class QuizManager {
+    constructor() {
+        this.currentQuiz = null;
+        this.questions = [];
+        this.currentQuestionIndex = 0;
+        this.score = 0;
+        this.userAnswers = [];
+        this.startTime = null;
+        this.endTime = null;
+        this.settings = {};
+        this.isQuizActive = false;
+        this.selectedAnswer = null;
+        this.hasAnswered = false;
+    }
+
+    // Initialize quiz manager
+    init() {
+        this.loadSettings();
+        this.bindEvents();
+        console.log('Quiz Manager initialized');
+    }
+
+    // Load settings from storage
+    loadSettings() {
+        this.settings = window.storageManager.loadSettings();
+        console.log('Quiz settings loaded:', this.settings);
+    }
+
+    // Bind event listeners
+    bindEvents() {
+        // Answer option clicks
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.option') && this.isQuizActive && !this.hasAnswered) {
+                this.selectAnswer(e.target.closest('.option'));
+            }
+        });
+
+        // Submit answer button
+        const submitBtn = document.getElementById('submitAnswer');
+        if (submitBtn) {
+            submitBtn.addEventListener('click', () => this.submitAnswer());
+        }
+
+        // Next question button
+        const nextBtn = document.getElementById('nextQuestion');
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => this.nextQuestion());
+        }
+
+        // Restart quiz button
+        const restartBtn = document.getElementById('restartQuiz');
+        if (restartBtn) {
+            restartBtn.addEventListener('click', () => this.restartQuiz());
+        }
+
+        // New quiz button
+        const newQuizBtn = document.getElementById('newQuiz');
+        if (newQuizBtn) {
+            newQuizBtn.addEventListener('click', () => this.startNewQuiz());
+        }
+    }
+
+    // Start a new quiz with given questions
+    startQuiz(quizData, quizName = 'Quiz') {
+        try {
+            this.currentQuiz = {
+                name: quizName,
+                questions: quizData.questions,
+                startTime: new Date().toISOString()
+            };
+
+            this.questions = [...quizData.questions];
+            
+            // Apply settings
+            if (this.settings.randomizeQuestions) {
+                this.shuffleArray(this.questions);
+            }
+
+            // Reset quiz state
+            this.currentQuestionIndex = 0;
+            this.score = 0;
+            this.userAnswers = [];
+            this.startTime = Date.now();
+            this.endTime = null;
+            this.isQuizActive = true;
+            this.selectedAnswer = null;
+            this.hasAnswered = false;
+
+            // Save current quiz state
+            this.saveQuizState();
+
+            // Show quiz interface
+            this.showQuizInterface();
+            this.displayCurrentQuestion();
+
+            console.log('Quiz started:', quizName, 'Questions:', this.questions.length);
+
+        } catch (error) {
+            console.error('Error starting quiz:', error);
+        }
+    }
+
+    // Display current question
+    displayCurrentQuestion() {
+        if (!this.isQuizActive || this.currentQuestionIndex >= this.questions.length) {
+            return;
+        }
+
+        const question = this.questions[this.currentQuestionIndex];
+        const questionText = document.getElementById('questionText');
+        const questionCategory = document.getElementById('questionCategory');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const currentQuestionSpan = document.getElementById('currentQuestion');
+        const totalQuestionsSpan = document.getElementById('totalQuestions');
+        const progressFill = document.getElementById('progressFill');
+        const submitBtn = document.getElementById('submitAnswer');
+
+        // Update question info
+        if (questionText) questionText.textContent = question.question;
+        if (questionCategory) questionCategory.textContent = question.category;
+        if (currentQuestionSpan) currentQuestionSpan.textContent = this.currentQuestionIndex + 1;
+        if (totalQuestionsSpan) totalQuestionsSpan.textContent = this.questions.length;
+
+        // Update progress bar
+        if (progressFill) {
+            const progress = ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+
+        // Reset answer state
+        this.selectedAnswer = null;
+        this.hasAnswered = false;
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Antwort bestätigen';
+        }
+
+        // Create options
+        if (optionsContainer) {
+            optionsContainer.innerHTML = '';
+            
+            let options = [...question.options];
+            let correctAnswerIndex = question.correct_answer;
+
+            // Randomize options if setting is enabled
+            if (this.settings.randomizeOptions) {
+                const shuffleMap = this.createShuffleMapping(options.length);
+                options = shuffleMap.map(index => question.options[index]);
+                correctAnswerIndex = shuffleMap.indexOf(question.correct_answer);
+            }
+
+            options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.dataset.index = index;
+                optionElement.dataset.originalIndex = this.settings.randomizeOptions ? 
+                    question.options.indexOf(option) : index;
+
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Hide explanation card
+        const explanationCard = document.getElementById('explanationCard');
+        if (explanationCard) {
+            explanationCard.classList.add('hidden');
+        }
+
+        console.log('Displaying question:', this.currentQuestionIndex + 1);
+    }
+
+    // Select an answer option
+    selectAnswer(optionElement) {
+        if (!this.isQuizActive || this.hasAnswered) return;
+
+        // Remove previous selection
+        document.querySelectorAll('.option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+
+        // Select current option
+        optionElement.classList.add('selected');
+        this.selectedAnswer = parseInt(optionElement.dataset.originalIndex);
+
+        // Enable submit button
+        const submitBtn = document.getElementById('submitAnswer');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+        }
+
+        console.log('Answer selected:', this.selectedAnswer);
+    }
+
+    // Submit the current answer
+    submitAnswer() {
+        if (!this.isQuizActive || this.hasAnswered || this.selectedAnswer === null) {
+            return;
+        }
+
+        const question = this.questions[this.currentQuestionIndex];
+        const isCorrect = this.selectedAnswer === question.correct_answer;
+        
+        // Record answer
+        this.userAnswers.push({
+            questionId: question.id,
+            questionText: question.question,
+            selectedAnswer: this.selectedAnswer,
+            correctAnswer: question.correct_answer,
+            isCorrect: isCorrect,
+            timeSpent: Date.now() - this.startTime
+        });
+
+        // Update score
+        if (isCorrect) {
+            this.score++;
+        }
+
+        this.hasAnswered = true;
+
+        // Update score display
+        const currentScore = document.getElementById('currentScore');
+        if (currentScore) {
+            currentScore.textContent = this.score;
+        }
+
+        // Show correct/incorrect answers
+        this.highlightAnswers(question.correct_answer);
+
+        // Show explanation if enabled and available
+        if (this.settings.showExplanations && question.explanation) {
+            this.showExplanation(question.explanation, isCorrect);
+        } else {
+            // Show next button immediately
+            this.showNextButton();
+        }
+
+        // Save progress
+        this.saveQuizState();
+
+        console.log('Answer submitted:', { selected: this.selectedAnswer, correct: isCorrect });
+    }
+
+    // Highlight correct and incorrect answers
+    highlightAnswers(correctAnswerIndex) {
+        const options = document.querySelectorAll('.option');
+        
+        options.forEach((option, index) => {
+            const originalIndex = parseInt(option.dataset.originalIndex);
+            option.classList.add('disabled');
+            
+            if (originalIndex === correctAnswerIndex) {
+                option.classList.add('correct');
+            } else if (originalIndex === this.selectedAnswer) {
+                option.classList.add('incorrect');
+            }
+        });
+
+        // Disable submit button
+        const submitBtn = document.getElementById('submitAnswer');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Beantwortet';
+        }
+    }
+
+    // Show explanation card
+    showExplanation(explanation, isCorrect) {
+        const explanationCard = document.getElementById('explanationCard');
+        const answerResult = document.getElementById('answerResult');
+        const explanationText = document.getElementById('explanationText');
+
+        if (explanationCard && answerResult && explanationText) {
+            explanationCard.classList.remove('hidden');
+            explanationCard.classList.toggle('incorrect', !isCorrect);
+            
+            answerResult.textContent = isCorrect ? 'Richtig! ✅' : 'Falsch! ❌';
+            answerResult.classList.toggle('incorrect', !isCorrect);
+            
+            explanationText.textContent = explanation;
+        }
+    }
+
+    // Show next question button
+    showNextButton() {
+        const nextBtn = document.getElementById('nextQuestion');
+        if (nextBtn) {
+            if (this.currentQuestionIndex < this.questions.length - 1) {
+                nextBtn.textContent = 'Nächste Frage';
+            } else {
+                nextBtn.textContent = 'Quiz beenden';
+            }
+            nextBtn.style.display = 'block';
+        }
+    }
+
+    // Move to next question or finish quiz
+    nextQuestion() {
+        if (!this.isQuizActive) return;
+
+        this.currentQuestionIndex++;
+
+        if (this.currentQuestionIndex < this.questions.length) {
+            // Show next question
+            this.selectedAnswer = null;
+            this.hasAnswered = false;
+            this.displayCurrentQuestion();
+        } else {
+            // Finish quiz
+            this.finishQuiz();
+        }
+    }
+
+    // Finish the quiz and show results
+    finishQuiz() {
+        this.endTime = Date.now();
+        this.isQuizActive = false;
+
+        const totalTime = this.endTime - this.startTime;
+        const percentage = Math.round((this.score / this.questions.length) * 100);
+
+        // Update results display
+        const finalScore = document.getElementById('finalScore');
+        const finalTotal = document.getElementById('finalTotal');
+        const scorePercentage = document.getElementById('scorePercentage');
+
+        if (finalScore) finalScore.textContent = this.score;
+        if (finalTotal) finalTotal.textContent = this.questions.length;
+        if (scorePercentage) scorePercentage.textContent = `${percentage}%`;
+
+        // Show results screen
+        this.showResultsInterface();
+
+        // Save final results
+        this.saveQuizResults();
+
+        // Clear current quiz state
+        window.storageManager.clearCurrentQuiz();
+
+        console.log('Quiz finished:', {
+            score: this.score,
+            total: this.questions.length,
+            percentage: percentage,
+            timeMs: totalTime
+        });
+    }
+
+    // Restart current quiz
+    restartQuiz() {
+        if (this.currentQuiz) {
+            this.startQuiz(this.currentQuiz, this.currentQuiz.name);
+        }
+    }
+
+    // Start a completely new quiz
+    startNewQuiz() {
+        this.currentQuiz = null;
+        this.isQuizActive = false;
+        window.storageManager.clearCurrentQuiz();
+        
+        // Switch to home screen
+        if (window.appManager) {
+            window.appManager.showScreen('homeScreen');
+        }
+    }
+
+    // Show quiz interface
+    showQuizInterface() {
+        const quizContainer = document.getElementById('quizContainer');
+        const quizStatus = document.getElementById('quizStatus');
+        const startSection = document.getElementById('startSection');
+        const resultsContainer = document.getElementById('resultsContainer');
+
+        if (quizContainer) quizContainer.classList.remove('hidden');
+        if (quizStatus) quizStatus.classList.remove('hidden');
+        if (startSection) startSection.classList.add('hidden');
+        if (resultsContainer) resultsContainer.classList.add('hidden');
+    }
+
+    // Show results interface
+    showResultsInterface() {
+        const quizContainer = document.getElementById('quizContainer');
+        const quizStatus = document.getElementById('quizStatus');
+        const resultsContainer = document.getElementById('resultsContainer');
+
+        if (quizContainer) quizContainer.classList.add('hidden');
+        if (quizStatus) quizStatus.classList.add('hidden');
+        if (resultsContainer) resultsContainer.classList.remove('hidden');
+    }
+
+    // Hide quiz interface (return to start)
+    hideQuizInterface() {
+        const quizContainer = document.getElementById('quizContainer');
+        const quizStatus = document.getElementById('quizStatus');
+        const startSection = document.getElementById('startSection');
+        const resultsContainer = document.getElementById('resultsContainer');
+
+        if (quizContainer) quizContainer.classList.add('hidden');
+        if (quizStatus) quizStatus.classList.add('hidden');
+        if (startSection) startSection.classList.remove('hidden');
+        if (resultsContainer) resultsContainer.classList.add('hidden');
+    }
+
+    // Save current quiz state
+    saveQuizState() {
+        if (this.currentQuiz && this.isQuizActive) {
+            const state = {
+                quiz: this.currentQuiz,
+                currentQuestionIndex: this.currentQuestionIndex,
+                score: this.score,
+                userAnswers: this.userAnswers,
+                startTime: this.startTime,
+                questions: this.questions
+            };
+            window.storageManager.saveCurrentQuiz(state);
+        }
+    }
+
+    // Load saved quiz state
+    loadQuizState() {
+        const state = window.storageManager.loadCurrentQuiz();
+        if (state && state.quiz) {
+            this.currentQuiz = state.quiz;
+            this.questions = state.questions || [];
+            this.currentQuestionIndex = state.currentQuestionIndex || 0;
+            this.score = state.score || 0;
+            this.userAnswers = state.userAnswers || [];
+            this.startTime = state.startTime || Date.now();
+            this.isQuizActive = true;
+
+            // Continue quiz
+            this.showQuizInterface();
+            this.displayCurrentQuestion();
+
+            console.log('Quiz state restored');
+            return true;
+        }
+        return false;
+    }
+
+    // Save quiz results
+    saveQuizResults() {
+        // This could be extended to save detailed quiz history
+        const results = {
+            quizName: this.currentQuiz?.name || 'Quiz',
+            score: this.score,
+            totalQuestions: this.questions.length,
+            percentage: Math.round((this.score / this.questions.length) * 100),
+            completedAt: new Date().toISOString(),
+            timeSpent: this.endTime - this.startTime,
+            answers: this.userAnswers
+        };
+
+        // For now, just log the results
+        console.log('Quiz results:', results);
+        
+        // Could save to IndexedDB for history tracking
+        // window.storageManager.saveQuizResult(results);
+    }
+
+    // Utility: Shuffle array in place
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Utility: Create shuffle mapping for options
+    createShuffleMapping(length) {
+        const indices = Array.from({ length }, (_, i) => i);
+        return this.shuffleArray(indices);
+    }
+
+    // Utility: Show toast notification
+    showToast(message, type = 'info') {
+        if (window.appManager && window.appManager.showToast) {
+            window.appManager.showToast(message, type);
+        } else {
+            console.log(`Toast (${type}):`, message);
+        }
+    }
+
+    // Get sample quiz data for testing
+    getSampleQuizData() {
+        return {
+            questions: [
+                {
+                    id: 1,
+                    category: "Allgemeinwissen",
+                    question: "Welche ist die Hauptstadt von Deutschland?",
+                    options: ["Berlin", "München", "Hamburg", "Köln"],
+                    correct_answer: 0,
+                    explanation: "Berlin ist seit der Wiedervereinigung 1990 die Hauptstadt der Bundesrepublik Deutschland."
+                },
+                {
+                    id: 2,
+                    category: "Wissenschaft",
+                    question: "Wie viele Planeten gibt es in unserem Sonnensystem?",
+                    options: ["7", "8", "9", "10"],
+                    correct_answer: 1,
+                    explanation: "Unser Sonnensystem hat 8 Planeten. Pluto wurde 2006 zu einem Zwergplaneten herabgestuft."
+                },
+                {
+                    id: 3,
+                    category: "Geschichte",
+                    question: "In welchem Jahr fiel die Berliner Mauer?",
+                    options: ["1987", "1988", "1989", "1990"],
+                    correct_answer: 2,
+                    explanation: "Die Berliner Mauer fiel am 9. November 1989, was ein wichtiger Schritt zur deutschen Wiedervereinigung war."
+                },
+                {
+                    id: 4,
+                    category: "Mathematik",
+                    question: "Was ist die Quadratzahl von 12?",
+                    options: ["124", "144", "154", "164"],
+                    correct_answer: 1,
+                    explanation: "12 × 12 = 144. Eine Quadratzahl entsteht durch Multiplikation einer Zahl mit sich selbst."
+                },
+                {
+                    id: 5,
+                    category: "Geographie",
+                    question: "Welcher ist der längste Fluss der Welt?",
+                    options: ["Amazonas", "Nil", "Mississippi", "Jangtse"],
+                    correct_answer: 1,
+                    explanation: "Der Nil ist mit etwa 6.650 km der längste Fluss der Welt und fließt durch mehrere afrikanische Länder."
+                }
+            ]
+        };
+    }
+}
+
+// Create global quiz manager instance
+window.quizManager = new QuizManager();

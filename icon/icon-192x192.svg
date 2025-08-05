@@ -1,0 +1,23 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="192" height="192" rx="32" fill="#4F46E5"/>
+  
+  <!-- Brain Icon -->
+  <g transform="translate(48, 48)">
+    <!-- Left hemisphere -->
+    <path d="M24 84C6 84 6 60 18 48C6 36 18 12 36 12C54 12 54 24 48 36C54 48 48 60 48 72C48 78 36 84 24 84Z" fill="white" fill-opacity="0.9"/>
+    
+    <!-- Right hemisphere -->
+    <path d="M72 84C90 84 90 60 78 48C90 36 78 12 60 12C42 12 42 24 48 36C42 48 48 60 48 72C48 78 60 84 72 84Z" fill="white" fill-opacity="0.9"/>
+    
+    <!-- Brain details -->
+    <path d="M30 24C30 30 36 30 36 36" stroke="#4F46E5" stroke-width="2" fill="none"/>
+    <path d="M66 24C66 30 60 30 60 36" stroke="#4F46E5" stroke-width="2" fill="none"/>
+    <path d="M30 48C36 48 36 54 42 54" stroke="#4F46E5" stroke-width="2" fill="none"/>
+    <path d="M66 48C60 48 60 54 54 54" stroke="#4F46E5" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- Question mark accent -->
+  <circle cx="144" cy="144" r="16" fill="white" fill-opacity="0.8"/>
+  <text x="144" y="152" text-anchor="middle" fill="#4F46E5" font-family="sans-serif" font-size="18" font-weight="bold">?</text>
+</svg>
