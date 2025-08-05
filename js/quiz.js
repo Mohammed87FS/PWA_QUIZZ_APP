@@ -139,7 +139,7 @@ class QuizManager {
         // Update progress bar
         if (progressFill) {
             const progress = (this.currentQuestionIndex / this.questions.length) * 100;
-            progressFill.style.width = `${progress}%`;
+            progressFill.style.setProperty('--progress', `${progress}%`);
         }
 
         // Reset answer state
@@ -410,11 +410,11 @@ class QuizManager {
     // Show quiz interface
     showQuizInterface() {
         const quizContainer = document.getElementById('quizContainer');
-        const startSection = document.getElementById('startSection');
+        const welcomeScreen = document.getElementById('welcomeScreen');
         const resultsContainer = document.getElementById('resultsContainer');
 
         if (quizContainer) quizContainer.classList.remove('hidden');
-        if (startSection) startSection.classList.add('hidden');
+        if (welcomeScreen) welcomeScreen.classList.add('hidden');
         if (resultsContainer) resultsContainer.classList.add('hidden');
     }
 
@@ -422,19 +422,21 @@ class QuizManager {
     showResultsInterface() {
         const quizContainer = document.getElementById('quizContainer');
         const resultsContainer = document.getElementById('resultsContainer');
+        const welcomeScreen = document.getElementById('welcomeScreen');
 
         if (quizContainer) quizContainer.classList.add('hidden');
         if (resultsContainer) resultsContainer.classList.remove('hidden');
+        if (welcomeScreen) welcomeScreen.classList.add('hidden');
     }
 
     // Hide quiz interface (return to start)
     hideQuizInterface() {
         const quizContainer = document.getElementById('quizContainer');
-        const startSection = document.getElementById('startSection');
+        const welcomeScreen = document.getElementById('welcomeScreen');
         const resultsContainer = document.getElementById('resultsContainer');
 
         if (quizContainer) quizContainer.classList.add('hidden');
-        if (startSection) startSection.classList.remove('hidden');
+        if (welcomeScreen) welcomeScreen.classList.remove('hidden');
         if (resultsContainer) resultsContainer.classList.add('hidden');
     }
 

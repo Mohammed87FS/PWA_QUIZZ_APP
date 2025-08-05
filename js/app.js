@@ -48,16 +48,19 @@ class AppManager {
 
     // Setup all event listeners
     setupEventListeners() {
-        // Settings button
-        const settingsBtn = document.getElementById('settingsBtn');
-        if (settingsBtn) {
-            settingsBtn.addEventListener('click', () => this.toggleSettings());
+        // Burger menu
+        const burgerBtn = document.getElementById('burgerBtn');
+        const closeMenu = document.getElementById('closeMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        
+        if (burgerBtn) {
+            burgerBtn.addEventListener('click', () => this.toggleMenu());
         }
-
-        // Close settings
-        const closeSettings = document.getElementById('closeSettings');
-        if (closeSettings) {
-            closeSettings.addEventListener('click', () => this.closeSettings());
+        if (closeMenu) {
+            closeMenu.addEventListener('click', () => this.closeMenu());
+        }
+        if (menuOverlay) {
+            menuOverlay.addEventListener('click', () => this.closeMenu());
         }
 
         // File input
@@ -66,23 +69,22 @@ class AppManager {
             fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         }
 
-        // Quiz cards (built-in quizzes) - use event delegation
+        // Menu quiz items - use event delegation
         document.addEventListener('click', (e) => {
-            // Handle quiz card clicks
-            const quizCard = e.target.closest('.quiz-card[data-quiz]');
-            if (quizCard) {
-                const quizName = quizCard.dataset.quiz;
+            // Handle menu quiz item clicks
+            const menuQuizItem = e.target.closest('.menu-quiz-item[data-quiz]');
+            if (menuQuizItem) {
+                const quizName = menuQuizItem.dataset.quiz;
                 if (quizName) {
-                    console.log('Quiz card clicked:', quizName);
+                    console.log('Menu quiz item clicked:', quizName);
                     e.preventDefault();
                     this.loadQuickQuiz(quizName);
+                    this.closeMenu(); // Close menu after selection
                 }
             }
-            
-            // Removed saved quiz handling - simplified interface
         });
 
-        // Settings checkboxes (only essential ones remain)
+        // Settings checkboxes (in menu)
         const showExplanations = document.getElementById('showExplanations');
         const darkMode = document.getElementById('darkMode');
         
@@ -97,16 +99,6 @@ class AppManager {
         const clearData = document.getElementById('clearData');
         if (clearData) {
             clearData.addEventListener('click', () => this.clearAllData());
-        }
-
-        // Click outside modal to close
-        const modal = document.getElementById('settingsModal');
-        if (modal) {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    this.closeSettings();
-                }
-            });
         }
     }
 
@@ -400,20 +392,24 @@ class AppManager {
         }
     }
 
-    // Settings methods
-    toggleSettings() {
-        const modal = document.getElementById('settingsModal');
-        if (modal) {
-            modal.classList.toggle('hidden');
-            this.settingsOpen = !modal.classList.contains('hidden');
+    // Menu methods
+    toggleMenu() {
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        
+        if (sideMenu && menuOverlay) {
+            sideMenu.classList.toggle('open');
+            menuOverlay.classList.toggle('open');
         }
     }
 
-    closeSettings() {
-        const modal = document.getElementById('settingsModal');
-        if (modal) {
-            modal.classList.add('hidden');
-            this.settingsOpen = false;
+    closeMenu() {
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        
+        if (sideMenu && menuOverlay) {
+            sideMenu.classList.remove('open');
+            menuOverlay.classList.remove('open');
         }
     }
 

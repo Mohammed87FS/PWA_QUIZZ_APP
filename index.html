@@ -27,98 +27,134 @@
 </head>
 <body>
     <div id="app">
-        <!-- Simple Header -->
-        <header class="header">
-            <h1>🧠 Quiz Master</h1>
-            <button id="settingsBtn" class="settings-btn">⚙️</button>
-        </header>
+        <!-- Burger Menu -->
+        <div class="burger-menu" id="burgerMenu">
+            <button class="burger-btn" id="burgerBtn">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+        </div>
 
-        <main class="main">
-            <!-- Clean Quiz Selection -->
-            <div class="quiz-selection">
-                <h2>Wähle ein Quiz</h2>
-                
-                <!-- Built-in Quizzes -->
-                <div class="quiz-section">
+        <!-- Side Menu -->
+        <div class="side-menu" id="sideMenu">
+            <div class="menu-header">
+                <h2>🧠 Quiz Master</h2>
+                <button class="close-menu" id="closeMenu">×</button>
+            </div>
+            
+            <div class="menu-content">
+                <div class="menu-section">
                     <h3>Verfügbare Quizzes</h3>
-                    <div class="quiz-grid">
-                        <button class="quiz-card" data-quiz="demokratie">
-                            <span class="quiz-icon">🏛️</span>
-                            <span class="quiz-title">Demokratie</span>
+                    <div class="menu-quiz-list">
+                        <button class="menu-quiz-item" data-quiz="demokratie">
+                            <span class="menu-icon">🏛️</span>
+                            <span class="menu-title">Demokratie</span>
                         </button>
-                        <button class="quiz-card" data-quiz="geschichte">
-                            <span class="quiz-icon">📜</span>
-                            <span class="quiz-title">Geschichte</span>
+                        <button class="menu-quiz-item" data-quiz="geschichte">
+                            <span class="menu-icon">📜</span>
+                            <span class="menu-title">Geschichte</span>
                         </button>
-                        <button class="quiz-card" data-quiz="elektronik_quiz">
-                            <span class="quiz-icon">⚡</span>
-                            <span class="quiz-title">Elektronik</span>
+                        <button class="menu-quiz-item" data-quiz="elektronik_quiz">
+                            <span class="menu-icon">⚡</span>
+                            <span class="menu-title">Elektronik</span>
                         </button>
-                        <label for="fileInput" class="quiz-card upload-card">
-                            <span class="quiz-icon">📁</span>
-                            <span class="quiz-title">Eigene Datei</span>
+                        <label for="fileInput" class="menu-quiz-item upload-item">
+                            <span class="menu-icon">📁</span>
+                            <span class="menu-title">Eigene Datei</span>
                             <input type="file" id="fileInput" accept=".json" hidden>
                         </label>
                     </div>
                 </div>
-
-                <!-- Removed saved quizzes section - simplified interface -->
-            </div>
-
-            <!-- Quiz Interface -->
-            <div id="quizContainer" class="quiz hidden">
-                <div class="quiz-header">
-                    <div class="progress">
-                        <div id="progressFill" class="progress-fill"></div>
-                        <span class="progress-text"><span id="currentQuestion">1</span> / <span id="totalQuestions">10</span></span>
+                
+                <div class="menu-section">
+                    <h3>Einstellungen</h3>
+                    <div class="menu-settings">
+                        <label class="setting-item">
+                            <input type="checkbox" id="showExplanations" checked>
+                            <span>Erklärungen anzeigen</span>
+                        </label>
+                        <label class="setting-item">
+                            <input type="checkbox" id="darkMode">
+                            <span>Dunkles Design</span>
+                        </label>
                     </div>
                 </div>
+                
+                <div class="menu-section">
+                    <button id="clearData" class="danger-btn">Alle Daten löschen</button>
+                </div>
+            </div>
+        </div>
 
-                <div class="question">
-                    <h3 id="questionText">Frage wird geladen...</h3>
-                    <div id="optionsContainer" class="options">
+        <!-- Menu Overlay -->
+        <div class="menu-overlay" id="menuOverlay"></div>
+
+        <!-- Welcome Screen -->
+        <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-content">
+                <h1>🧠 Quiz Master</h1>
+                <p>Wähle ein Quiz aus dem Menü, um zu beginnen</p>
+                <div class="welcome-hint">
+                    <span class="burger-icon">☰</span>
+                    <span>Menü öffnen</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full-Screen Quiz Interface -->
+        <div id="quizContainer" class="quiz-fullscreen hidden">
+            <!-- Quiz Progress Bar -->
+            <div class="quiz-progress">
+                <div id="progressFill" class="progress-fill"></div>
+                <div class="progress-info">
+                    <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span>
+                </div>
+            </div>
+
+            <!-- Main Quiz Content -->
+            <div class="quiz-content">
+                <div class="question-container">
+                    <h2 id="questionText">Frage wird geladen...</h2>
+                    
+                    <div id="optionsContainer" class="options-grid">
                         <!-- Options generated dynamically -->
                     </div>
-                    <button id="submitAnswer" class="submit-btn" disabled>Antwort bestätigen</button>
+                    
+                    <div class="quiz-actions">
+                        <button id="submitAnswer" class="submit-btn" disabled>Antwort bestätigen</button>
+                    </div>
                 </div>
 
-                <div id="explanationCard" class="explanation hidden">
-                    <div id="answerResult" class="result">Richtig!</div>
-                    <p id="explanationText">Erklärung...</p>
-                    <button id="nextQuestion" class="next-btn">Nächste Frage</button>
-                </div>
-            </div>
-
-            <!-- Quiz Results -->
-            <div id="resultsContainer" class="results hidden">
-                <h3>Quiz beendet! 🎉</h3>
-                <div class="final-score">
-                    <span id="finalScore">0</span> / <span id="finalTotal">10</span>
-                    <div class="percentage">(<span id="scorePercentage">0%</span>)</div>
-                </div>
-                <div class="result-actions">
-                    <button id="restartQuiz" class="restart-btn">Wiederholen</button>
-                    <button id="newQuiz" class="new-btn">Neues Quiz</button>
-                </div>
-            </div>
-
-
-
-
-
-            <!-- Settings Modal -->
-            <div id="settingsModal" class="modal hidden">
-                <div class="modal-content">
-                    <h3>Einstellungen</h3>
-                    <label><input type="checkbox" id="showExplanations" checked> Erklärungen anzeigen</label>
-                    <label><input type="checkbox" id="darkMode"> Dunkles Design</label>
-                    <div class="modal-actions">
-                        <button id="clearData" class="clear-btn">Daten löschen</button>
-                        <button id="closeSettings" class="close-btn">Schließen</button>
+                <!-- Explanation Overlay -->
+                <div id="explanationCard" class="explanation-overlay hidden">
+                    <div class="explanation-content">
+                        <div id="answerResult" class="result">Richtig!</div>
+                        <p id="explanationText">Erklärung...</p>
+                        <button id="nextQuestion" class="next-btn">Nächste Frage</button>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
+
+        <!-- Full-Screen Quiz Results -->
+        <div id="resultsContainer" class="results-fullscreen hidden">
+            <div class="results-content">
+                <h1>Quiz beendet! 🎉</h1>
+                <div class="final-score">
+                    <div class="score-number">
+                        <span id="finalScore">0</span> / <span id="finalTotal">10</span>
+                    </div>
+                    <div class="score-percentage">
+                        <span id="scorePercentage">0%</span>
+                    </div>
+                </div>
+                <div class="result-actions">
+                    <button id="restartQuiz" class="action-btn primary">Wiederholen</button>
+                    <button id="newQuiz" class="action-btn secondary">Neues Quiz</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
