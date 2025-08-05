@@ -14,6 +14,7 @@ class QuizManager {
         this.isQuizActive = false;
         this.selectedAnswer = null;
         this.hasAnswered = false;
+        this.autoAdvanceTimer = null;
     }
 
     // Initialize quiz manager
@@ -230,12 +231,12 @@ class QuizManager {
         if (this.settings.showExplanations && question.explanation) {
             this.showExplanation(question.explanation, isCorrect);
             // Auto-advance after 2.5 seconds
-            setTimeout(() => {
+            this.autoAdvanceTimer = setTimeout(() => {
                 this.nextQuestion();
             }, 2500);
         } else {
             // Auto-advance after 1 second
-            setTimeout(() => {
+            this.autoAdvanceTimer = setTimeout(() => {
                 this.nextQuestion();
             }, 1000);
         }
@@ -355,6 +356,32 @@ class QuizManager {
         
         // Return to start state
         this.hideQuizInterface();
+    }
+
+    // Force end current quiz (for switching quizzes)
+    forceEndQuiz() {
+        this.isQuizActive = false;
+        this.currentQuiz = null;
+        this.questions = [];
+        this.currentQuestionIndex = 0;
+        this.score = 0;
+        this.userAnswers = [];
+        this.selectedAnswer = null;
+        this.hasAnswered = false;
+        
+        // Clear any pending timers
+        if (this.autoAdvanceTimer) {
+            clearTimeout(this.autoAdvanceTimer);
+            this.autoAdvanceTimer = null;
+        }
+        
+        // Clear quiz state
+        window.storageManager.clearCurrentQuiz();
+        
+        // Return to start interface
+        this.hideQuizInterface();
+        
+        console.log('Quiz forcefully ended');
     }
 
     // Show quiz interface

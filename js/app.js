@@ -114,12 +114,25 @@ class AppManager {
             const quizName = file.name.replace('.json', '') || 'Quiz';
             const savedId = await window.storageManager.saveQuizData(quizName, data);
             
+            // If currently in a quiz, ask for confirmation to switch
+            if (window.quizManager.isQuizActive) {
+                const confirmSwitch = confirm('Möchtest du das aktuelle Quiz beenden und das neue starten?');
+                if (!confirmSwitch) {
+                    return;
+                }
+                // Stop current quiz
+                window.quizManager.forceEndQuiz();
+            }
+            
             // Set current quiz data and update info
             this.currentQuizData = { ...data, id: savedId, name: quizName };
             this.updateQuizInfo();
             await this.loadSavedQuizzes(); // Refresh quiz list
             
-            alert(`Quiz erfolgreich gespeichert: ${data.questions.length} Fragen`);
+            // Auto-start the uploaded quiz
+            window.quizManager.startQuiz(this.currentQuizData, this.currentQuizData.name || 'Quiz');
+            
+            alert(`Quiz erfolgreich geladen: ${data.questions.length} Fragen`);
         } catch (error) {
             console.error('Error processing file:', error);
             alert('Fehler beim Verarbeiten der Datei. Überprüfe das JSON-Format.');
@@ -129,6 +142,17 @@ class AppManager {
     // Load a quick quiz from json_dbs directory
     async loadQuickQuiz(quizName) {
         if (!quizName) return;
+        
+        // If currently in a quiz, ask for confirmation to switch
+        if (window.quizManager.isQuizActive) {
+            const confirmSwitch = confirm('Möchtest du das aktuelle Quiz beenden und ein neues starten?');
+            if (!confirmSwitch) {
+                return;
+            }
+            // Stop current quiz
+            window.quizManager.forceEndQuiz();
+        }
+        
         const quizFileName = `json_dbs/${quizName}.json`;
 
         try {
@@ -324,6 +348,16 @@ class AppManager {
     // Select a quiz from the saved list
     async selectQuiz(quizId) {
         try {
+            // If currently in a quiz, ask for confirmation to switch
+            if (window.quizManager.isQuizActive) {
+                const confirmSwitch = confirm('Möchtest du das aktuelle Quiz beenden und ein neues starten?');
+                if (!confirmSwitch) {
+                    return;
+                }
+                // Stop current quiz
+                window.quizManager.forceEndQuiz();
+            }
+            
             const quizData = await window.storageManager.getQuizData(quizId);
             if (quizData) {
                 this.currentQuizData = {
@@ -332,7 +366,11 @@ class AppManager {
                     questions: quizData.questions
                 };
                 this.updateQuizInfo();
-                console.log('Quiz selected:', quizData.name);
+                
+                // Auto-start the selected quiz
+                window.quizManager.startQuiz(this.currentQuizData, this.currentQuizData.name || 'Quiz');
+                
+                console.log('Quiz selected and started:', quizData.name);
             }
         } catch (error) {
             console.error('Error selecting quiz:', error);
