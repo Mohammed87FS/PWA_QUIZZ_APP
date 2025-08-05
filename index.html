@@ -33,6 +33,7 @@
             <button id="settingsBtn" class="settings-btn">⚙️</button>
         </header>
 
+        <main class="main">
             <!-- File Upload (Direct Access) -->
             <div class="upload-box">
                 <input type="file" id="fileInput" accept=".json" hidden>
@@ -42,7 +43,16 @@
 
             <!-- Quiz Start -->
             <div id="startSection">
-                <p id="quizDescription">Lade eine JSON-Datei mit Fragen hoch.</p>
+                <p id="quizDescription">Lade eine JSON-Datei mit Fragen hoch oder wähle ein gespeichertes Quiz.</p>
+                
+                <!-- Saved Quizzes Section -->
+                <div id="savedQuizzesSection" class="saved-quizzes hidden">
+                    <h3>📚 Gespeicherte Quizzes</h3>
+                    <div id="quizList" class="quiz-list">
+                        <!-- Quiz items will be added dynamically -->
+                    </div>
+                </div>
+                
                 <div id="quizStats" class="stats hidden">
                     <span id="questionCount">0</span> Fragen • <span id="categoryCount">0</span> Kategorien
                 </div>

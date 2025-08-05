@@ -11,9 +11,16 @@ class AppManager {
         try {
             console.log('Initializing Quiz Master PWA...');
             
+            // Initialize storage manager first
+            await window.storageManager.init();
+            
             window.quizManager.init();
             this.setupEventListeners();
             this.loadSettings();
+            
+            // Load saved quiz data
+            await this.loadSavedQuizzes();
+            
             this.updateQuizInfo();
             
             console.log('Quiz Master PWA initialized successfully');
@@ -92,11 +99,16 @@ class AppManager {
                 return;
             }
 
-            // Set current quiz data and update info
-            this.currentQuizData = data;
-            this.updateQuizInfo();
+            // Save quiz data persistently
+            const quizName = file.name.replace('.json', '') || 'Quiz';
+            const savedId = await window.storageManager.saveQuizData(quizName, data);
             
-            alert(`Quiz erfolgreich geladen: ${data.questions.length} Fragen`);
+            // Set current quiz data and update info
+            this.currentQuizData = { ...data, id: savedId, name: quizName };
+            this.updateQuizInfo();
+            await this.loadSavedQuizzes(); // Refresh quiz list
+            
+            alert(`Quiz erfolgreich gespeichert: ${data.questions.length} Fragen`);
         } catch (error) {
             console.error('Error processing file:', error);
             alert('Fehler beim Verarbeiten der Datei. Überprüfe das JSON-Format.');
@@ -154,6 +166,73 @@ class AppManager {
         };
     }
 
+    // Load saved quizzes from storage
+    async loadSavedQuizzes() {
+        try {
+            const savedQuizzes = await window.storageManager.getStoredQuizFiles();
+            
+            // If we have saved quizzes but no current quiz, load the most recent one
+            if (savedQuizzes.length > 0 && !this.currentQuizData) {
+                const mostRecent = savedQuizzes[savedQuizzes.length - 1];
+                this.currentQuizData = {
+                    id: mostRecent.id,
+                    name: mostRecent.name,
+                    questions: mostRecent.questions
+                };
+                console.log('Loaded most recent quiz:', mostRecent.name);
+            }
+            
+            this.updateQuizList(savedQuizzes);
+        } catch (error) {
+            console.error('Error loading saved quizzes:', error);
+        }
+    }
+
+    // Update quiz list in UI
+    updateQuizList(quizzes) {
+        const savedQuizzesSection = document.getElementById('savedQuizzesSection');
+        const quizList = document.getElementById('quizList');
+        
+        if (!quizList) return;
+        
+        // Show/hide section based on available quizzes
+        if (savedQuizzesSection) {
+            savedQuizzesSection.classList.toggle('hidden', quizzes.length === 0);
+        }
+        
+        // Clear existing list
+        quizList.innerHTML = '';
+        
+        // Add each quiz to the list
+        quizzes.forEach(quiz => {
+            const quizItem = document.createElement('div');
+            quizItem.className = 'quiz-item';
+            quizItem.innerHTML = `
+                <div class="quiz-info">
+                    <div class="quiz-name">${quiz.name}</div>
+                    <div class="quiz-details">${quiz.questionCount} Fragen • ${quiz.categories.length} Kategorien</div>
+                    <div class="quiz-date">Hochgeladen: ${new Date(quiz.uploadDate).toLocaleDateString('de-DE')}</div>
+                </div>
+                <div class="quiz-actions">
+                    <button class="quiz-select-btn" data-quiz-id="${quiz.id}">Auswählen</button>
+                    <button class="quiz-delete-btn" data-quiz-id="${quiz.id}">🗑️</button>
+                </div>
+            `;
+            quizList.appendChild(quizItem);
+        });
+        
+        // Add event listeners for quiz selection and deletion
+        quizList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('quiz-select-btn')) {
+                this.selectQuiz(parseInt(e.target.dataset.quizId));
+            } else if (e.target.classList.contains('quiz-delete-btn')) {
+                this.deleteQuiz(parseInt(e.target.dataset.quizId));
+            }
+        });
+        
+        console.log('Quiz list updated:', quizzes.length, 'quizzes');
+    }
+
     // Update quiz info
     updateQuizInfo() {
         const startBtn = document.getElementById('startQuiz');
@@ -183,6 +262,50 @@ class AppManager {
         }
     }
 
+    // Select a quiz from the saved list
+    async selectQuiz(quizId) {
+        try {
+            const quizData = await window.storageManager.getQuizData(quizId);
+            if (quizData) {
+                this.currentQuizData = {
+                    id: quizData.id,
+                    name: quizData.name,
+                    questions: quizData.questions
+                };
+                this.updateQuizInfo();
+                console.log('Quiz selected:', quizData.name);
+            }
+        } catch (error) {
+            console.error('Error selecting quiz:', error);
+            alert('Fehler beim Laden des Quiz.');
+        }
+    }
+
+    // Delete a quiz from storage
+    async deleteQuiz(quizId) {
+        if (!confirm('Möchtest du dieses Quiz wirklich löschen?')) {
+            return;
+        }
+
+        try {
+            await window.storageManager.deleteQuizData(quizId);
+            
+            // If deleted quiz was currently selected, clear it
+            if (this.currentQuizData && this.currentQuizData.id === quizId) {
+                this.currentQuizData = null;
+                this.updateQuizInfo();
+            }
+            
+            // Refresh quiz list
+            await this.loadSavedQuizzes();
+            
+            console.log('Quiz deleted:', quizId);
+        } catch (error) {
+            console.error('Error deleting quiz:', error);
+            alert('Fehler beim Löschen des Quiz.');
+        }
+    }
+
     // Start quiz
     startQuiz() {
         if (!this.currentQuizData) {
@@ -190,7 +313,7 @@ class AppManager {
             return;
         }
 
-        window.quizManager.startQuiz(this.currentQuizData, 'Quiz');
+        window.quizManager.startQuiz(this.currentQuizData, this.currentQuizData.name || 'Quiz');
     }
 
     // Check if there's a quiz to resume
@@ -217,10 +340,13 @@ class AppManager {
         }
     }
 
-    // Load user settings (simplified)
+    // Load user settings (using localStorage for persistence)
     loadSettings() {
         try {
-            const settings = JSON.parse(sessionStorage.getItem('quizSettings') || '{}');
+            // Use storageManager if available, otherwise fallback to localStorage
+            const settings = window.storageManager ? 
+                window.storageManager.loadSettings() : 
+                JSON.parse(localStorage.getItem('quizSettings') || '{}');
             
             // Set default values
             const defaults = {
@@ -251,7 +377,7 @@ class AppManager {
         }
     }
 
-    // Save settings (simplified)
+    // Save settings (using localStorage for persistence)
     saveSettings() {
         const settings = {
             showExplanations: document.getElementById('showExplanations')?.checked || true,
@@ -267,21 +393,36 @@ class AppManager {
             document.documentElement.removeAttribute('data-theme');
         }
         
-        // Store in sessionStorage for current session only
-        sessionStorage.setItem('quizSettings', JSON.stringify(settings));
+        // Store persistently using storageManager if available
+        if (window.storageManager) {
+            window.storageManager.saveSettings(settings);
+        } else {
+            localStorage.setItem('quizSettings', JSON.stringify(settings));
+        }
     }
 
     // Clear current data
-    clearAllData() {
-        if (!confirm('Möchtest du das aktuelle Quiz wirklich löschen?')) {
+    async clearAllData() {
+        if (!confirm('Möchtest du wirklich ALLE gespeicherten Quiz-Daten löschen? Dies kann nicht rückgängig gemacht werden.')) {
             return;
         }
 
-        this.currentQuizData = null;
-        this.updateQuizInfo();
-        window.quizManager.hideQuizInterface();
-        sessionStorage.removeItem('quizSettings');
-        console.log('Current quiz cleared');
+        try {
+            // Clear all stored quizzes
+            if (window.storageManager) {
+                await window.storageManager.clearAllQuizData();
+            }
+            
+            this.currentQuizData = null;
+            this.updateQuizInfo();
+            window.quizManager.hideQuizInterface();
+            
+            alert('Alle Quiz-Daten wurden gelöscht.');
+            console.log('All quiz data cleared');
+        } catch (error) {
+            console.error('Error clearing data:', error);
+            alert('Fehler beim Löschen der Daten.');
+        }
     }
 }
 

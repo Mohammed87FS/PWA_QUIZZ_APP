@@ -25,7 +25,26 @@ class QuizManager {
 
     // Load settings from storage
     loadSettings() {
-        this.settings = window.storageManager.loadSettings();
+        if (window.storageManager) {
+            this.settings = window.storageManager.loadSettings();
+        } else {
+            // Fallback if storageManager not available
+            try {
+                this.settings = JSON.parse(localStorage.getItem('quizSettings') || '{}');
+            } catch (error) {
+                this.settings = {};
+            }
+        }
+        
+        // Ensure all required settings have default values
+        this.settings = {
+            showExplanations: true,
+            randomizeQuestions: false,
+            randomizeOptions: false,
+            darkMode: false,
+            ...this.settings
+        };
+        
         console.log('Quiz settings loaded:', this.settings);
     }
 
