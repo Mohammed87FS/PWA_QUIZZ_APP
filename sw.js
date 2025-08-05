@@ -1,5 +1,5 @@
 // Service Worker for Quiz Master PWA
-const CACHE_NAME = 'quiz-master-v3-no-sample';
+const CACHE_NAME = 'quiz-master-v4-fixed';
 const OFFLINE_URL = 'offline.html';
 
 // Files to cache for offline functionality
@@ -23,10 +23,14 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME)
       .then((cache) => {
         console.log('Service Worker: Caching files');
-        return cache.addAll(urlsToCache);
+        // Filter out any chrome-extension URLs that might cause issues
+        const filteredUrls = urlsToCache.filter(url => !url.startsWith('chrome-extension:'));
+        return cache.addAll(filteredUrls);
       })
       .catch((error) => {
         console.error('Service Worker: Error caching files:', error);
+        // Don't fail the install if caching fails
+        return Promise.resolve();
       })
   );
   // Force the service worker to activate immediately
