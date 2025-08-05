@@ -42,15 +42,15 @@
                 <div class="quiz-section">
                     <h3>Verfügbare Quizzes</h3>
                     <div class="quiz-grid">
-                        <button class="quiz-card" data-quiz="demokratie" onclick="console.log('Demokratie clicked')">
+                        <button class="quiz-card" data-quiz="demokratie">
                             <span class="quiz-icon">🏛️</span>
                             <span class="quiz-title">Demokratie</span>
                         </button>
-                        <button class="quiz-card" data-quiz="geschichte" onclick="console.log('Geschichte clicked')">
+                        <button class="quiz-card" data-quiz="geschichte">
                             <span class="quiz-icon">📜</span>
                             <span class="quiz-title">Geschichte</span>
                         </button>
-                        <button class="quiz-card" data-quiz="elektronik_quiz" onclick="console.log('Elektronik clicked')">
+                        <button class="quiz-card" data-quiz="elektronik_quiz">
                             <span class="quiz-icon">⚡</span>
                             <span class="quiz-title">Elektronik</span>
                         </button>
@@ -62,13 +62,7 @@
                     </div>
                 </div>
 
-                <!-- Saved Quizzes (shown when available) -->
-                <div id="savedQuizzesSection" class="quiz-section hidden">
-                    <h3>Gespeicherte Quizzes</h3>
-                    <div id="quizList" class="saved-quiz-grid">
-                        <!-- Quiz items will be added dynamically -->
-                    </div>
-                </div>
+                <!-- Removed saved quizzes section - simplified interface -->
             </div>
 
             <!-- Quiz Interface -->
@@ -85,11 +79,13 @@
                     <div id="optionsContainer" class="options">
                         <!-- Options generated dynamically -->
                     </div>
+                    <button id="submitAnswer" class="submit-btn" disabled>Antwort bestätigen</button>
                 </div>
 
                 <div id="explanationCard" class="explanation hidden">
                     <div id="answerResult" class="result">Richtig!</div>
                     <p id="explanationText">Erklärung...</p>
+                    <button id="nextQuestion" class="next-btn">Nächste Frage</button>
                 </div>
             </div>
 

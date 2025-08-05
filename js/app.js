@@ -36,9 +36,7 @@ class AppManager {
             this.loadSettings();
             console.log('Settings loaded');
             
-            // Load saved quiz data
-            await this.loadSavedQuizzes();
-            console.log('Saved quizzes loaded');
+            // Removed saved quizzes loading - simplified interface
             
             this.updateQuizInfo();
             
@@ -70,8 +68,6 @@ class AppManager {
 
         // Quiz cards (built-in quizzes) - use event delegation
         document.addEventListener('click', (e) => {
-            console.log('Document click detected:', e.target);
-            
             // Handle quiz card clicks
             const quizCard = e.target.closest('.quiz-card[data-quiz]');
             if (quizCard) {
@@ -83,21 +79,7 @@ class AppManager {
                 }
             }
             
-            // Handle saved quiz selection
-            if (e.target.classList.contains('quiz-select-btn')) {
-                const quizId = parseInt(e.target.dataset.quizId);
-                if (quizId) {
-                    this.selectQuiz(quizId);
-                }
-            }
-            
-            // Handle saved quiz deletion
-            if (e.target.classList.contains('quiz-delete-btn')) {
-                const quizId = parseInt(e.target.dataset.quizId);
-                if (quizId) {
-                    this.deleteQuiz(quizId);
-                }
-            }
+            // Removed saved quiz handling - simplified interface
         });
 
         // Settings checkboxes (only essential ones remain)
@@ -163,10 +145,8 @@ class AppManager {
                 window.quizManager.forceEndQuiz();
             }
             
-            // Set current quiz data and update info
-            this.currentQuizData = { ...data, id: savedId, name: quizName };
-            this.updateQuizInfo();
-            await this.loadSavedQuizzes(); // Refresh quiz list
+            // Set current quiz data
+            this.currentQuizData = { ...data, name: quizName };
             
             // Auto-start the uploaded quiz
             window.quizManager.startQuiz(this.currentQuizData, this.currentQuizData.name || 'Quiz');
@@ -221,13 +201,8 @@ class AppManager {
             };
             const displayName = friendlyNames[quizName] || quizName;
 
-            // Save quiz data persistently (so it appears in saved quizzes)
-            const savedId = await window.storageManager.saveQuizData(displayName, data);
-            
-            // Set current quiz data and update info
-            this.currentQuizData = { ...data, id: savedId, name: displayName };
-            this.updateQuizInfo();
-            await this.loadSavedQuizzes(); // Refresh quiz list
+            // Set current quiz data
+            this.currentQuizData = { ...data, name: displayName };
             
             // Auto-start the quiz for quick selection
             window.quizManager.startQuiz(this.currentQuizData, this.currentQuizData.name || 'Quiz');

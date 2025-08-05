@@ -49,12 +49,18 @@ class QuizManager {
 
     // Bind event listeners
     bindEvents() {
-        // Answer option clicks - auto-submit on selection
+        // Answer option clicks
         document.addEventListener('click', (e) => {
             if (e.target.closest('.option') && this.isQuizActive && !this.hasAnswered) {
-                this.selectAndSubmitAnswer(e.target.closest('.option'));
+                this.selectAnswer(e.target.closest('.option'));
             }
         });
+
+        // Submit answer button
+        const submitBtn = document.getElementById('submitAnswer');
+        if (submitBtn) {
+            submitBtn.addEventListener('click', () => this.submitAnswer());
+        }
 
         // Next question button
         const nextBtn = document.getElementById('nextQuestion');
@@ -139,6 +145,13 @@ class QuizManager {
         // Reset answer state
         this.selectedAnswer = null;
         this.hasAnswered = false;
+        
+        // Reset submit button
+        const submitBtn = document.getElementById('submitAnswer');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Antwort bestätigen';
+        }
 
         // Create options
         if (optionsContainer) {
@@ -162,17 +175,22 @@ class QuizManager {
             });
         }
 
-        // Hide explanation card
+        // Hide explanation card and next button
         const explanationCard = document.getElementById('explanationCard');
         if (explanationCard) {
             explanationCard.classList.add('hidden');
+        }
+        
+        const nextBtn = document.getElementById('nextQuestion');
+        if (nextBtn) {
+            nextBtn.style.display = 'none';
         }
 
         console.log('Displaying question:', this.currentQuestionIndex + 1);
     }
 
-    // Select and immediately submit answer - simplified flow
-    selectAndSubmitAnswer(optionElement) {
+    // Select an answer option
+    selectAnswer(optionElement) {
         if (!this.isQuizActive || this.hasAnswered) return;
 
         // Remove previous selection
@@ -184,12 +202,13 @@ class QuizManager {
         optionElement.classList.add('selected');
         this.selectedAnswer = parseInt(optionElement.dataset.originalIndex);
 
-        console.log('Answer selected and submitting:', this.selectedAnswer);
-        
-        // Auto-submit after a brief delay for visual feedback
-        setTimeout(() => {
-            this.submitAnswer();
-        }, 300);
+        // Enable submit button
+        const submitBtn = document.getElementById('submitAnswer');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+        }
+
+        console.log('Answer selected:', this.selectedAnswer);
     }
 
     // Submit the current answer
@@ -227,19 +246,13 @@ class QuizManager {
         // Show correct/incorrect answers
         this.highlightAnswers(question.correct_answer);
 
-        // Show explanation if enabled and available, then auto-advance
+        // Show explanation if enabled and available
         if (this.settings.showExplanations && question.explanation) {
             this.showExplanation(question.explanation, isCorrect);
-            // Auto-advance after 2.5 seconds
-            this.autoAdvanceTimer = setTimeout(() => {
-                this.nextQuestion();
-            }, 2500);
-        } else {
-            // Auto-advance after 1 second
-            this.autoAdvanceTimer = setTimeout(() => {
-                this.nextQuestion();
-            }, 1000);
         }
+        
+        // Show next button for manual progression
+        this.showNextButton();
 
         // Save progress
         this.saveQuizState();
@@ -262,10 +275,12 @@ class QuizManager {
             }
         });
 
-        // Disable all options
-        document.querySelectorAll('.option').forEach(opt => {
-            opt.style.pointerEvents = 'none';
-        });
+        // Disable submit button
+        const submitBtn = document.getElementById('submitAnswer');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Beantwortet';
+        }
     }
 
     // Show explanation card
@@ -285,9 +300,17 @@ class QuizManager {
         }
     }
 
-    // Show next question button (not used in auto-advance mode)
+    // Show next question button
     showNextButton() {
-        // Auto-advance mode - this method is kept for compatibility but not used
+        const nextBtn = document.getElementById('nextQuestion');
+        if (nextBtn) {
+            if (this.currentQuestionIndex < this.questions.length - 1) {
+                nextBtn.textContent = 'Nächste Frage';
+            } else {
+                nextBtn.textContent = 'Quiz beenden';
+            }
+            nextBtn.style.display = 'block';
+        }
     }
 
     // Move to next question or finish quiz
