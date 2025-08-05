@@ -38,12 +38,23 @@
             <div class="upload-box">
                 <input type="file" id="fileInput" accept=".json" hidden>
                 <label for="fileInput" class="upload-label">📁 JSON-Datei hochladen</label>
+            </div>
 
+            <!-- Pre-loaded Quiz Selection -->
+            <div class="preloaded-quiz-box">
+                <h3>📚 Verfügbare Quizzes</h3>
+                <select id="preloadedQuizSelect" class="quiz-select">
+                    <option value="">Wähle ein Quiz aus...</option>
+                    <option value="demokratie">🏛️ Demokratie</option>
+                    <option value="geschichte">📜 Geschichte</option>
+                    <option value="elektronik_quiz">⚡ Elektronik</option>
+                </select>
+                <button id="loadPreloadedQuiz" class="load-quiz-btn" disabled>Quiz laden</button>
             </div>
 
             <!-- Quiz Start -->
             <div id="startSection">
-                <p id="quizDescription">Lade eine JSON-Datei mit Fragen hoch oder wähle ein gespeichertes Quiz.</p>
+                <p id="quizDescription">Lade eine JSON-Datei hoch, wähle ein verfügbares Quiz oder nutze ein gespeichertes Quiz.</p>
                 
                 <!-- Saved Quizzes Section -->
                 <div id="savedQuizzesSection" class="saved-quizzes hidden">

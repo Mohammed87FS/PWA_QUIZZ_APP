@@ -49,6 +49,18 @@ class AppManager {
             fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         }
 
+        // Preloaded quiz selection
+        const preloadedQuizSelect = document.getElementById('preloadedQuizSelect');
+        if (preloadedQuizSelect) {
+            preloadedQuizSelect.addEventListener('change', () => this.handlePreloadedQuizSelection());
+        }
+
+        // Load preloaded quiz button
+        const loadPreloadedQuiz = document.getElementById('loadPreloadedQuiz');
+        if (loadPreloadedQuiz) {
+            loadPreloadedQuiz.addEventListener('click', () => this.loadPreloadedQuiz());
+        }
+
         // Start quiz
         const startQuiz = document.getElementById('startQuiz');
         if (startQuiz) {
@@ -112,6 +124,70 @@ class AppManager {
         } catch (error) {
             console.error('Error processing file:', error);
             alert('Fehler beim Verarbeiten der Datei. Überprüfe das JSON-Format.');
+        }
+    }
+
+    // Handle preloaded quiz selection change
+    handlePreloadedQuizSelection() {
+        const select = document.getElementById('preloadedQuizSelect');
+        const loadBtn = document.getElementById('loadPreloadedQuiz');
+        
+        if (select && loadBtn) {
+            loadBtn.disabled = !select.value;
+        }
+    }
+
+    // Load a preloaded quiz from json_dbs directory
+    async loadPreloadedQuiz() {
+        const select = document.getElementById('preloadedQuizSelect');
+        if (!select || !select.value) return;
+
+        const quizName = select.value;
+        const quizFileName = `json_dbs/${quizName}.json`;
+
+        try {
+            console.log(`Loading preloaded quiz: ${quizFileName}`);
+            
+            // Fetch the JSON file
+            const response = await fetch(quizFileName);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // Validate the quiz data
+            const validation = this.validateQuizData(data);
+            if (!validation.valid) {
+                alert(`Quiz-Validierungsfehler: ${validation.errors[0]}`);
+                return;
+            }
+
+            // Get a friendly name for the quiz
+            const friendlyNames = {
+                'demokratie': 'Demokratie',
+                'geschichte': 'Geschichte',
+                'elektronik_quiz': 'Elektronik'
+            };
+            const displayName = friendlyNames[quizName] || quizName;
+
+            // Save quiz data persistently (so it appears in saved quizzes)
+            const savedId = await window.storageManager.saveQuizData(displayName, data);
+            
+            // Set current quiz data and update info
+            this.currentQuizData = { ...data, id: savedId, name: displayName };
+            this.updateQuizInfo();
+            await this.loadSavedQuizzes(); // Refresh quiz list
+            
+            // Reset the select
+            select.value = '';
+            this.handlePreloadedQuizSelection();
+            
+            alert(`Quiz "${displayName}" erfolgreich geladen: ${data.questions.length} Fragen`);
+            
+        } catch (error) {
+            console.error('Error loading preloaded quiz:', error);
+            alert(`Fehler beim Laden des Quiz "${quizName}". Bitte versuche es erneut.`);
         }
     }
 
