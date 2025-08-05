@@ -34,38 +34,35 @@
         </header>
 
         <main class="main">
-            <!-- File Upload (Direct Access) -->
-            <div class="upload-box">
-                <input type="file" id="fileInput" accept=".json" hidden>
-                <label for="fileInput" class="upload-label">📁 JSON-Datei hochladen</label>
-            </div>
-
-            <!-- Pre-loaded Quiz Selection -->
-            <div class="preloaded-quiz-box">
-                <h3>📚 Verfügbare Quizzes</h3>
-                <select id="preloadedQuizSelect" class="quiz-select">
-                    <option value="">Wähle ein Quiz aus...</option>
-                    <option value="demokratie">🏛️ Demokratie</option>
-                    <option value="geschichte">📜 Geschichte</option>
-                    <option value="elektronik_quiz">⚡ Elektronik</option>
-                </select>
-                <button id="loadPreloadedQuiz" class="load-quiz-btn" disabled>Quiz laden</button>
-            </div>
-
-            <!-- Quiz Start -->
-            <div id="startSection">
-                <p id="quizDescription">Lade eine JSON-Datei hoch, wähle ein verfügbares Quiz oder nutze ein gespeichertes Quiz.</p>
+            <!-- Simplified Quiz Selection -->
+            <div class="quiz-selection">
+                <h2>Quiz auswählen</h2>
                 
-                <!-- Saved Quizzes Section -->
+                <!-- Quick Quiz Selection -->
+                <div class="quick-quiz-buttons">
+                    <button class="quick-quiz-btn" data-quiz="demokratie">🏛️ Demokratie</button>
+                    <button class="quick-quiz-btn" data-quiz="geschichte">📜 Geschichte</button>
+                    <button class="quick-quiz-btn" data-quiz="elektronik_quiz">⚡ Elektronik</button>
+                </div>
+                
+                <div class="divider">oder</div>
+                
+                <!-- File Upload -->
+                <div class="upload-section">
+                    <input type="file" id="fileInput" accept=".json" hidden>
+                    <label for="fileInput" class="upload-btn">📁 Eigene JSON-Datei hochladen</label>
+                </div>
+
+                <!-- Saved Quizzes (Auto-shown when available) -->
                 <div id="savedQuizzesSection" class="saved-quizzes hidden">
-                    <h3>📚 Gespeicherte Quizzes</h3>
+                    <h3>Gespeicherte Quizzes</h3>
                     <div id="quizList" class="quiz-list">
                         <!-- Quiz items will be added dynamically -->
                     </div>
                 </div>
                 
                 <div id="quizStats" class="stats hidden">
-                    <span id="questionCount">0</span> Fragen • <span id="categoryCount">0</span> Kategorien
+                    <span id="questionCount">0</span> Fragen
                 </div>
                 <button id="startQuiz" class="start-btn" disabled>Quiz starten</button>
             </div>
@@ -73,26 +70,22 @@
             <!-- Quiz Interface -->
             <div id="quizContainer" class="quiz hidden">
                 <div class="quiz-header">
-                    <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span>
                     <div class="progress">
                         <div id="progressFill" class="progress-fill"></div>
+                        <span class="progress-text"><span id="currentQuestion">1</span> / <span id="totalQuestions">10</span></span>
                     </div>
-                    <div class="score">Punkte: <span id="currentScore">0</span></div>
                 </div>
 
                 <div class="question">
-                    <div class="category" id="questionCategory">Kategorie</div>
                     <h3 id="questionText">Frage wird geladen...</h3>
                     <div id="optionsContainer" class="options">
                         <!-- Options generated dynamically -->
                     </div>
-                    <button id="submitAnswer" class="submit-btn" disabled>Antwort bestätigen</button>
                 </div>
 
                 <div id="explanationCard" class="explanation hidden">
                     <div id="answerResult" class="result">Richtig!</div>
                     <p id="explanationText">Erklärung...</p>
-                    <button id="nextQuestion" class="next-btn">Nächste Frage</button>
                 </div>
             </div>
 
@@ -100,10 +93,8 @@
             <div id="resultsContainer" class="results hidden">
                 <h3>Quiz beendet! 🎉</h3>
                 <div class="final-score">
-                    <span id="finalScore">0</span> / <span id="finalTotal">10</span> Punkten
-                </div>
-                <div class="percentage">
-                    <span id="scorePercentage">0%</span>
+                    <span id="finalScore">0</span> / <span id="finalTotal">10</span>
+                    <div class="percentage">(<span id="scorePercentage">0%</span>)</div>
                 </div>
                 <div class="result-actions">
                     <button id="restartQuiz" class="restart-btn">Wiederholen</button>
@@ -120,8 +111,6 @@
                 <div class="modal-content">
                     <h3>Einstellungen</h3>
                     <label><input type="checkbox" id="showExplanations" checked> Erklärungen anzeigen</label>
-                    <label><input type="checkbox" id="randomizeQuestions"> Fragen mischen</label>
-                    <label><input type="checkbox" id="randomizeOptions"> Antworten mischen</label>
                     <label><input type="checkbox" id="darkMode"> Dunkles Design</label>
                     <div class="modal-actions">
                         <button id="clearData" class="clear-btn">Daten löschen</button>

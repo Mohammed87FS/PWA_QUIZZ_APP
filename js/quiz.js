@@ -39,8 +39,6 @@ class QuizManager {
         // Ensure all required settings have default values
         this.settings = {
             showExplanations: true,
-            randomizeQuestions: false,
-            randomizeOptions: false,
             darkMode: false,
             ...this.settings
         };
@@ -50,18 +48,12 @@ class QuizManager {
 
     // Bind event listeners
     bindEvents() {
-        // Answer option clicks
+        // Answer option clicks - auto-submit on selection
         document.addEventListener('click', (e) => {
             if (e.target.closest('.option') && this.isQuizActive && !this.hasAnswered) {
-                this.selectAnswer(e.target.closest('.option'));
+                this.selectAndSubmitAnswer(e.target.closest('.option'));
             }
         });
-
-        // Submit answer button
-        const submitBtn = document.getElementById('submitAnswer');
-        if (submitBtn) {
-            submitBtn.addEventListener('click', () => this.submitAnswer());
-        }
 
         // Next question button
         const nextBtn = document.getElementById('nextQuestion');
@@ -93,10 +85,7 @@ class QuizManager {
 
             this.questions = [...quizData.questions];
             
-            // Apply settings
-            if (this.settings.randomizeQuestions) {
-                this.shuffleArray(this.questions);
-            }
+            // Questions are not randomized in simplified version
 
             // Reset quiz state
             this.currentQuestionIndex = 0;
@@ -130,53 +119,38 @@ class QuizManager {
 
         const question = this.questions[this.currentQuestionIndex];
         const questionText = document.getElementById('questionText');
-        const questionCategory = document.getElementById('questionCategory');
         const optionsContainer = document.getElementById('optionsContainer');
         const currentQuestionSpan = document.getElementById('currentQuestion');
         const totalQuestionsSpan = document.getElementById('totalQuestions');
         const progressFill = document.getElementById('progressFill');
-        const submitBtn = document.getElementById('submitAnswer');
 
         // Update question info
         if (questionText) questionText.textContent = question.question;
-        if (questionCategory) questionCategory.textContent = question.category;
         if (currentQuestionSpan) currentQuestionSpan.textContent = this.currentQuestionIndex + 1;
         if (totalQuestionsSpan) totalQuestionsSpan.textContent = this.questions.length;
 
         // Update progress bar
         if (progressFill) {
-            const progress = ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
+            const progress = (this.currentQuestionIndex / this.questions.length) * 100;
             progressFill.style.width = `${progress}%`;
         }
 
         // Reset answer state
         this.selectedAnswer = null;
         this.hasAnswered = false;
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Antwort bestätigen';
-        }
 
         // Create options
         if (optionsContainer) {
             optionsContainer.innerHTML = '';
             
-            let options = [...question.options];
-            let correctAnswerIndex = question.correct_answer;
-
-            // Randomize options if setting is enabled
-            if (this.settings.randomizeOptions) {
-                const shuffleMap = this.createShuffleMapping(options.length);
-                options = shuffleMap.map(index => question.options[index]);
-                correctAnswerIndex = shuffleMap.indexOf(question.correct_answer);
-            }
+            const options = question.options;
 
             options.forEach((option, index) => {
                 const optionElement = document.createElement('div');
                 optionElement.className = 'option';
                 optionElement.dataset.index = index;
-                optionElement.dataset.originalIndex = this.settings.randomizeOptions ? 
-                    question.options.indexOf(option) : index;
+                optionElement.dataset.originalIndex = index;
+                optionElement.style.pointerEvents = 'auto'; // Re-enable interactions
 
                 optionElement.innerHTML = `
                     <div class="option-letter">${String.fromCharCode(65 + index)}</div>
@@ -196,8 +170,8 @@ class QuizManager {
         console.log('Displaying question:', this.currentQuestionIndex + 1);
     }
 
-    // Select an answer option
-    selectAnswer(optionElement) {
+    // Select and immediately submit answer - simplified flow
+    selectAndSubmitAnswer(optionElement) {
         if (!this.isQuizActive || this.hasAnswered) return;
 
         // Remove previous selection
@@ -209,13 +183,12 @@ class QuizManager {
         optionElement.classList.add('selected');
         this.selectedAnswer = parseInt(optionElement.dataset.originalIndex);
 
-        // Enable submit button
-        const submitBtn = document.getElementById('submitAnswer');
-        if (submitBtn) {
-            submitBtn.disabled = false;
-        }
-
-        console.log('Answer selected:', this.selectedAnswer);
+        console.log('Answer selected and submitting:', this.selectedAnswer);
+        
+        // Auto-submit after a brief delay for visual feedback
+        setTimeout(() => {
+            this.submitAnswer();
+        }, 300);
     }
 
     // Submit the current answer
@@ -253,12 +226,18 @@ class QuizManager {
         // Show correct/incorrect answers
         this.highlightAnswers(question.correct_answer);
 
-        // Show explanation if enabled and available
+        // Show explanation if enabled and available, then auto-advance
         if (this.settings.showExplanations && question.explanation) {
             this.showExplanation(question.explanation, isCorrect);
+            // Auto-advance after 2.5 seconds
+            setTimeout(() => {
+                this.nextQuestion();
+            }, 2500);
         } else {
-            // Show next button immediately
-            this.showNextButton();
+            // Auto-advance after 1 second
+            setTimeout(() => {
+                this.nextQuestion();
+            }, 1000);
         }
 
         // Save progress
@@ -282,12 +261,10 @@ class QuizManager {
             }
         });
 
-        // Disable submit button
-        const submitBtn = document.getElementById('submitAnswer');
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Beantwortet';
-        }
+        // Disable all options
+        document.querySelectorAll('.option').forEach(opt => {
+            opt.style.pointerEvents = 'none';
+        });
     }
 
     // Show explanation card
@@ -307,17 +284,9 @@ class QuizManager {
         }
     }
 
-    // Show next question button
+    // Show next question button (not used in auto-advance mode)
     showNextButton() {
-        const nextBtn = document.getElementById('nextQuestion');
-        if (nextBtn) {
-            if (this.currentQuestionIndex < this.questions.length - 1) {
-                nextBtn.textContent = 'Nächste Frage';
-            } else {
-                nextBtn.textContent = 'Quiz beenden';
-            }
-            nextBtn.style.display = 'block';
-        }
+        // Auto-advance mode - this method is kept for compatibility but not used
     }
 
     // Move to next question or finish quiz

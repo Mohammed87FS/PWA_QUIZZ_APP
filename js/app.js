@@ -49,17 +49,11 @@ class AppManager {
             fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         }
 
-        // Preloaded quiz selection
-        const preloadedQuizSelect = document.getElementById('preloadedQuizSelect');
-        if (preloadedQuizSelect) {
-            preloadedQuizSelect.addEventListener('change', () => this.handlePreloadedQuizSelection());
-        }
-
-        // Load preloaded quiz button
-        const loadPreloadedQuiz = document.getElementById('loadPreloadedQuiz');
-        if (loadPreloadedQuiz) {
-            loadPreloadedQuiz.addEventListener('click', () => this.loadPreloadedQuiz());
-        }
+        // Quick quiz buttons
+        const quickQuizButtons = document.querySelectorAll('.quick-quiz-btn');
+        quickQuizButtons.forEach(button => {
+            button.addEventListener('click', () => this.loadQuickQuiz(button.dataset.quiz));
+        });
 
         // Start quiz
         const startQuiz = document.getElementById('startQuiz');
@@ -67,11 +61,16 @@ class AppManager {
             startQuiz.addEventListener('click', () => this.startQuiz());
         }
 
-        // Settings checkboxes
-        const settingsInputs = document.querySelectorAll('#settingsModal input[type="checkbox"]');
-        settingsInputs.forEach(input => {
-            input.addEventListener('change', () => this.saveSettings());
-        });
+        // Settings checkboxes (only essential ones remain)
+        const showExplanations = document.getElementById('showExplanations');
+        const darkMode = document.getElementById('darkMode');
+        
+        if (showExplanations) {
+            showExplanations.addEventListener('change', () => this.saveSettings());
+        }
+        if (darkMode) {
+            darkMode.addEventListener('change', () => this.saveSettings());
+        }
 
         // Clear data
         const clearData = document.getElementById('clearData');
@@ -127,22 +126,9 @@ class AppManager {
         }
     }
 
-    // Handle preloaded quiz selection change
-    handlePreloadedQuizSelection() {
-        const select = document.getElementById('preloadedQuizSelect');
-        const loadBtn = document.getElementById('loadPreloadedQuiz');
-        
-        if (select && loadBtn) {
-            loadBtn.disabled = !select.value;
-        }
-    }
-
-    // Load a preloaded quiz from json_dbs directory
-    async loadPreloadedQuiz() {
-        const select = document.getElementById('preloadedQuizSelect');
-        if (!select || !select.value) return;
-
-        const quizName = select.value;
+    // Load a quick quiz from json_dbs directory
+    async loadQuickQuiz(quizName) {
+        if (!quizName) return;
         const quizFileName = `json_dbs/${quizName}.json`;
 
         try {
@@ -179,11 +165,8 @@ class AppManager {
             this.updateQuizInfo();
             await this.loadSavedQuizzes(); // Refresh quiz list
             
-            // Reset the select
-            select.value = '';
-            this.handlePreloadedQuizSelection();
-            
-            alert(`Quiz "${displayName}" erfolgreich geladen: ${data.questions.length} Fragen`);
+            // Auto-start the quiz for quick selection
+            window.quizManager.startQuiz(this.currentQuizData, this.currentQuizData.name || 'Quiz');
             
         } catch (error) {
             console.error('Error loading preloaded quiz:', error);
@@ -457,8 +440,6 @@ class AppManager {
     saveSettings() {
         const settings = {
             showExplanations: document.getElementById('showExplanations')?.checked || true,
-            randomizeQuestions: document.getElementById('randomizeQuestions')?.checked || false,
-            randomizeOptions: document.getElementById('randomizeOptions')?.checked || false,
             darkMode: document.getElementById('darkMode')?.checked || false
         };
 
