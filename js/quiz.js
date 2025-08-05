@@ -481,53 +481,7 @@ class QuizManager {
         }
     }
 
-    // Get sample quiz data for testing
-    getSampleQuizData() {
-        return {
-            questions: [
-                {
-                    id: 1,
-                    category: "Allgemeinwissen",
-                    question: "Welche ist die Hauptstadt von Deutschland?",
-                    options: ["Berlin", "München", "Hamburg", "Köln"],
-                    correct_answer: 0,
-                    explanation: "Berlin ist seit der Wiedervereinigung 1990 die Hauptstadt der Bundesrepublik Deutschland."
-                },
-                {
-                    id: 2,
-                    category: "Wissenschaft",
-                    question: "Wie viele Planeten gibt es in unserem Sonnensystem?",
-                    options: ["7", "8", "9", "10"],
-                    correct_answer: 1,
-                    explanation: "Unser Sonnensystem hat 8 Planeten. Pluto wurde 2006 zu einem Zwergplaneten herabgestuft."
-                },
-                {
-                    id: 3,
-                    category: "Geschichte",
-                    question: "In welchem Jahr fiel die Berliner Mauer?",
-                    options: ["1987", "1988", "1989", "1990"],
-                    correct_answer: 2,
-                    explanation: "Die Berliner Mauer fiel am 9. November 1989, was ein wichtiger Schritt zur deutschen Wiedervereinigung war."
-                },
-                {
-                    id: 4,
-                    category: "Mathematik",
-                    question: "Was ist die Quadratzahl von 12?",
-                    options: ["124", "144", "154", "164"],
-                    correct_answer: 1,
-                    explanation: "12 × 12 = 144. Eine Quadratzahl entsteht durch Multiplikation einer Zahl mit sich selbst."
-                },
-                {
-                    id: 5,
-                    category: "Geographie",
-                    question: "Welcher ist der längste Fluss der Welt?",
-                    options: ["Amazonas", "Nil", "Mississippi", "Jangtse"],
-                    correct_answer: 1,
-                    explanation: "Der Nil ist mit etwa 6.650 km der längste Fluss der Welt und fließt durch mehrere afrikanische Länder."
-                }
-            ]
-        };
-    }
+
 }
 
 // Create global quiz manager instance

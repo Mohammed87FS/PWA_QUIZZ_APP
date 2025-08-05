@@ -45,11 +45,7 @@ class AppManager {
             fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         }
 
-        // Load sample quiz
-        const loadSample = document.getElementById('loadSample');
-        if (loadSample) {
-            loadSample.addEventListener('click', () => this.loadSampleQuiz());
-        }
+
 
         // Start quiz
         const startQuiz = document.getElementById('startQuiz');
@@ -314,11 +310,7 @@ class AppManager {
         }
     }
 
-    // Load sample quiz
-    loadSampleQuiz() {
-        const sampleData = window.quizManager.getSampleQuizData();
-        window.quizManager.startQuiz(sampleData, 'Beispiel-Quiz');
-    }
+
 
     // Check if there's a quiz to resume
     checkResumeQuiz() {
