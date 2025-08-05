@@ -11,13 +11,10 @@ class AppManager {
         try {
             console.log('Initializing Quiz Master PWA...');
             
-            await window.storageManager.init();
             window.quizManager.init();
-            
             this.setupEventListeners();
             this.loadSettings();
-            await this.loadStoredFiles();
-            this.checkResumeQuiz();
+            this.updateQuizInfo();
             
             console.log('Quiz Master PWA initialized successfully');
         } catch (error) {
@@ -39,21 +36,17 @@ class AppManager {
             closeSettings.addEventListener('click', () => this.closeSettings());
         }
 
-        // File upload
+        // File input
         const fileInput = document.getElementById('fileInput');
         if (fileInput) {
             fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         }
-
-
 
         // Start quiz
         const startQuiz = document.getElementById('startQuiz');
         if (startQuiz) {
             startQuiz.addEventListener('click', () => this.startQuiz());
         }
-
-
 
         // Settings checkboxes
         const settingsInputs = document.querySelectorAll('#settingsModal input[type="checkbox"]');
@@ -92,7 +85,7 @@ class AppManager {
             const text = await this.readFileAsText(file);
             const data = JSON.parse(text);
             
-            const validation = window.storageManager.validateQuizData(data);
+            const validation = this.validateQuizData(data);
             
             if (!validation.valid) {
                 alert(`JSON-Validierungsfehler: ${validation.errors[0]}`);
@@ -114,15 +107,52 @@ class AppManager {
     readFileAsText(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onload = (e) => resolve(e.target.result);
+            reader.onload = () => resolve(reader.result);
             reader.onerror = () => reject(new Error('Fehler beim Lesen der Datei'));
             reader.readAsText(file);
         });
     }
 
-    
-
-
+    // Simple JSON validation
+    validateQuizData(data) {
+        const errors = [];
+        
+        if (!data || typeof data !== 'object') {
+            errors.push('Invalid JSON structure');
+            return { valid: false, errors };
+        }
+        
+        if (!data.questions || !Array.isArray(data.questions)) {
+            errors.push('Questions array is required');
+            return { valid: false, errors };
+        }
+        
+        if (data.questions.length === 0) {
+            errors.push('At least one question is required');
+            return { valid: false, errors };
+        }
+        
+        // Validate each question
+        for (let i = 0; i < data.questions.length; i++) {
+            const q = data.questions[i];
+            if (!q.question || typeof q.question !== 'string') {
+                errors.push(`Question ${i + 1}: Missing question text`);
+            }
+            if (!q.options || !Array.isArray(q.options) || q.options.length < 2) {
+                errors.push(`Question ${i + 1}: At least 2 options required`);
+            }
+            if (typeof q.correct_answer !== 'number' || q.correct_answer < 0 || q.correct_answer >= q.options.length) {
+                errors.push(`Question ${i + 1}: Invalid correct_answer index`);
+            }
+        }
+        
+        return {
+            valid: errors.length === 0,
+            errors,
+            questionCount: data.questions.length,
+            categories: [...new Set(data.questions.map(q => q.category).filter(Boolean))].length
+        };
+    }
 
     // Update quiz info
     updateQuizInfo() {
@@ -153,8 +183,6 @@ class AppManager {
         }
     }
 
-
-
     // Start quiz
     startQuiz() {
         if (!this.currentQuizData) {
@@ -164,10 +192,6 @@ class AppManager {
 
         window.quizManager.startQuiz(this.currentQuizData, 'Quiz');
     }
-
-
-
-
 
     // Check if there's a quiz to resume
     checkResumeQuiz() {
@@ -193,28 +217,41 @@ class AppManager {
         }
     }
 
+    // Load user settings (simplified)
     loadSettings() {
-        const settings = window.storageManager.loadSettings();
-        
-        const inputs = {
-            'showExplanations': settings.showExplanations,
-            'randomizeQuestions': settings.randomizeQuestions,
-            'randomizeOptions': settings.randomizeOptions,
-            'darkMode': settings.darkMode
-        };
+        try {
+            const settings = JSON.parse(sessionStorage.getItem('quizSettings') || '{}');
+            
+            // Set default values
+            const defaults = {
+                showExplanations: true,
+                randomizeQuestions: false,
+                randomizeOptions: false,
+                darkMode: false
+            };
+            
+            const finalSettings = { ...defaults, ...settings };
+            
+            // Apply to UI
+            Object.entries(finalSettings).forEach(([id, value]) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.checked = value;
+                }
+            });
 
-        Object.entries(inputs).forEach(([id, value]) => {
-            const input = document.getElementById(id);
-            if (input) {
-                input.checked = value;
+            // Apply dark mode
+            if (finalSettings.darkMode) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
             }
-        });
-
-        if (settings.darkMode) {
-            document.documentElement.setAttribute('data-theme', 'dark');
+        } catch (error) {
+            console.log('No previous settings found');
         }
     }
 
+    // Save settings (simplified)
     saveSettings() {
         const settings = {
             showExplanations: document.getElementById('showExplanations')?.checked || true,
@@ -223,32 +260,28 @@ class AppManager {
             darkMode: document.getElementById('darkMode')?.checked || false
         };
 
-        window.storageManager.saveSettings(settings);
-        window.quizManager.loadSettings();
-
+        // Apply dark mode immediately
         if (settings.darkMode) {
             document.documentElement.setAttribute('data-theme', 'dark');
         } else {
             document.documentElement.removeAttribute('data-theme');
         }
+        
+        // Store in sessionStorage for current session only
+        sessionStorage.setItem('quizSettings', JSON.stringify(settings));
     }
 
-    // Clear all data
-        async clearAllData() {
-        if (!confirm('Möchtest du wirklich alle Daten löschen? Diese Aktion kann nicht rückgängig gemacht werden.')) {
+    // Clear current data
+    clearAllData() {
+        if (!confirm('Möchtest du das aktuelle Quiz wirklich löschen?')) {
             return;
         }
 
-        try {
-            await window.storageManager.clearAllQuizData();
-            this.currentQuizData = null;
-            this.updateQuizInfo();
-            window.quizManager.hideQuizInterface();
-            console.log('All data cleared');
-        } catch (error) {
-            console.error('Error clearing data:', error);
-            alert('Fehler beim Löschen der Daten.');
-        }
+        this.currentQuizData = null;
+        this.updateQuizInfo();
+        window.quizManager.hideQuizInterface();
+        sessionStorage.removeItem('quizSettings');
+        console.log('Current quiz cleared');
     }
 }
 
