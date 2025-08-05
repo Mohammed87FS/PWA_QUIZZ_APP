@@ -1,5 +1,5 @@
 // Service Worker for Quiz Master PWA
-const CACHE_NAME = 'quiz-master-v5-simplified';
+const CACHE_NAME = 'quiz-master-v6-with-preloaded-quizzes';
 const OFFLINE_URL = 'offline.html';
 
 // Files to cache for offline functionality
@@ -13,7 +13,11 @@ const urlsToCache = [
   './manifest.json',
   './icon/icon-72x72.png',
   './icon/icon-192x192.svg',
-  './icon/icon-512x512.svg'
+  './icon/icon-512x512.svg',
+  './json_dbs/demokratie.json',
+  './json_dbs/geschichte.json',
+  './json_dbs/elektronik_quiz.json',
+  './offline.html'
 ];
 
 // Install event - cache resources
@@ -58,6 +62,11 @@ self.addEventListener('activate', (event) => {
 
 // Fetch event - serve cached content when offline
 self.addEventListener('fetch', (event) => {
+  // Skip non-HTTP(S) requests (chrome-extension, etc.)
+  if (!event.request.url.startsWith('http')) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
@@ -75,13 +84,19 @@ self.addEventListener('fetch', (event) => {
             return response;
           }
           
-          // Clone the response because it's a stream
-          const responseToCache = response.clone();
-          
-          caches.open(CACHE_NAME)
-            .then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
+          // Only cache HTTP/HTTPS requests from the same origin
+          if (event.request.url.startsWith(self.location.origin)) {
+            // Clone the response because it's a stream
+            const responseToCache = response.clone();
+            
+            caches.open(CACHE_NAME)
+              .then((cache) => {
+                cache.put(event.request, responseToCache);
+              })
+              .catch((error) => {
+                console.warn('Service Worker: Error caching response:', error);
+              });
+          }
             
           return response;
         }).catch(() => {
