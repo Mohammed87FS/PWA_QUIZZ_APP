@@ -100,6 +100,12 @@ class AppManager {
         if (clearData) {
             clearData.addEventListener('click', () => this.clearAllData());
         }
+
+        // Load Quiz button
+        const loadQuizBtn = document.getElementById('loadQuizBtn');
+        if (loadQuizBtn) {
+            loadQuizBtn.addEventListener('click', () => this.loadRandomQuiz());
+        }
     }
 
     // Handle file selection
@@ -148,6 +154,42 @@ class AppManager {
             console.error('Error processing file:', error);
             alert('Fehler beim Verarbeiten der Datei. Überprüfe das JSON-Format.');
         }
+    }
+
+    // Load a random quiz from available options
+    async loadRandomQuiz() {
+        console.log('Loading random quiz...');
+        
+        // If currently in a quiz, ask for confirmation to switch
+        if (window.quizManager && window.quizManager.isQuizActive) {
+            const confirmSwitch = confirm('Möchtest du das aktuelle Quiz beenden und ein neues starten?');
+            if (!confirmSwitch) {
+                return;
+            }
+            // Stop current quiz
+            window.quizManager.forceEndQuiz();
+        }
+        
+        // First, try to load from saved quizzes
+        try {
+            const savedQuizzes = await window.storageManager.getStoredQuizFiles();
+            if (savedQuizzes.length > 0) {
+                // Randomly select from saved quizzes
+                const randomIndex = Math.floor(Math.random() * savedQuizzes.length);
+                const selectedQuiz = savedQuizzes[randomIndex];
+                await this.selectQuiz(selectedQuiz.id);
+                return;
+            }
+        } catch (error) {
+            console.log('No saved quizzes found, using predefined quizzes');
+        }
+        
+        // If no saved quizzes, use predefined ones
+        const availableQuizzes = ['demokratie', 'geschichte', 'elektronik_quiz'];
+        const randomIndex = Math.floor(Math.random() * availableQuizzes.length);
+        const selectedQuizName = availableQuizzes[randomIndex];
+        
+        await this.loadQuickQuiz(selectedQuizName);
     }
 
     // Load a quick quiz from json_dbs directory
