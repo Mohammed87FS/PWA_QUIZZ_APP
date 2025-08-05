@@ -2,8 +2,8 @@
 
 class AppManager {
     constructor() {
-        this.currentFiles = [];
         this.settingsOpen = false;
+        this.currentQuizData = null;
     }
 
     // Initialize the application
@@ -53,17 +53,7 @@ class AppManager {
             startQuiz.addEventListener('click', () => this.startQuiz());
         }
 
-        // JSON preview actions
-        const saveJson = document.getElementById('saveJson');
-        const discardJson = document.getElementById('discardJson');
-        
-        if (saveJson) {
-            saveJson.addEventListener('click', () => this.saveCurrentJson());
-        }
-        
-        if (discardJson) {
-            discardJson.addEventListener('click', () => this.discardCurrentJson());
-        }
+
 
         // Settings checkboxes
         const settingsInputs = document.querySelectorAll('#settingsModal input[type="checkbox"]');
@@ -109,7 +99,11 @@ class AppManager {
                 return;
             }
 
-            this.showJsonPreview(file.name, data, validation);
+            // Set current quiz data and update info
+            this.currentQuizData = data;
+            this.updateQuizInfo();
+            
+            alert(`Quiz erfolgreich geladen: ${data.questions.length} Fragen`);
         } catch (error) {
             console.error('Error processing file:', error);
             alert('Fehler beim Verarbeiten der Datei. Überprüfe das JSON-Format.');
@@ -126,70 +120,9 @@ class AppManager {
         });
     }
 
-    // Show JSON preview
-    showJsonPreview(fileName, data, validation) {
-        const preview = document.getElementById('jsonPreview');
-        const questionCount = document.getElementById('previewQuestionCount');
-        const categories = document.getElementById('previewCategories');
+    
 
-        if (preview) {
-            preview.classList.remove('hidden');
-            preview.dataset.fileName = fileName;
-            preview.dataset.jsonData = JSON.stringify(data);
-        }
 
-        if (questionCount) {
-            questionCount.textContent = `${validation.questionCount} Fragen`;
-        }
-
-        if (categories) {
-            categories.textContent = `${validation.categories} Kategorien`;
-        }
-    }
-
-    // Save current JSON
-    async saveCurrentJson() {
-        const preview = document.getElementById('jsonPreview');
-        if (!preview) return;
-
-        const fileName = preview.dataset.fileName;
-        const jsonData = JSON.parse(preview.dataset.jsonData);
-
-        try {
-            await window.storageManager.saveQuizData(fileName, jsonData);
-            console.log('Quiz data saved successfully');
-            this.discardCurrentJson();
-            await this.loadStoredFiles();
-        } catch (error) {
-            console.error('Error saving quiz data:', error);
-            alert('Fehler beim Speichern der Daten.');
-        }
-    }
-
-    // Discard current JSON preview
-    discardCurrentJson() {
-        const preview = document.getElementById('jsonPreview');
-        const fileInput = document.getElementById('fileInput');
-        
-        if (preview) {
-            preview.classList.add('hidden');
-        }
-        
-        if (fileInput) {
-            fileInput.value = '';
-        }
-    }
-
-    // Load stored files
-    async loadStoredFiles() {
-        try {
-            this.currentFiles = await window.storageManager.getStoredQuizFiles();
-            this.updateQuizInfo();
-            this.updateFilesDisplay();
-        } catch (error) {
-            console.error('Error loading stored files:', error);
-        }
-    }
 
     // Update quiz info
     updateQuizInfo() {
@@ -198,21 +131,21 @@ class AppManager {
         const questionCount = document.getElementById('questionCount');
         const categoryCount = document.getElementById('categoryCount');
 
-        const hasFiles = this.currentFiles.length > 0;
+        const hasData = !!this.currentQuizData;
         
         if (startBtn) {
-            startBtn.disabled = !hasFiles;
+            startBtn.disabled = !hasData;
         }
 
         if (stats) {
-            stats.classList.toggle('hidden', !hasFiles);
+            stats.classList.toggle('hidden', !hasData);
         }
 
-        if (hasFiles) {
-            const totalQuestions = this.currentFiles.reduce((sum, file) => sum + file.questionCount, 0);
+        if (hasData && this.currentQuizData.questions) {
+            const totalQuestions = this.currentQuizData.questions.length;
             const allCategories = new Set();
-            this.currentFiles.forEach(file => {
-                file.categories.forEach(cat => allCategories.add(cat));
+            this.currentQuizData.questions.forEach(q => {
+                if (q.category) allCategories.add(q.category);
             });
 
             if (questionCount) questionCount.textContent = totalQuestions;
@@ -220,95 +153,19 @@ class AppManager {
         }
     }
 
-    // Update files display
-    updateFilesDisplay() {
-        const filesSection = document.getElementById('currentFiles');
-        const filesList = document.getElementById('filesList');
 
-        if (!filesList) return;
-
-        if (this.currentFiles.length === 0) {
-            if (filesSection) {
-                filesSection.classList.add('hidden');
-            }
-            return;
-        }
-
-        if (filesSection) {
-            filesSection.classList.remove('hidden');
-        }
-
-        filesList.innerHTML = '';
-
-        this.currentFiles.forEach((file, index) => {
-            const fileItem = document.createElement('div');
-            fileItem.style.cssText = `
-                background: var(--gray-100);
-                padding: 1rem;
-                border-radius: var(--radius);
-                margin-bottom: 0.5rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            `;
-            
-            fileItem.innerHTML = `
-                <div>
-                    <strong>${file.name}</strong><br>
-                    <small>${file.questionCount} Fragen, ${file.categories.length} Kategorien</small>
-                </div>
-                <div style="display: flex; gap: 0.5rem;">
-                    <button onclick="appManager.useQuizFile(${file.id || index})" 
-                            style="background: var(--primary); color: white; border: none; padding: 0.25rem 0.5rem; border-radius: var(--radius); cursor: pointer;">
-                        Verwenden
-                    </button>
-                    <button onclick="appManager.deleteQuizFile(${file.id || index})" 
-                            style="background: var(--danger); color: white; border: none; padding: 0.25rem 0.5rem; border-radius: var(--radius); cursor: pointer;">
-                        Löschen
-                    </button>
-                </div>
-            `;
-            filesList.appendChild(fileItem);
-        });
-    }
 
     // Start quiz
     startQuiz() {
-        if (this.currentFiles.length === 0) {
+        if (!this.currentQuizData) {
             alert('Keine Quiz-Daten verfügbar. Bitte lade zuerst eine JSON-Datei hoch.');
             return;
         }
 
-        this.useQuizFile(this.currentFiles[0].id || 0);
+        window.quizManager.startQuiz(this.currentQuizData, 'Quiz');
     }
 
-    // Use a specific quiz file
-    async useQuizFile(fileId) {
-        try {
-            const quizData = await window.storageManager.getQuizData(fileId);
-            if (quizData) {
-                window.quizManager.startQuiz(quizData, quizData.name);
-            }
-        } catch (error) {
-            console.error('Error loading quiz file:', error);
-            alert('Fehler beim Laden der Quiz-Datei.');
-        }
-    }
 
-    // Delete a quiz file
-    async deleteQuizFile(fileId) {
-        if (!confirm('Möchtest du diese Quiz-Datei wirklich löschen?')) {
-            return;
-        }
-
-        try {
-            await window.storageManager.deleteQuizData(fileId);
-            await this.loadStoredFiles();
-        } catch (error) {
-            console.error('Error deleting quiz file:', error);
-            alert('Fehler beim Löschen der Datei.');
-        }
-    }
 
 
 
@@ -377,15 +234,14 @@ class AppManager {
     }
 
     // Clear all data
-    async clearAllData() {
+        async clearAllData() {
         if (!confirm('Möchtest du wirklich alle Daten löschen? Diese Aktion kann nicht rückgängig gemacht werden.')) {
             return;
         }
 
         try {
             await window.storageManager.clearAllQuizData();
-            this.currentFiles = [];
-            this.updateFilesDisplay();
+            this.currentQuizData = null;
             this.updateQuizInfo();
             window.quizManager.hideQuizInterface();
             console.log('All data cleared');
