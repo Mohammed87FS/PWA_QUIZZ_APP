@@ -1,5 +1,5 @@
 // Service Worker for Quiz Master PWA
-const CACHE_NAME = 'quiz-master-v6-with-preloaded-quizzes';
+const CACHE_NAME = 'quiz-master-v7-' + Date.now(); // Force new cache
 const OFFLINE_URL = 'offline.html';
 
 // Files to cache for offline functionality
