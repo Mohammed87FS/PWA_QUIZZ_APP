@@ -106,6 +106,12 @@ class AppManager {
         if (loadQuizBtn) {
             loadQuizBtn.addEventListener('click', () => this.loadRandomQuiz());
         }
+
+        // Quiz exit button
+        const quizExitBtn = document.getElementById('quizExitBtn');
+        if (quizExitBtn) {
+            quizExitBtn.addEventListener('click', () => this.exitQuiz());
+        }
     }
 
     // Handle file selection
@@ -190,6 +196,20 @@ class AppManager {
         const selectedQuizName = availableQuizzes[randomIndex];
         
         await this.loadQuickQuiz(selectedQuizName);
+    }
+
+    // Exit quiz and return to welcome screen
+    exitQuiz() {
+        if (window.quizManager && window.quizManager.isQuizActive) {
+            const confirmExit = confirm('Möchtest du das Quiz wirklich verlassen? Dein Fortschritt geht verloren.');
+            if (confirmExit) {
+                window.quizManager.forceEndQuiz();
+                console.log('Quiz manually exited by user');
+            }
+        } else {
+            // If no active quiz, just go back to welcome screen
+            window.quizManager.hideQuizInterface();
+        }
     }
 
     // Load a quick quiz from json_dbs directory
