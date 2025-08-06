@@ -490,6 +490,10 @@ body {
 /* Quiz Actions */
 .quiz-actions {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
 }
 
 .submit-btn, .next-btn {
@@ -502,6 +506,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
+  min-width: 200px;
 }
 
 .submit-btn:hover:not(:disabled), .next-btn:hover {
@@ -513,6 +518,14 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+}
+
+.next-btn {
+  background: var(--success);
+}
+
+.next-btn:hover {
+  background: #059669;
 }
 
 /* Explanation Overlay */

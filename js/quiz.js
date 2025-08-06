@@ -151,6 +151,7 @@ class QuizManager {
         if (submitBtn) {
             submitBtn.disabled = true;
             submitBtn.textContent = 'Antwort bestätigen';
+            submitBtn.classList.remove('hidden');
         }
 
         // Create options
@@ -183,7 +184,7 @@ class QuizManager {
         
         const nextBtn = document.getElementById('nextQuestion');
         if (nextBtn) {
-            nextBtn.style.display = 'none';
+            nextBtn.classList.add('hidden');
         }
 
         console.log('Displaying question:', this.currentQuestionIndex + 1);
@@ -246,13 +247,13 @@ class QuizManager {
         // Show correct/incorrect answers
         this.highlightAnswers(question.correct_answer);
 
+        // Always show next button after answering
+        this.showNextButton();
+        
         // Show explanation if enabled and available
         if (this.settings.showExplanations && question.explanation) {
             this.showExplanation(question.explanation, isCorrect);
         }
-        
-        // Show next button for manual progression
-        this.showNextButton();
 
         // Save progress
         this.saveQuizState();
@@ -303,13 +304,20 @@ class QuizManager {
     // Show next question button
     showNextButton() {
         const nextBtn = document.getElementById('nextQuestion');
+        const submitBtn = document.getElementById('submitAnswer');
+        
         if (nextBtn) {
             if (this.currentQuestionIndex < this.questions.length - 1) {
                 nextBtn.textContent = 'Nächste Frage';
             } else {
                 nextBtn.textContent = 'Quiz beenden';
             }
-            nextBtn.style.display = 'block';
+            nextBtn.classList.remove('hidden');
+        }
+        
+        // Hide submit button when next button is shown
+        if (submitBtn) {
+            submitBtn.classList.add('hidden');
         }
     }
 
