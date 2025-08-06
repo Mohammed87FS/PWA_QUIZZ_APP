@@ -61,7 +61,7 @@ body {
 .burger-menu {
   position: fixed;
   top: 20px;
-  left: 20px;
+  right: 20px;
   z-index: 1000;
 }
 
@@ -93,18 +93,18 @@ body {
 .side-menu {
   position: fixed;
   top: 0;
-  left: -350px;
+  right: -350px;
   width: 350px;
   height: 100vh;
   background: var(--white);
   color: var(--gray-900);
   z-index: 2000;
-  transition: left 0.3s ease;
+  transition: right 0.3s ease;
   overflow-y: auto;
 }
 
 .side-menu.open {
-  left: 0;
+  right: 0;
 }
 
 .menu-overlay {
@@ -358,6 +358,7 @@ body {
   font-weight: bold;
   transition: var(--transition);
   flex-shrink: 0;
+  order: -1; /* Move exit button to the left */
 }
 
 .quiz-exit-btn:hover {
@@ -649,7 +650,7 @@ body {
 @media (max-width: 768px) {
   .side-menu {
     width: 300px;
-    left: -300px;
+    right: -300px;
   }
   
   .welcome-content h1 {
@@ -700,7 +701,7 @@ body {
 @media (max-width: 480px) {
   .burger-menu {
     top: 15px;
-    left: 15px;
+    right: 15px;
   }
   
   .quiz-progress {
