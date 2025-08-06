@@ -61,7 +61,7 @@ body {
 .burger-menu {
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 400px;
   z-index: 1000;
 }
 
@@ -398,15 +398,47 @@ body {
 .quiz-content {
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 2rem;
   position: relative;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .question-container {
   max-width: 800px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 120px); /* Account for progress bar */
+}
+
+/* Question Content Area */
+.question-content {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  padding-right: 0.5rem; /* Space for scrollbar */
+}
+
+/* Custom Scrollbar for Question Content */
+.question-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.question-content::-webkit-scrollbar-track {
+  background: var(--gray-800);
+  border-radius: 3px;
+}
+
+.question-content::-webkit-scrollbar-thumb {
+  background: var(--gray-600);
+  border-radius: 3px;
+}
+
+.question-content::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
 }
 
 .question-container h2 {
@@ -422,7 +454,6 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  margin-bottom: 2rem;
 }
 
 .option {
@@ -496,6 +527,10 @@ body {
   flex-direction: column;
   gap: 1rem;
   align-items: center;
+  flex-shrink: 0; /* Prevent shrinking */
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray-700);
+  background: var(--gray-900);
 }
 
 .submit-btn, .next-btn {
@@ -670,9 +705,21 @@ body {
     padding: 1rem;
   }
   
+  .question-container {
+    max-height: calc(100vh - 100px); /* Account for progress bar */
+  }
+  
+  .question-content {
+    padding-right: 0.25rem;
+  }
+  
   .option {
     padding: 1rem;
     min-height: 60px;
+  }
+  
+  .quiz-actions {
+    padding-top: 0.75rem;
   }
   
   .option-letter {
@@ -719,6 +766,14 @@ body {
     padding: 0.5rem;
   }
   
+  .question-container {
+    max-height: calc(100vh - 80px); /* Smaller progress bar on mobile */
+  }
+  
+  .question-content {
+    padding-right: 0.25rem; /* Less padding on mobile */
+  }
+  
   .question-container h2 {
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
@@ -726,5 +781,9 @@ body {
   
   .option {
     padding: 0.75rem;
+  }
+  
+  .quiz-actions {
+    padding-top: 0.75rem;
   }
 }
