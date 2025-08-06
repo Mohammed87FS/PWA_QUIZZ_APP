@@ -62,10 +62,15 @@ class QuizManager {
             submitBtn.addEventListener('click', () => this.submitAnswer());
         }
 
-        // Next question button
+        // Next question buttons (both main and overlay)
         const nextBtn = document.getElementById('nextQuestion');
+        const nextBtnOverlay = document.getElementById('nextQuestionOverlay');
+        
         if (nextBtn) {
             nextBtn.addEventListener('click', () => this.nextQuestion());
+        }
+        if (nextBtnOverlay) {
+            nextBtnOverlay.addEventListener('click', () => this.nextQuestion());
         }
 
         // Restart quiz button
@@ -289,6 +294,7 @@ class QuizManager {
         const explanationCard = document.getElementById('explanationCard');
         const answerResult = document.getElementById('answerResult');
         const explanationText = document.getElementById('explanationText');
+        const nextBtn = document.getElementById('nextQuestion');
 
         if (explanationCard && answerResult && explanationText) {
             explanationCard.classList.remove('hidden');
@@ -298,21 +304,30 @@ class QuizManager {
             answerResult.classList.toggle('incorrect', !isCorrect);
             
             explanationText.textContent = explanation;
+            
+            // Hide the main next button when overlay is shown
+            if (nextBtn) {
+                nextBtn.classList.add('hidden');
+            }
         }
     }
 
     // Show next question button
     showNextButton() {
         const nextBtn = document.getElementById('nextQuestion');
+        const nextBtnOverlay = document.getElementById('nextQuestionOverlay');
         const submitBtn = document.getElementById('submitAnswer');
         
+        const buttonText = this.currentQuestionIndex < this.questions.length - 1 ? 'Nächste Frage' : 'Quiz beenden';
+        
+        // Update both next buttons
         if (nextBtn) {
-            if (this.currentQuestionIndex < this.questions.length - 1) {
-                nextBtn.textContent = 'Nächste Frage';
-            } else {
-                nextBtn.textContent = 'Quiz beenden';
-            }
+            nextBtn.textContent = buttonText;
             nextBtn.classList.remove('hidden');
+        }
+        
+        if (nextBtnOverlay) {
+            nextBtnOverlay.textContent = buttonText;
         }
         
         // Hide submit button when next button is shown
