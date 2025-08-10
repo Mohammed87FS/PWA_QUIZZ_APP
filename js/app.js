@@ -69,6 +69,35 @@ class AppManager {
             fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
         }
 
+        // JSON text input button
+        const jsonTextBtn = document.getElementById('jsonTextBtn');
+        if (jsonTextBtn) {
+            jsonTextBtn.addEventListener('click', () => this.openJsonModal());
+        }
+
+        // JSON modal controls
+        const closeJsonModal = document.getElementById('closeJsonModal');
+        const cancelJsonInput = document.getElementById('cancelJsonInput');
+        const loadJsonText = document.getElementById('loadJsonText');
+        const jsonModalOverlay = document.getElementById('jsonModalOverlay');
+
+        if (closeJsonModal) {
+            closeJsonModal.addEventListener('click', () => this.closeJsonModal());
+        }
+        if (cancelJsonInput) {
+            cancelJsonInput.addEventListener('click', () => this.closeJsonModal());
+        }
+        if (loadJsonText) {
+            loadJsonText.addEventListener('click', () => this.handleJsonTextLoad());
+        }
+        if (jsonModalOverlay) {
+            jsonModalOverlay.addEventListener('click', (e) => {
+                if (e.target === jsonModalOverlay) {
+                    this.closeJsonModal();
+                }
+            });
+        }
+
         // Menu quiz items - use event delegation
         document.addEventListener('click', (e) => {
             // Handle menu quiz item clicks
@@ -159,6 +188,87 @@ class AppManager {
         } catch (error) {
             console.error('Error processing file:', error);
             alert('Fehler beim Verarbeiten der Datei. Überprüfe das JSON-Format.');
+        }
+    }
+
+    // Open JSON text input modal
+    openJsonModal() {
+        const modal = document.getElementById('jsonModalOverlay');
+        if (modal) {
+            modal.classList.add('open');
+            // Focus on the textarea after modal opens
+            setTimeout(() => {
+                const textarea = document.getElementById('jsonTextInput');
+                if (textarea) {
+                    textarea.focus();
+                }
+            }, 100);
+        }
+        this.closeMenu(); // Close the side menu
+    }
+
+    // Close JSON text input modal
+    closeJsonModal() {
+        const modal = document.getElementById('jsonModalOverlay');
+        if (modal) {
+            modal.classList.remove('open');
+        }
+        // Clear the textarea when closing
+        const textarea = document.getElementById('jsonTextInput');
+        if (textarea) {
+            textarea.value = '';
+        }
+    }
+
+    // Handle JSON text loading
+    async handleJsonTextLoad() {
+        const textarea = document.getElementById('jsonTextInput');
+        if (!textarea) return;
+
+        const jsonText = textarea.value.trim();
+        if (!jsonText) {
+            alert('Bitte gebe zuerst einen JSON-Text ein.');
+            return;
+        }
+
+        try {
+            const data = JSON.parse(jsonText);
+            
+            const validation = this.validateQuizData(data);
+            
+            if (!validation.valid) {
+                alert(`JSON-Validierungsfehler: ${validation.errors[0]}`);
+                return;
+            }
+
+            // If currently in a quiz, ask for confirmation to switch
+            if (window.quizManager.isQuizActive) {
+                const confirmSwitch = confirm('Möchtest du das aktuelle Quiz beenden und das neue starten?');
+                if (!confirmSwitch) {
+                    return;
+                }
+                // Stop current quiz
+                window.quizManager.forceEndQuiz();
+            }
+
+            // Set current quiz data (temporary, no persistent storage)
+            const quizName = 'Temporäres Quiz';
+            this.currentQuizData = { ...data, name: quizName, isTemporary: true };
+            
+            // Auto-start the JSON text quiz
+            window.quizManager.startQuiz(this.currentQuizData, quizName);
+            
+            // Close the modal
+            this.closeJsonModal();
+            
+            alert(`Quiz erfolgreich geladen: ${data.questions.length} Fragen (Temporär)`);
+        } catch (error) {
+            console.error('Error processing JSON text:', error);
+            if (error instanceof SyntaxError) {
+                alert('Ungültiges JSON-Format. Bitte überprüfe die Syntax.');
+            } else {
+                alert('Fehler beim Verarbeiten des JSON-Texts. Überprüfe das Format.');
+            }
         }
     }
 
@@ -556,6 +666,11 @@ class AppManager {
             console.error('Error clearing data:', error);
             alert('Fehler beim Löschen der Daten.');
         }
+    }
+
+    // Check if current quiz is temporary
+    isCurrentQuizTemporary() {
+        return this.currentQuizData && this.currentQuizData.isTemporary === true;
     }
 }
 

@@ -68,6 +68,10 @@
                             <span class="menu-title">JSON-Datei hochladen</span>
                             <input type="file" id="fileInput" accept=".json" hidden>
                         </label>
+                        <button id="jsonTextBtn" class="menu-quiz-item upload-item">
+                            <span class="menu-icon">📝</span>
+                            <span class="menu-title">JSON-Text eingeben</span>
+                        </button>
                     </div>
                 </div>
                 
@@ -93,6 +97,36 @@
 
         <!-- Menu Overlay -->
         <div class="menu-overlay" id="menuOverlay"></div>
+
+        <!-- JSON Text Input Modal -->
+        <div class="json-modal-overlay" id="jsonModalOverlay">
+            <div class="json-modal">
+                <div class="json-modal-header">
+                    <h2>JSON-Text eingeben</h2>
+                    <button class="close-json-modal" id="closeJsonModal">×</button>
+                </div>
+                <div class="json-modal-content">
+                    <p>Füge deinen Quiz-JSON-Text hier ein. Dieser wird nur temporär gespeichert und geht beim Schließen der App verloren.</p>
+                    <textarea id="jsonTextInput" placeholder='Beispiel:
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "Was ist die Hauptstadt von Deutschland?",
+      "category": "Geographie",
+      "options": ["Berlin", "München", "Hamburg", "Köln"],
+      "correct_answer": 0,
+      "explanation": "Berlin ist seit 1990 die Hauptstadt von Deutschland."
+    }
+  ]
+}'></textarea>
+                    <div class="json-modal-actions">
+                        <button id="cancelJsonInput" class="action-btn secondary">Abbrechen</button>
+                        <button id="loadJsonText" class="action-btn primary">Quiz laden</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Welcome Screen -->
         <div class="welcome-screen" id="welcomeScreen">
