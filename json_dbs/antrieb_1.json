@@ -1,0 +1,979 @@
+{  
+"questions": [  
+{  
+"id": 1,  
+"category": "Organisatorisches",  
+"question": "Welche Aussage zur Leistungsüberprüfung trifft nach dem Text zu?",  
+"options": [  
+"Die Prüfung findet am 13.11.2025 mündlich statt.",  
+"Die Prüfung ist schriftlich und am 13.11.2025 angesetzt.",  
+"Die Prüfung ist eine Projektarbeit mit Abgabe am 13.11.2025.",  
+"Die Prüfung ist ein Laborpraktikum ohne festen Termin."  
+],  
+"correct_answer": 2,  
+"explanation": "Explizit angegeben: Haupttermin schriftlich am 13.11.2025. Andere Formate/Termine stehen nicht im Text."  
+},  
+{  
+"id": 2,  
+"category": "Lehrziele",  
+"question": "Welcher Aspekt gehört explizit zu den Lehrzielen und geht über reines Faktenwissen hinaus?",  
+"options": [  
+"Auswendiglernen von Motortypen und Normnummern.",  
+"Analytisches, fachübergreifendes Denken in technischen Zusammenhängen.",  
+"Nur die mathematische Herleitung des Raumzeigers ohne Anwendung.",  
+"Einzelne Bauteilbezeichnungen in Zeichnungen identifizieren."  
+],  
+"correct_answer": 2,  
+"explanation": "Neben Fachwissen wird das analytische, fachübergreifende Denken als Ziel hervorgehoben."  
+},  
+{  
+"id": 3,  
+"category": "Inhaltsüberblick",  
+"question": "Welche Kombination repräsentiert einen thematischen Schwerpunkt der Veranstaltung korrekt?",  
+"options": [  
+"Mechanische Getriebeauslegung, Hydraulikpumpen, Brennstoffzellen",  
+"Gleichstrommaschine, Raumzeigertheorie, Regelung von Drehfeldmaschinen",  
+"Leistungselektronik in der Photovoltaik, Netzintegration von Windparks",  
+"Hochfrequenztechnik, Antennendesign, EMV-Prüfungen"  
+],  
+"correct_answer": 2,  
+"explanation": "DC-Maschine, Raumzeiger und Regelung von Drehfeldmaschinen sind explizite Inhalte. Die anderen Optionen sind fachfremd."  
+},  
+{  
+"id": 4,  
+"category": "Aufgaben eines Antriebssystems",  
+"question": "Welche Formulierung trifft den Kernauftrag eines elektrischen Antriebssystems am besten?",  
+"options": [  
+"Beliebige Bewegungsvorgänge erzeugen – unabhängig von Genauigkeit.",  
+"Elektromechanische Energiewandlung mit maximalem Wirkungsgrad und Realisierung der Bewegung gemäß Sollwerten bei Einhaltung statischer und dynamischer Genauigkeitsanforderungen.",  
+"Elektrische Energie puffern und bei Bedarf ins Netz zurückspeisen.",  
+"Temperaturkonstanz der Maschine sicherstellen, auch wenn die Bewegung verfehlt wird."  
+],  
+"correct_answer": 2,  
+"explanation": "Der Text betont Wirkungsgrad, Sollwerttreue und Genauigkeit (statisch/dynamisch)."  
+},  
+{  
+"id": 5,  
+"category": "Anwendungsfelder",  
+"question": "Welche Einordnung ist korrekt im Sinne der im Text genannten Bewegungsvorgänge?",  
+"options": [  
+"Positionierung: Ventile, Schieber; Stellvorgänge: Roboter",  
+"Bearbeitung: Pumpen; Transport: Fräsen",  
+"Positionierung: Werkzeugmaschinen/Roboter; Stellvorgänge: Ventile/Schieber",  
+"Transport: Drehen/Fräsen; Bearbeitung: e-Mobilität"  
+],  
+"correct_answer": 3,  
+"explanation": "Positionierung → Roboter/Werkzeugmaschinen; Stellvorgänge → Ventile/Schieber; Transport → e-Mobilität, Förderanlagen etc."  
+},  
+{  
+"id": 6,  
+"category": "Skalierung",  
+"question": "Welcher Leistungsbereich wird für elektrische Antriebssysteme genannt?",  
+"options": [  
+"Einige Milliwatt bis 100 kW",  
+"Einige Watt bis 10 MW",  
+"10 MW bis 1 GW",  
+"Nur 1–100 kW in Industrieanwendungen"  
+],  
+"correct_answer": 2,  
+"explanation": "Mehrfach betont: einige Watt bis 10 MW."  
+},  
+{  
+"id": 7,  
+"category": "Klassifizierung von Motoren",  
+"question": "Welche Zuordnung ist korrekt im Sinne der Klassifizierung nach Rotor bzw. Bürsten?",  
+"options": [  
+"Universalmotor → bürstenlos",  
+"Elektrisch erregte Synchronmaschine (FSM) → bürstenbehaftet (Schleifringe)",  
+"Doppelt gespeiste Asynchronmaschine → bürstenlos",  
+"Permanenterregte Synchronmaschine → bürstenbehaftet"  
+],  
+"correct_answer": 2,  
+"explanation": "FSM nutzt Schleifringe zur Erregung → bürstenbehaftet. Universalmotor ist Kollektormaschine (bürstenbehaftet); PMSM ist bürstenlos."  
+},  
+{  
+"id": 8,  
+"category": "Klassifizierung von Motoren",  
+"question": "Welche Aussage zu PMSM/IPMSM ist gemäß Text korrekt?",  
+"options": [  
+"PMSM/IPMSM besitzen stets Oberflächenmagnete und sind daher identisch.",  
+"IPMSM hat eingebettete Permanentmagnete; PMSM hat Magnete i. d. R. an der Oberfläche.",  
+"IPMSM und PMSM sind bürstenbehaftete Synchronmaschinen.",  
+"IPMSM steht für Induction Permanent Magnet Synchronous Machine."  
+],  
+"correct_answer": 2,  
+"explanation": "IPMSM = Interior PMSM (eingebettete Magnete), PMSM oft Oberflächenmagnete; beide bürstenlos."  
+},  
+{  
+"id": 9,  
+"category": "Bedeutung & Trends",  
+"question": "Welche Entwicklung wird im Text als Trend beschrieben?",  
+"options": [  
+"Geregelte Antriebe nehmen ab, binäre Antriebe dominieren langfristig.",  
+"Geregelte Antriebe nehmen absolut jährlich um ca. 5 % zu.",  
+"Die DC-Antriebe verdrängen umrichtergespeiste ASM.",  
+"Die Anzahl der Antriebe mit mechanischer Regelung steigt stark."  
+],  
+"correct_answer": 2,  
+"explanation": "Es wird ein jährlicher absoluter Zuwachs von ≈ 5 % bei geregelten Antrieben genannt."  
+},  
+{  
+"id": 10,  
+"category": "Bedeutung & Trends",  
+"question": "Welche Aussage beschreibt die technologische Substitution korrekt?",  
+"options": [  
+"Der klassische Gleichstromantrieb verdrängt die umrichtergespeiste ASM.",  
+"Die umrichtergespeiste Asynchronmaschine verdrängt den Gleichstromantrieb.",  
+"Permanenterregte Synchronmaschinen werden vollständig durch Universalmotoren ersetzt.",  
+"Bürstenbehaftete Maschinen verdrängen bürstenlose Maschinen."  
+],  
+"correct_answer": 2,  
+"explanation": "Der Text nennt explizit die Verdrängung des DC-Antriebs durch umrichtergespeiste ASM."  
+},  
+{  
+"id": 11,  
+"category": "Systemstruktur",  
+"question": "Welche Sensorik ist laut Struktur eines Antriebssystems erforderlich und wofür wird sie genutzt?",  
+"options": [  
+"Ein Stromsensor und ein Temperatursensor; Drehzahlregelung über Temperaturmodell.",  
+"Zwei Stromsensoren sowie Drehzahl- und Lagemessung; Lage für feldorientierte Regelung, Drehzahl für Drehzahlregelung.",  
+"Drei Stromsensoren und ein Drucksensor; Lage wird aus Druck abgeleitet.",  
+"Nur Lagegeber; Drehzahl wird nicht benötigt."  
+],  
+"correct_answer": 2,  
+"explanation": "Es werden zwei Stromsensoren, Drehzahl- und Lagesensor erwähnt; Lage ist für feldorientierte Regelung essenziell."  
+},  
+{  
+"id": 12,  
+"category": "Systemstruktur",  
+"question": "Welche Kaskadenstruktur für Regelkreise wird im Text beschrieben?",  
+"options": [  
+"Innen Position → Mitte Drehzahl → Außen Drehmoment",  
+"Innen Drehzahl → Mitte Position → Außen Drehmoment",  
+"Innen Drehmoment → Mitte Drehzahl → Außen Position",  
+"Ein einziger kombinierter Regler ohne Kaskadierung"  
+],  
+"correct_answer": 3,  
+"explanation": "Die Regelung ist kaskadiert: innerster Drehmoment-Regelkreis, darüber Drehzahl, äußerster Positionsregelkreis."  
+},  
+{  
+"id": 13,  
+"category": "Sensorlose Regelung",  
+"question": "Welches Ziel verfolgen sensorlose Regelungsverfahren laut Text?",  
+"options": [  
+"Erhöhung der Anzahl der Stromsensoren auf drei.",  
+"Wegfall des Lagegebers durch Schätzung/Beobachtung der Rotorlage.",  
+"Direkte Messung der Drehzahl ohne jegliche Sensorik.",  
+"Reduktion der Umrichter-Schaltfrequenz auf null."  
+],  
+"correct_answer": 2,  
+"explanation": "Forschung zielt auf Regelungen ohne dedizierten Lagegeber ab."  
+},  
+{  
+"id": 14,  
+"category": "PMSM/IPMSM",  
+"question": "Welche Kombination aus Vorteil und Nachteil trifft auf PMSM/IPMSM zu?",  
+"options": [  
+"Vorteil: höchste Wirkungsgrade nur im oberen Drehzahlbereich; Nachteil: Fehlerfall unkritisch",  
+"Vorteil: Baugröße ~15 % kleiner als ASM; Nachteil: Fehlerfall kritisch (z. B. Überspannung, Pendelmomente)",  
+"Vorteil: sehr niedrige Kosten; Nachteil: keine Hochdrehzahlfähigkeit",  
+"Vorteil: keine Abhängigkeit von Magnetmaterial; Nachteil: geringe Leistungsdichte"  
+],  
+"correct_answer": 2,  
+"explanation": "Text: kompaktere Baugröße und gute Hochdrehzahlfähigkeit; Fehlerfälle jedoch kritisch; Magnetmaterial (Seltene Erden) kann problematisch sein."  
+},  
+{  
+"id": 15,  
+"category": "Sicherheitsmaßnahmen PMSM/IPMSM",  
+"question": "Welche Maßnahme wird ausdrücklich bei PMSM/IPMSM im Fehlerfall empfohlen?",  
+"options": [  
+"Einsatz langsamer mechanischer Kupplungen zur Dämpfung",  
+"Schnell schaltende Kupplung zur Trennung oder schnelles Öffnen der Anschlussklemmen",  
+"Erhöhung des Magnetisierungsstroms im Stator",  
+"Reduktion der Zwischenkreisspannung durch Lastzuschaltung"  
+],  
+"correct_answer": 2,  
+"explanation": "Empfohlen: schnelle mechanische Trennung oder schnelles Öffnen der Klemmen, um kritische Momente/Spannungen zu vermeiden."  
+},  
+{  
+"id": 16,  
+"category": "FSM",  
+"question": "Welche Aussage zur fremderregten Synchronmaschine (FSM) ist korrekt?",  
+"options": [  
+"Sie benötigt keine Schleifringe und keine Erregereinrichtung.",  
+"Sie nutzt Permanentmagnete und vermeidet dadurch Rotorverluste.",  
+"Sie ist im Fehlerfall unkritischer als PMSM/IPMSM, benötigt aber Schleifringe und eine Erregereinrichtung; Rotorkühlung ist kritisch.",  
+"Sie ist grundsätzlich günstiger als ASM und PMSM zusammen."  
+],  
+"correct_answer": 3,  
+"explanation": "FSM ist elektrisch erregt (Schleifringe/Erreger), Fehlerfall unkritischer, Rotorkühlung/Fliehkräfte sind Herausforderungen."  
+},  
+{  
+"id": 17,  
+"category": "SYRM",  
+"question": "Worin liegt ein charakteristischer Trade-off der Synchron-Reluktanzmaschine (SYRM)?",  
+"options": [  
+"Sehr hohe Leistungsdichte, aber hohe Rotorverluste",  
+"Geringe Rotorverluste, aber niedrigere Leistungsdichte und erhöhte Stator-Kupferverluste durch Magnetisierungsstrom",  
+"Keine Verluste im Stator, dafür hohe Verluste im Rotor",  
+"Hohe Kosten wegen seltener Erden"  
+],  
+"correct_answer": 2,  
+"explanation": "SYRM: geringe Rotorverluste, jedoch geringere Leistungsdichte und mehr Stator-Kupferverluste (Magnetisierungsstrom)."  
+},  
+{  
+"id": 18,  
+"category": "ASM",  
+"question": "Welche Aussage charakterisiert die umrichtergespeiste ASM korrekt?",  
+"options": [  
+"Geringe Überlastfähigkeit, teure Herstellung, kritischer Fehlerfall",  
+"Robust, hohe Überlastfähigkeit, unkritisch im Fehlerfall, kostengünstig",  
+"Nur im unteren Drehzahlbereich effizient",  
+"Benötigt Seltene Erden im Rotor"  
+],  
+"correct_answer": 2,  
+"explanation": "ASM gilt als robust, überlastfähig, fehlerunkritisch, kostengünstig; effizient v. a. im oberen Drehzahlbereich."  
+},  
+{  
+"id": 19,  
+"category": "Energieanteil",  
+"question": "Welche Größenordnung des elektrischen Energieanteils, der in mechanische Energie überführt wird, nennt der Text?",  
+"options": [  
+"Etwa 6 %",  
+"Mehr als 60 %",  
+"Ungefähr 30 %",  
+"Über 95 %"  
+],  
+"correct_answer": 2,  
+"explanation": "Es werden > 60 % genannt."  
+},  
+{  
+"id": 20,  
+"category": "Typenschild – Spannung",  
+"question": "Wie sind zwei Bemessungsspannungen $U_N$ auf dem Typenschild zu interpretieren?",  
+"options": [  
+"Kleinere Spannung für Stern, größere für Dreieck",  
+"Kleinere Spannung für Dreieck, größere für Stern",  
+"Beide Spannungen gelten nur für Sternschaltung",  
+"Beide Spannungen gelten nur für Dreieckschaltung"  
+],  
+"correct_answer": 2,  
+"explanation": "Explizit: kleinere $U_N$ → Dreieck; größere $U_N$ → Stern."  
+},  
+{  
+"id": 21,  
+"category": "Typenschild – Strom",  
+"question": "Wie sind zwei Bemessungsströme $I_N$ zu deuten?",  
+"options": [  
+"Größerer Strom gehört zur Sternschaltung, kleiner zur Dreieckschaltung",  
+"Kleinerer Strom gehört zur Sternschaltung, größer zur Dreieckschaltung",  
+"Beide Ströme gehören zur Sternschaltung",  
+"Beide Ströme gehören zur Dreieckschaltung"  
+],  
+"correct_answer": 2,  
+"explanation": "Der Text sagt: kleinerer $I_N$ → Stern, größerer $I_N$ → Dreieck."  
+},  
+{  
+"id": 22,  
+"category": "Typenschild – Frequenz",  
+"question": "Welche Auswirkung hat der Betrieb eines für 60 Hz ausgelegten Motors am 50 Hz-Netz gemäß Text?",  
+"options": [  
+"Höhere Drehzahl und geringere Stromaufnahme → Unterkühlung",  
+"Geringere Drehzahl und erhöhte Stromaufnahme → Überhitzungsgefahr",  
+"Gleiche Drehzahl bei höherer Spannung → stabiler Betrieb",  
+"Höhere Drehzahl bei gleichem Strom → Überhitzungsgefahr"  
+],  
+"correct_answer": 2,  
+"explanation": "50 Hz statt 60 Hz → synchrone Drehzahl sinkt; $I$ steigt → Überhitzungsgefahr."  
+},  
+{  
+"id": 23,  
+"category": "Typenschild – Leistungsangaben",  
+"question": "Welche Zuordnung ist korrekt?",  
+"options": [  
+"Beim Motor ist $P_N$ die elektrische Abgabeleistung; beim Generator die mechanische.",  
+"Beim Motor ist $P_N$ die mechanische Abgabeleistung; beim Generator die elektrische Abgabeleistung.",  
+"In beiden Fällen ist $P_N$ die Verlustleistung.",  
+"In beiden Fällen bezeichnet $P_N$ die aufgenommene Wirkleistung."  
+],  
+"correct_answer": 2,  
+"explanation": "Motor: mechanische Abgabeleistung; Generator: elektrische Abgabeleistung."  
+},  
+{  
+"id": 24,  
+"category": "Leistungsfaktor",  
+"question": "Wann gilt der Bemessungsleistungsfaktor $\\lambda_N/\\cos\\varphi$ laut Text?",  
+"options": [  
+"Bei Leerlauf und erhöhter Spannung",  
+"Bei Bemessungsstrom und Bemessungsspannung (Nennlastfall)",  
+"Nur bei Überlast",  
+"Nur im Anlauf"  
+],  
+"correct_answer": 2,  
+"explanation": "Der Leistungsfaktor ist für den Fall definiert, dass $I_N$ bei $U_N$ fließt (Nennlast)."  
+},  
+{  
+"id": 25,  
+"category": "Betriebsarten – Grundlagen",  
+"question": "Wann darf für die Temperaturberechnung eine mittlere Ersatzverlustleistung $P_{V,\\mathrm{ers}}$ über eine Periode verwendet werden?",  
+"options": [  
+"Wenn die Periodendauer $T$ der Laständerung groß gegenüber der thermischen Zeitkonstante ist",  
+"Wenn $T$ klein gegenüber der thermischen Zeitkonstante ist (Richtwert: $T\\lesssim 0{,}1\\!\\ldots\\!0{,}2\\,\\tau_{th}$)",  
+"Nur im stationären Dauerbetrieb S1",  
+"Nur wenn keine Anlaufvorgänge auftreten"  
+],  
+"correct_answer": 2,  
+"explanation": "Explizit: $T$ klein gegenüber $\tau_{th}$ → Mittelwertbildung zulässig; Richtwert 10–20 %."  
+},  
+{  
+"id": 26,  
+"category": "Betriebsarten – S1",  
+"question": "Welche Bedingung beschreibt S1 (Dauerbetrieb) korrekt?",  
+"options": [  
+"Die Maschine erreicht nie einen thermischen Endzustand.",  
+"Die Maschine wird so lange belastet, bis sich der thermische Endzustand $\\Theta_e$ einstellt; $\\Theta_e \\le \\Theta_{zul}$.",  
+"Die Maschine darf nur kurzzeitig betrieben werden.",  
+"Es müssen zwingend Anlauf- und Bremsvorgänge enthalten sein."  
+],  
+"correct_answer": 2,  
+"explanation": "S1: Dauerbelastung bis Endübertemperatur, die zulässig sein muss."  
+},  
+{  
+"id": 27,  
+"category": "Betriebsarten – S2",  
+"question": "Welche Ungleichungen charakterisieren S2 (Kurzzeitbetrieb) gemäß Text?",  
+"options": [  
+"$t_B > 3\\,T_{th}$ und $t_P < 3\\,T_{thSt}$",  
+"$t_B < 3\\,T_{th}$ und $t_P > 3\\,T_{thSt}$",
+"$t_B = t_P = 3\\,T_{th}$",
+"Keine Beziehung zu thermischen Zeitkonstanten"
+],  
+"correct_answer": 2,  
+"explanation": "Kurzzeitbetrieb: kurze Betriebszeit, lange Pause → $t_B < 3\\,T_{th}$ und $t_P > 3\\,T_{thSt}$."  
+},  
+{  
+"id": 28,  
+"category": "Betriebsarten – S2",  
+"question": "Welche Aussage zur Verlustleistung in S2 ist korrekt?",  
+"options": [  
+"$P_{V,S2} = P_{V,S1}$",  
+"$P_{V,S2} < P_{V,S1}$ wegen der Pausen",  
+"$P_{V,S2} > P_{V,S1}$, da höhere kurzzeitige Belastung zulässig ist",  
+"Die Verlustleistung ist in S2 nicht definierbar"  
+],  
+"correct_answer": 3,  
+"explanation": "Im Kurzzeitbetrieb darf höher belastet werden → zulässige Verlustleistung größer als in S1."  
+},  
+{  
+"id": 29,  
+"category": "Betriebsarten – S3",  
+"question": "Welche Temperaturgrenzen und Bedingungen gelten in S3 (Aussetzbetrieb ohne nennenswerten Einfluss von Anlauf/Bremsung)?",  
+"options": [  
+"$\\vartheta$ erreicht stets $\\Theta_e$",
+"$\\vartheta$ fällt stets auf Umgebung zurück",
+"$\\Theta_{Pe} \\le \\vartheta \\le \\Theta_{Be}$; mit $t_B < 3\\,T_{th}$ und $t_P < 3\\,T_{thSt}$",
+"Keine periodische Belastung vorhanden"
+],  
+"correct_answer": 3,  
+"explanation": "S3: periodisch, Temperatur pendelt zwischen $\\Theta_{Pe}$ und $\\Theta_{Be}$, End- bzw. Umgebungstemp. werden nicht erreicht."  
+},  
+{  
+"id": 30,  
+"category": "Betriebsarten – S5",  
+"question": "Welche Zusatzgrößen werden in S5 (mit Anlauf und elektrischer Bremsung) zur Verlustbewertung herangezogen?",  
+"options": [  
+"Nur $P_{V,LastN}$",  
+"Nur die Umgebungstemperatur",  
+"Verlustenergien $W_{VI}^{An}$ (Anlauf) und $W_{VI}^{Br}$ (Bremsen)",  
+"Die Leerlaufspannung und der Kurzschlussstrom"  
+],  
+"correct_answer": 3,  
+"explanation": "S5 berücksichtigt Anlauf- und Bremsverluste durch $W_{VI}^{An}$ und $W_{VI}^{Br}$."  
+},  
+{  
+"id": 31,  
+"category": "Betriebsarten – Schalthäufigkeit",  
+"question": "Was kennzeichnet die Leerschalthäufigkeit $z_0$ eines Motors laut Text?",  
+"options": [  
+"Die Anzahl der zulässigen Schaltungen pro Tag unter Volllast",  
+"Die zulässige Anzahl von Anlauf- und Bremsvorgängen pro Stunde eines leer laufenden Motors zwischen $\\omega_M=0$ und $\\Omega_N$",
+"Die minimale Anzahl der Wartungsintervalle pro Jahr",
+"Die maximale Anzahl der Stern-Dreieck-Umstellungen pro Minute"
+],  
+"correct_answer": 2,  
+"explanation": "Definition aus dem Text: $z_0$ ist die zulässige Leerschalthäufigkeit pro Stunde zwischen Stillstand und Nenndrehzahl."  
+},  
+{  
+"id": 32,  
+"category": "Betriebsarten – thermische Äquivalenz",  
+"question": "Welche Aussage zur thermischen Äquivalenz von $z_0$ ist korrekt?",  
+"options": [  
+"$z_0$ bewirkt eine geringere Erwärmung als Dauerbetrieb mit $M_N$",  
+"$z_0$ bewirkt dieselbe Erwärmung wie eine Dauerbelastung mit Nenndrehmoment $M_N$",  
+"$z_0$ ist nur für Generatoren definiert",  
+"$z_0$ ist unabhängig von $P_{V,LastN}$"  
+],  
+"correct_answer": 2,  
+"explanation": "Der Text sagt: Eine Leerschalthäufigkeit $z_0$ bewirkt die gleiche Erwärmung wie Dauerbelastung mit $M_N$ (→ $P_{V,LastN}$)."  
+},  
+{  
+"id": 33,  
+"category": "Betriebsarten – Trägheitseinfluss",  
+"question": "Wie wirkt sich ein angekoppeltes Lastträgheitsmoment $J_L$ auf die zulässige Schalthäufigkeit aus?",  
+"options": [  
+"Es erhöht die zulässige Schalthäufigkeit von $z_0$ auf $z$",  
+"Es verringert die zulässige Schalthäufigkeit von $z_0$ auf $z$",  
+"Es hat keinen Einfluss auf die Schalthäufigkeit",  
+"Es ändert nur die Umgebungstemperatur, nicht $z$"  
+],  
+"correct_answer": 2,  
+"explanation": "Mit zusätzlichem Trägheitsmoment sinkt die zulässige Schalthäufigkeit von $z_0$ auf $z$."  
+},  
+{  
+"id": 34,  
+"category": "Kurzschlussverhalten",  
+"question": "Welches Momentenverhalten wird für Kurzschlussfälle genannt?",  
+"options": [  
+"Zweiphasig: bremsendes Moment; dreiphasig: oszillierendes Moment",  
+"Zweiphasig: oszillierendes Moment; dreiphasig: bremsendes Moment",  
+"Beide Fälle: konstantes Nenndrehmoment",  
+"Beide Fälle: momentfreie Zustände"  
+],  
+"correct_answer": 2,  
+"explanation": "Explizit: zweiphasiger Kurzschluss → oszillierendes Moment; dreiphasig → bremsendes Moment."  
+},  
+{  
+"id": 35,  
+"category": "IP-Schutzarten",  
+"question": "Was geben die beiden Ziffern der IP-Kennzeichnung an?",  
+"options": [  
+"1. Ziffer: Flüssigkeitsschutz, 2. Ziffer: Berührungsschutz",  
+"1. Ziffer: Berührungsschutz, 2. Ziffer: Schutz gegen Fremdkörper/Flüssigkeiten/Gase",  
+"Beide Ziffern: nur Staubschutzklassen",  
+"Beide Ziffern: nur Spritzwasserschutzstufen"  
+],  
+"correct_answer": 2,  
+"explanation": "Der Text definiert: 1) Berührungsschutz, 2) Fremdkörper/Flüssigkeiten/Gase."  
+},  
+{  
+"id": 36,  
+"category": "IP-Schutzarten",  
+"question": "Welche Aussage zu IP44 ist korrekt?",  
+"options": [  
+"Schutz gegen Untertauchen und Partikel >10 mm",  
+"Schutz gegen Spritzwasser aus allen Richtungen und gegen Eindringen fester Fremdkörper >1 mm",  
+"Nur Schutz gegen Staub, kein Wasserschutz",  
+"Nur Schutz gegen Strahlwasser, aber nicht gegen Fremdkörper"  
+],  
+"correct_answer": 2,  
+"explanation": "Beispiel aus dem Text: IP44 → Spritzwasser aus allen Richtungen und Fremdkörper > 1 mm."  
+},  
+{  
+"id": 37,  
+"category": "Kühlkonzepte",  
+"question": "Welche Aussage zur Eigenkühlung ist korrekt?",  
+"options": [  
+"Sie nutzt einen externen Lüfter und ist daher auch im Stillstand wirksam.",  
+"Der Lüfter sitzt auf der Motorwelle; gute Kühlung im Betrieb, wirkungslos im Stillstand.",  
+"Sie ist identisch mit Selbstkühlung durch natürliche Konvektion.",  
+"Sie erfordert immer einen Wasserkreislauf."  
+],  
+"correct_answer": 2,  
+"explanation": "Eigenkühlung: Wellenlüfter → abhängig von Drehzahl; im Stillstand keine Wirkung."  
+},  
+{  
+"id": 38,  
+"category": "Kühlkonzepte",  
+"question": "Welche Zuordnung ist korrekt?",  
+"options": [  
+"Selbstkühlung → hohe Kühlleistung für stark belastete Maschinen",  
+"Fremdkühlung → separates Lüfteraggregat, Kühlung auch bei Stillstand/niedriger Drehzahl",  
+"Eigenkühlung → geschlossenes Kühlkreislauf-System mit Wärmetauscher",  
+"Selbstkühlung → Lüfter auf der Motorwelle"  
+],  
+"correct_answer": 2,  
+"explanation": "Fremdkühlung ist unabhängig vom Hauptmotor und daher auch bei Stillstand wirksam."  
+},  
+{  
+"id": 39,  
+"category": "Kühlkonzepte",  
+"question": "Welche Aussage zum Kühlmedium ist laut Text korrekt?",  
+"options": [  
+"Es wird ausschließlich Wasser als Kühlmittel verwendet.",  
+"Luft ist üblich; bei hoch ausgelasteten Maschinen zunehmend Wasser (Wärmetauscher).",  
+"Nur Öl wird verwendet, um elektrische Isolierung zu verbessern.",  
+"Gasförmige Medien sind unzulässig."  
+],  
+"correct_answer": 2,  
+"explanation": "Text: meist Luft; bei hohen Lasten auch Wasserkühlung (z. B. mit Wärmetauscher)."  
+},  
+{  
+"id": 40,  
+"category": "Effizienzklassen",  
+"question": "Welche Reihenfolge von Effizienzklassen ist korrekt (niedrig → hoch)?",  
+"options": [  
+"IE5 < IE4 < IE3 < IE2 < IE1",  
+"IE1 < IE2 < IE3 < IE4 < IE5",  
+"IE2 < IE1 < IE3 < IE5 < IE4",  
+"IE1 < IE3 < IE2 < IE4 < IE5"  
+],  
+"correct_answer": 2,  
+"explanation": "Definiert sind IE1 (Standard) bis IE5 (Ultra Premium), aufsteigend nach Effizienzniveau."  
+},  
+{  
+"id": 41,  
+"category": "Effizienzklassen – Regulierung",  
+"question": "Welche regulatorische Aussage ist korrekt?",  
+"options": [  
+"Standardmotoren >0,75 kW müssen mindestens IE2 erfüllen, unabhängig von der Speisung.",  
+"Standardmotoren >0,75 kW müssen mindestens IE3 erfüllen; IE2 ist nur in Verbindung mit Frequenzumrichter zulässig.",  
+"Es gibt keine regulatorischen Mindestanforderungen.",  
+"IE4 ist für alle Motoren verpflichtend."  
+],  
+"correct_answer": 2,  
+"explanation": "Text: >0,75 kW mindestens IE3; IE2 nur mit FU zulässig."  
+},  
+{  
+"id": 42,  
+"category": "Effizienzklassen – Typenschild",  
+"question": "Welche Angaben müssen laut Text am Typenschild in Bezug auf Effizienz vorhanden sein?",  
+"options": [  
+"Nur die Effizienzklasse bei 100 % Last",  
+"Effizienzklasse und Nenneffizienz bei 100 %, 75 % und 50 % Last",  
+"Nur die Klasse IE4 oder IE5",  
+"Nur die Nenneffizienz bei 75 % Last"  
+],  
+"correct_answer": 2,  
+"explanation": "Gefordert: Effizienzklasse plus Effizienzangaben bei 100/75/50 % Last."  
+},  
+{  
+"id": 43,  
+"category": "Systemoptimierung",  
+"question": "Welche Aussage spiegelt den Systemgedanken korrekt wider?",  
+"options": [  
+"Optimierung auf Komponentenebene ist ausreichend.",  
+"Das Gesamtsystem ist zu optimieren; frühe Zusammenarbeit zwischen Antriebssystem- und Fahrzeug/Systementwicklung ist nötig.",  
+"Mechanische Optimierung genügt, elektrische Aspekte sind nachrangig.",  
+"Software-Optimierung ersetzt elektrische/thermische Auslegung."  
+],  
+"correct_answer": 2,  
+"explanation": "Explizit gefordert: Systemoptimierung und frühe interdisziplinäre Zusammenarbeit."  
+},  
+{  
+"id": 44,  
+"category": "Entwicklungsprozess",  
+"question": "Welche Elemente gehören zum iterativen Optimierungsprozess laut Text?",  
+"options": [  
+"Nur experimentelle Tests an Prototypen",  
+"Analytische Programme, Finite-Elemente-Analysen (elektrisch, mechanisch, thermisch) und Gesamtsystemsimulation",  
+"Ausschließlich Geschäftsprozessmodellierung",  
+"Nur thermische Simulation, keine mechanische"  
+],  
+"correct_answer": 2,  
+"explanation": "Alle drei Werkzeuge werden genannt: analytisch, FEA (multi-physikalisch) und Systemsimulation."  
+},  
+{  
+"id": 45,  
+"category": "Universalmotor",  
+"question": "Warum wird die Reihenschlussmaschine als Universalmotor bezeichnet?",  
+"options": [  
+"Weil sie nur mit Gleichstrom betrieben werden kann",  
+"Weil sie sowohl mit Gleich- als auch mit Wechselstrom betrieben werden kann",  
+"Weil sie ohne jede Form der Kommutierung auskommt",  
+"Weil sie permanentmagnetisch erregt ist"  
+],  
+"correct_answer": 2,  
+"explanation": "Universalmotor = Reihenschlussmaschine, die mit AC und DC betreibbar ist."  
+},  
+{  
+"id": 46,  
+"category": "Rotorbauarten ASM",  
+"question": "Welche Rotorbauarten werden bei bürstenlosen Asynchronmaschinen genannt?",  
+"options": [  
+"Kupfer-Rotoren und Aluminium-Rotoren",  
+"Nur eisenlose Rotoren",  
+"Permanentmagnet-Rotoren",  
+"Schleifringläufer mit Bürsten"  
+],  
+"correct_answer": 1,  
+"explanation": "ASM (bürstenlos) mit Käfigläufer aus Aluminium oder Kupfer."  
+},  
+{  
+"id": 47,  
+"category": "Fehlerfall-Charakteristik",  
+"question": "Welche Zuordnung beschreibt den Fehlerfall verschiedener Maschinen korrekt?",  
+"options": [  
+"PMSM/IPMSM: unkritisch; FSM/SYRM/ASM: kritisch",  
+"ASM/FSM/SYRM: eher unkritisch; PMSM/IPMSM: kritisch",  
+"Alle Maschinen verhalten sich identisch kritisch",  
+"SYRM ist am kritischsten wegen hoher Rotorverluste"  
+],  
+"correct_answer": 2,  
+"explanation": "Text: PMSM/IPMSM → kritisch; ASM/FSM/SYRM → unkritischer."  
+},  
+{  
+"id": 48,  
+"category": "Wirkungsgradbereiche",  
+"question": "Welche Effizienzcharakteristik ist korrekt zugeordnet?",  
+"options": [  
+"PMSM/IPMSM: hoher Wirkungsgrad im oberen Drehzahlbereich",  
+"ASM: hoher Wirkungsgrad im unteren Drehzahlbereich",  
+"PMSM/IPMSM: hoher Wirkungsgrad im unteren Drehzahlbereich; ASM: im oberen",  
+"SYRM: hoher Wirkungsgrad nur im Feldschwächbereich"  
+],  
+"correct_answer": 3,  
+"explanation": "PMSM/IPMSM: unten effizient; ASM: oben effizient."  
+},  
+{  
+"id": 49,  
+"category": "Materialverfügbarkeit",  
+"question": "Welche Aussage zur Materialverfügbarkeit ist korrekt?",  
+"options": [  
+"ASM hat Risiken durch seltene Erden im Rotor",  
+"PMSM/IPMSM können bei Magnetmaterialverfügbarkeit kritisch sein",  
+"FSM ist abhängig von seltenen Erden",  
+"SYRM benötigt große Mengen seltener Erden"  
+],  
+"correct_answer": 2,  
+"explanation": "PMSM/IPMSM benötigen Permanentmagnete (Seltene Erden), deren Verfügbarkeit problematisch sein kann."  
+},  
+{  
+"id": 50,  
+"category": "Sicherheitsaspekte – Maßnahmen",  
+"question": "Welche Maßnahme ist NICHT im Text als Reaktion auf kritische Fehlerfälle bei PMSM/IPMSM genannt?",  
+"options": [  
+"Schnelles Öffnen der Anschlussklemmen",  
+"Trennung mittels schnell schaltender Kupplung",  
+"Erhöhung der DC-Zwischenkreisspannung",  
+"Mechanische Entkopplung der Last"  
+],  
+"correct_answer": 3,  
+"explanation": "Erhöhung der Zwischenkreisspannung ist nicht genannt; genannt sind schnelle Trennung/Öffnen der Klemmen."  
+},  
+{  
+"id": 51,  
+"category": "Begriffsklarheit – Raumzeiger",  
+"question": "Wozu ist die Lagemessung im Kontext der feldorientierten Regelung erforderlich?",  
+"options": [  
+"Zur Transformation in ein flussfestes Koordinatensystem",  
+"Nur zur Begrenzung der Zwischenkreisspannung",  
+"Zur Minimierung der Lagerreibung",  
+"Zur Verringerung des $\\cos\\varphi$"  
+],  
+"correct_answer": 1,  
+"explanation": "Die Rotorlage ist zur Transformation in ein flussfestes (d-q) Koordinatensystem erforderlich."  
+},  
+{  
+"id": 52,  
+"category": "Messkonzepte",  
+"question": "Warum werden zwei Stromsensoren im Antriebssystem genannt?",  
+"options": [  
+"Weil drei Ströme damit exakt bestimmt werden können",  
+"Weil damit die Temperatur differenziell gemessen wird",  
+"Weil eine Phasenstromrekonstruktion in dreiphasigen Systemen mit zwei Messungen möglich ist",  
+"Weil die Spannungen dadurch präziser werden"  
+],  
+"correct_answer": 3,  
+"explanation": "In dreiphasigen Systemen reicht die Messung zweier Phasenströme aus, um den dritten zu rekonstruieren."  
+},  
+{  
+"id": 53,  
+"category": "Normative Betriebsarten",  
+"question": "Welche Nennbetriebsarten nennt der Text nach VDE 0530 (Auswahl)?",  
+"options": [  
+"S1, S2, S3, S4, S5, S6, S7, S8",  
+"Nur S1, S2, S3",  
+"S1 bis S3 und S9",  
+"S1 bis S4, keine weiteren"  
+],  
+"correct_answer": 1,  
+"explanation": "Es werden S1 bis S8 aufgelistet."  
+},  
+{  
+"id": 54,  
+"category": "Thermik – Periodendauer",  
+"question": "Welche Daumenregel gibt der Text für die Periodendauer $T$ in Bezug auf thermische Zeitkonstanten?",  
+"options": [  
+"$T$ sollte größer als die thermische Zeitkonstante sein",  
+"$T$ sollte nicht größer als 10…20 % der thermischen Zeitkonstanten sein",  
+"$T$ muss exakt der thermischen Zeitkonstante entsprechen",  
+"Es gibt keine Beziehung zwischen $T$ und $\tau_{th}$"  
+],  
+"correct_answer": 2,  
+"explanation": "Richtwert: $T \\le 0{,}1…0{,}2\\,\\tau_{th}$."  
+},  
+{  
+"id": 55,  
+"category": "Temperaturverläufe S2",  
+"question": "Welche Temperaturgröße wird in S2 am Ende der Betriebszeit gerade erreicht?",  
+"options": [  
+"Die Umgebungstemperatur",  
+"Die fiktive Endübertemperatur $\\Theta_{e,S2}$",
+"Die zulässige Betriebstemperatur $\\Theta_{Be}=\\Theta_{zul}$",
+"Die maximale Lagerinnentemperatur"
+],  
+"correct_answer": 3,  
+"explanation": "Definiert: Am Ende der Betriebszeit stellt sich $\\Theta_{Be}=\\Theta_{zul}$ ein; danach Abkühlung in der Pause."  
+},  
+{  
+"id": 56,  
+"category": "S5 – Mittelwertbildung",  
+"question": "Warum ist in S5 eine Mittelwertbildung der Verlustleistung zulässig?",  
+"options": [  
+"Weil thermische Konstanten irrelevant sind",  
+"Weil Anlauf- und Bremsintervalle kurz gegenüber den thermischen Zeitkonstanten sind",  
+"Weil der Motor im Vakuum betrieben wird",  
+"Weil es keine Kupferverluste gibt"  
+],  
+"correct_answer": 2,  
+"explanation": "Kurze Energiepulse relativ zu $\tau_{th}$ → Mittelwertbildung zulässig."  
+},  
+{  
+"id": 57,  
+"category": "IP – Fehlinterpretationen",  
+"question": "Welche Fehlinterpretation wird durch den Text explizit vermieden?",  
+"options": [  
+"Dass die zweite Ziffer nur Spritzwasserschutz meint",  
+"Dass die erste Ziffer Staubschutz meint",  
+"Dass IP nur für Innenräume gilt",  
+"Dass IP nur für explosionsgefährdete Bereiche gilt"  
+],  
+"correct_answer": 1,  
+"explanation": "Die zweite Ziffer umfasst Fremdkörper/Flüssigkeiten/Gase, nicht nur Wasser."  
+},  
+{  
+"id": 58,  
+"category": "Energieeffizienz – Werte",  
+"question": "Welcher Aussagewert wird zu IE4 genannt?",  
+"options": [  
+"IE4 ≈ 90 %",  
+"IE4 ≈ 97 %",  
+"IE4 ≈ 99,9 %",  
+"IE4 ≈ 75 %"  
+],  
+"correct_answer": 2,  
+"explanation": "IE4 wird als „Super Premium (~97 %)“ angegeben."  
+},  
+{  
+"id": 59,  
+"category": "Antriebsstrang – Getriebe",  
+"question": "Welche Aussage spiegelt die Rolle des Getriebes im Antriebsstrang wider?",  
+"options": [  
+"Das Getriebe ersetzt den Umrichter",  
+"Das Getriebe koppelt Motor und mechanische Strecke (Arbeitsmaschine)",  
+"Das Getriebe misst die Drehzahl",  
+"Das Getriebe bestimmt die IP-Schutzart"  
+],  
+"correct_answer": 2,  
+"explanation": "Im Strukturblock: Motor → Getriebe → mechanische Strecke."  
+},  
+{  
+"id": 60,  
+"category": "Lastfälle",  
+"question": "Welche Aussage zu Widerstandsmomenten der Arbeitsmaschine ist korrekt?",  
+"options": [  
+"Sie sind zeitlich konstant und bestimmen daher die Wahl der Betriebsart nicht.",  
+"Sie sind i. Allg. zeitlich veränderlich; die Typenleistung ist so zu wählen, dass Wicklungstemperaturen zulässig bleiben.",  
+"Sie sind nur beim Anfahren relevant.",  
+"Sie betreffen ausschließlich Synchronmaschinen."  
+],  
+"correct_answer": 2,  
+"explanation": "Text: zeitlich veränderliches Widerstandsmoment; Auswahl der Typenleistung muss thermische Grenzen berücksichtigen."  
+},  
+{  
+"id": 61,  
+"category": "Begriffe – Bemessungsdrehzahl",  
+"question": "Was bezeichnet $n_N$ gemäß Text?",  
+"options": [  
+"Die Leerlaufdrehzahl",  
+"Die Bemessungsdrehzahl",  
+"Die Polpaarzahl",  
+"Die Schlupfdrehzahl"  
+],  
+"correct_answer": 2,  
+"explanation": "$n_N$ ist die Bemessungsdrehzahl."  
+},  
+{  
+"id": 62,  
+"category": "Vergleich Motortypen – Übersicht",  
+"question": "Welche Aussage ist mit dem „groben Vergleich der Motortypen“ konsistent?",  
+"options": [  
+"ASM ist im Fehlerfall kritischer als PMSM/IPMSM.",  
+"FSM/SYRM kommen ohne Seltene Erden aus; PMSM/IPMSM benötigen Magnete.",  
+"SYRM hat die höchste Leistungsdichte aller genannten Maschinen.",  
+"PMSM/IPMSM ist stets günstiger in der Herstellung als ASM."  
+],  
+"correct_answer": 2,  
+"explanation": "FSM/SYRM vermeiden Seltene Erden; PMSM/IPMSM benötigen sie. ASM ist i. d. R. günstiger und fehlerunkritisch."  
+},  
+{  
+"id": 63,  
+"category": "Literaturbezug",  
+"question": "Welches Werk wird als zentrale Literaturempfehlung für die Veranstaltung genannt?",  
+"options": [  
+"Brosch: Moderne Stromrichterantriebe (1989)",  
+"Liebl et al.: Energiemanagement im Kraftfahrzeug (2014)",  
+"Riefenstahl: Elektrische Antriebssysteme (2010)",  
+"Hofer AG: Herausforderungen… (2021)"  
+],  
+"correct_answer": 3,  
+"explanation": "Als Literaturempfehlung wird Riefenstahl (2010) genannt."  
+},  
+{  
+"id": 64,  
+"category": "Normenbezug",  
+"question": "Mit welcher Normreihe sind die Energieeffizienzklassen verknüpft?",  
+"options": [  
+"EN 60034-30 / IEC 60034-30-1",  
+"EN 60204-1",  
+"IEC 61800-5-2",  
+"ISO 13849-1"  
+],  
+"correct_answer": 1,  
+"explanation": "Die Effizienzklassen beziehen sich auf EN 60034-30 und IEC 60034-30-1."  
+},  
+{  
+"id": 65,  
+"category": "Antriebsauslegung – Systemzusammenarbeit",  
+"question": "Warum ist eine frühe Zusammenarbeit zwischen Antriebssystem- und Fahrzeug/Systementwicklung wichtig?",  
+"options": [  
+"Um die IP-Schutzart früh festzulegen und nie zu ändern",  
+"Weil nur so Einbauort und Farbgebung abgestimmt werden können",  
+"Weil Systemoptimierung (Kosten, Dynamik, Wirkungsgrad) nur im Zusammenspiel sinnvoll erreichbar ist",  
+"Um die Prüfungsform rechtzeitig zu ändern"  
+],  
+"correct_answer": 3,  
+"explanation": "Zielparameter (Kosten, Dynamik, Wirkungsgrad) sind systemisch und erfordern frühe Kooperation."  
+},  
+{  
+"id": 66,  
+"category": "Stern/Dreieck – Stolperfallen",  
+"question": "Welche kombinierte Aussage zu Typenschildangaben vermeidet eine typische Verwechslung?",  
+"options": [  
+"Kleinere Spannung → Stern; kleinerer Strom → Dreieck",  
+"Kleinere Spannung → Dreieck; kleinerer Strom → Stern",  
+"Größere Spannung → Dreieck; größerer Strom → Stern",  
+"Spannungsangabe ist unabhängig von der Schaltung"  
+],  
+"correct_answer": 2,  
+"explanation": "Richtig: $U_N$ klein → Dreieck, $I_N$ klein → Stern."  
+},  
+{  
+"id": 67,  
+"category": "Lastprofile – Mittelwertbildung",  
+"question": "Unter welcher Voraussetzung ist die Verwendung einer mittleren Ersatzverlustleistung $P_{V,\\mathrm{ers}}$ über eine Belastungsperiode gerechtfertigt?",  
+"options": [  
+"Wenn $T \\gg \\tau_{th}$",  
+"Wenn $T \\ll \\tau_{th}$, z. B. $T\\lesssim 0{,}1\\!\\ldots\\!0{,}2\\,\\tau_{th}$",  
+"Nur bei reiner Positionierachse ohne Wärmeverluste",  
+"Nur bei SYRM, nicht bei ASM/PMSM"  
+],  
+"correct_answer": 2,  
+"explanation": "Die Periode muss deutlich kleiner als die thermische Zeitkonstante sein, damit die gemittelte Betrachtung zulässig ist."  
+},  
+{  
+"id": 68,  
+"category": "S5 – Thermische Referenz",  
+"question": "Welche Größe wird in Zusammenhang mit der thermischen Äquivalenz zu $z_0$ genannt?",  
+"options": [  
+"Die Leerlaufspannung $U_0$",  
+"Die Nennlastverlustleistung $P_{V,LastN}$",  
+"Die IP-Schutzklasse",  
+"Die Polpaarzahl $p$"  
+],  
+"correct_answer": 2,  
+"explanation": "Thermische Äquivalenz: $z_0$ bewirkt gleiche Erwärmung wie Dauerbelastung mit $M_N$ (→ $P_{V,LastN}$)."  
+},  
+{  
+"id": 69,  
+"category": "Fehlerfall – Kurzschluss",  
+"question": "Welche Aussage ist konsistent mit den Momentenfolgen bei Kurzschluss?",  
+"options": [  
+"Dreiphasiger Kurzschluss führt zu oszillierendem Moment",  
+"Zweiphasiger Kurzschluss führt zu konstantem Nennmoment",  
+"Zweiphasiger Kurzschluss → oszillierendes Moment; dreiphasig → bremsendes Moment",  
+"Beide Kurzschlussarten führen zu identischem Verhalten"  
+],  
+"correct_answer": 3,  
+"explanation": "So ist es im Text beschrieben."  
+},  
+{  
+"id": 70,  
+"category": "PMSM/IPMSM – Risiken",  
+"question": "Welche Gefahr wird bei PMSM/IPMSM im Fehlerfall explizit genannt?",  
+"options": [  
+"Überhitzung durch fehlende Magnetisierung",  
+"Unterspannung im Zwischenkreis",  
+"Überspannung und Pendelmomente",  
+"Momentenfreiheit"  
+],  
+"correct_answer": 3,  
+"explanation": "Fehlerfall kritisch: Überspannung, Pendelmoment, Bremsmoment."  
+},  
+{  
+"id": 71,  
+"category": "Kühlkonzepte – Auswahl",  
+"question": "Welche Kühlart ist für Maschinen mit überwiegend Nenndrehzahl typischerweise geeignet?",  
+"options": [  
+"Selbstkühlung",  
+"Eigenkühlung (Wellenlüfter)",  
+"Fremdkühlung mit geschlossenem Kreislauf",  
+"Nur Wasserkühlung"  
+],  
+"correct_answer": 2,  
+"explanation": "Eigenkühlung wirkt mit Drehzahl und eignet sich bei überwiegend Nenndrehzahl."  
+},  
+{  
+"id": 72,  
+"category": "Energieeffizienz – Einordnung",  
+"question": "Welche Klasse entspricht „Ultra Premium“?",  
+"options": [  
+"IE3",  
+"IE4",  
+"IE5",  
+"IE2"  
+],  
+"correct_answer": 3,  
+"explanation": "IE5 wird als „Ultra Premium“ bezeichnet."  
+},  
+{  
+"id": 73,  
+"category": "Systemarchitektur",  
+"question": "Welche Abfolge beschreibt den Antriebsstrang korrekt?",  
+"options": [  
+"Mechanische Strecke → Getriebe → Motor → Umrichter",  
+"Umrichter/Netz → Motor → Getriebe → mechanische Strecke",  
+"Motor → Umrichter → Getriebe → mechanische Strecke",  
+"Mechanische Strecke → Motor → Getriebe → Umrichter"  
+],  
+"correct_answer": 2,  
+"explanation": "Beschrieben: Netz/Umrichter → Motor → Getriebe → Last (mechanische Strecke)."  
+},  
+{  
+"id": 74,  
+"category": "Regelungsziele",  
+"question": "Welche Sollgrößen können je nach Anwendung vorgegeben werden?",  
+"options": [  
+"Nur Drehzahl",  
+"Nur Position",  
+"Drehmoment, Drehzahl und Position",  
+"Nur Drehmoment"  
+],  
+"correct_answer": 3,  
+"explanation": "Alle drei werden explizit genannt."  
+},  
+{  
+"id": 75,  
+"category": "Wirkzusammenhänge – 60 Hz Motor an 50 Hz Netz",  
+"question": "Welche Kette ist korrekt?",  
+"options": [  
+"50 Hz statt 60 Hz → höhere synchrone Drehzahl → geringere Stromaufnahme",  
+"50 Hz statt 60 Hz → geringere synchrone Drehzahl → erhöhte Stromaufnahme → Überhitzungsgefahr",  
+"50 Hz statt 60 Hz → gleiche synchrone Drehzahl → gleicher Strom",  
+"50 Hz statt 60 Hz → geringere Drehzahl → geringere Stromaufnahme → Unterkühlung"  
+],  
+"correct_answer": 2,  
+"explanation": "So explizit im Text: geringere Drehzahl und erhöhte Stromaufnahme → Gefahr der Überhitzung."  
+}  
+]  
+}
